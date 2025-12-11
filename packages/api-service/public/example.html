@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>路由测试工具 - Webbox</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .login-section {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .login-form {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    .form-group {
+      flex: 1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #5568d3;
+    }
+
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+    }
+
+    .btn-secondary:hover {
+      background: #5a6268;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-left: 10px;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .status.warning {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .domains-section {
+      display: none;
+    }
+
+    .domains-section.active {
+      display: block;
+    }
+
+    .domain-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .domain-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .domain-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .domain-info {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .routes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+    }
+
+    .route-item {
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .route-item:hover {
+      background: #e9ecef;
+      transform: translateX(5px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .route-pattern {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .route-type {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #667eea;
+      color: white;
+      border-radius: 4px;
+      font-size: 11px;
+      margin-right: 8px;
+    }
+
+    .route-template {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .route-enabled {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      margin-left: 5px;
+    }
+
+    .route-enabled.yes {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .route-enabled.no {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .error-message {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+    }
+
+    .empty-state svg {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      opacity: 0.3;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .refresh-btn {
+      background: #28a745;
+    }
+
+    .refresh-btn:hover {
+      background: #218838;
+    }
+
+    .logout-btn {
+      background: #dc3545;
+    }
+
+    .logout-btn:hover {
+      background: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>🧪 路由测试工具</h1>
+      <p class="subtitle">查看所有域名和路由，点击测试渲染效果</p>
+    </div>
+
+    <!-- Login Section -->
+    <div class="login-section" id="loginSection">
+      <h3 style="margin-bottom: 15px; color: #333;">登录以查看路由</h3>
+      <div class="login-form">
+        <div class="form-group">
+          <label for="username">用户名</label>
+          <input type="text" id="username" placeholder="输入用户名" value="admin">
+        </div>
+        <div class="form-group">
+          <label for="password">密码</label>
+          <input type="password" id="password" placeholder="输入密码" value="admin123">
+        </div>
+        <button class="btn" onclick="login()">登录</button>
+      </div>
+      <div id="loginStatus"></div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats" id="statsSection" style="display: none;">
+      <div class="stat-card">
+        <div class="stat-value" id="statDomains">0</div>
+        <div class="stat-label">域名总数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statRoutes">0</div>
+        <div class="stat-label">路由总数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statEnabled">0</div>
+        <div class="stat-label">启用路由</div>
+      </div>
+      <div class="stat-card" style="display: flex; flex-direction: column; gap: 10px; justify-content: center;">
+        <button class="btn refresh-btn" onclick="loadDomains()">🔄 刷新数据</button>
+        <button class="btn logout-btn" onclick="logout()">退出登录</button>
+      </div>
+    </div>
+
+    <!-- Domains Section -->
+    <div class="domains-section" id="domainsSection">
+      <div id="domainsContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:3002/api';
+    const RENDER_BASE = 'http://localhost:3001';
+    let authToken = null;
+
+    // 登录
+    async function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const statusEl = document.getElementById('loginStatus');
+
+      if (!username || !password) {
+        statusEl.innerHTML = '<span class="status error">请输入用户名和密码</span>';
+        return;
+      }
+
+      try {
+        statusEl.innerHTML = '<span class="status warning">登录中...</span>';
+
+        const response = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+
+        if (result.success && result.data.token) {
+          authToken = result.data.token;
+          localStorage.setItem('authToken', authToken);
+          statusEl.innerHTML = '<span class="status success">✓ 登录成功</span>';
+
+          // 隐藏登录表单
+          document.getElementById('loginSection').style.display = 'none';
+          document.getElementById('statsSection').style.display = 'grid';
+          document.getElementById('domainsSection').classList.add('active');
+
+          // 加载域名数据
+          loadDomains();
+        } else {
+          statusEl.innerHTML = `<span class="status error">✗ ${result.message || '登录失败'}</span>`;
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        statusEl.innerHTML = `<span class="status error">✗ 登录失败: ${error.message}</span>`;
+      }
+    }
+
+    // 退出登录
+    function logout() {
+      authToken = null;
+      localStorage.removeItem('authToken');
+      document.getElementById('loginSection').style.display = 'block';
+      document.getElementById('statsSection').style.display = 'none';
+      document.getElementById('domainsSection').classList.remove('active');
+      document.getElementById('domainsContainer').innerHTML = '';
+      document.getElementById('loginStatus').innerHTML = '';
+    }
+
+    // 加载域名和路由数据
+    async function loadDomains() {
+      const container = document.getElementById('domainsContainer');
+      container.innerHTML = '<div class="loading">⏳ 加载中...</div>';
+
+      try {
+        // 获取所有域名
+        const domainsResponse = await fetch(`${API_BASE}/admin/domains?limit=100`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+
+        const domainsResult = await domainsResponse.json();
+
+        if (!domainsResult.success) {
+          throw new Error(domainsResult.message || '获取域名失败');
+        }
+
+        const domains = domainsResult.data.list || [];
+
+        if (domains.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <div style="font-size: 48px;">📭</div>
+              <h3>暂无域名数据</h3>
+              <p>请先在 Admin 系统中添加域名和路由配置</p>
+            </div>
+          `;
+          return;
+        }
+
+        // 获取所有路由
+        const routesResponse = await fetch(`${API_BASE}/admin/routes?limit=1000`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+
+        const routesResult = await routesResponse.json();
+        const allRoutes = routesResult.success ? (routesResult.data.list || []) : [];
+
+        // 统计数据
+        const totalRoutes = allRoutes.length;
+        const enabledRoutes = allRoutes.filter(r => r.enabled).length;
+
+        document.getElementById('statDomains').textContent = domains.length;
+        document.getElementById('statRoutes').textContent = totalRoutes;
+        document.getElementById('statEnabled').textContent = enabledRoutes;
+
+        // 渲染域名卡片
+        let html = '';
+
+        for (const domain of domains) {
+          const domainRoutes = allRoutes.filter(r => r.domain === domain.host);
+
+          html += `
+            <div class="domain-card">
+              <div class="domain-header">
+                <div>
+                  <div class="domain-title">🌐 ${domain.host}</div>
+                  <div class="domain-info">${domain.app_name || '未命名应用'}</div>
+                </div>
+                <div>
+                  <span class="status ${domain.status === 'active' ? 'success' : 'error'}">
+                    ${domain.status === 'active' ? '启用' : '禁用'}
+                  </span>
+                  <span class="status warning">${domainRoutes.length} 条路由</span>
+                </div>
+              </div>
+              ${renderRoutes(domain.host, domainRoutes)}
+            </div>
+          `;
+        }
+
+        container.innerHTML = html;
+      } catch (error) {
+        console.error('Load domains error:', error);
+        container.innerHTML = `
+          <div class="error-message">
+            ❌ 加载失败: ${error.message}
+          </div>
+        `;
+      }
+    }
+
+    // 渲染路由列表
+    function renderRoutes(domain, routes) {
+      if (routes.length === 0) {
+        return `
+          <div class="empty-state" style="padding: 40px 20px;">
+            <div style="font-size: 32px;">📋</div>
+            <p style="margin: 10px 0;">此域名暂无路由配置</p>
+          </div>
+        `;
+      }
+
+      let html = '<div class="routes-grid">';
+
+      for (const route of routes) {
+        const templateName = route.template_id?.name || route.template_id?.display_name || '未知模板';
+
+        html += `
+          <div class="route-item" onclick="testRoute('${domain}', '${route.pattern}', ${route.enabled})">
+            <div>
+              <span class="route-type">${getRouteTypeLabel(route.type)}</span>
+              <span class="route-enabled ${route.enabled ? 'yes' : 'no'}">
+                ${route.enabled ? '✓ 启用' : '✗ 禁用'}
+              </span>
+            </div>
+            <div class="route-pattern">${route.pattern}</div>
+            <div class="route-template">📄 ${templateName}</div>
+          </div>
+        `;
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    // 获取路由类型标签
+    function getRouteTypeLabel(type) {
+      const labels = {
+        'exact': '精确匹配',
+        'wildcard': '通配符',
+        'regex': '正则表达式'
+      };
+      return labels[type] || type;
+    }
+
+    // 测试路由
+    function testRoute(domain, pattern, enabled) {
+      if (!enabled) {
+        if (!confirm('该路由已禁用，确定要测试吗？')) {
+          return;
+        }
+      }
+
+      // 生成测试路径
+      let testPath = pattern;
+
+      // 如果是通配符，替换为示例路径
+      if (pattern.includes('*')) {
+        testPath = pattern.replace(/\*/g, 'test');
+      }
+
+      // 如果是正则表达式，尝试生成一个符合的路径
+      if (pattern.startsWith('^')) {
+        // 简单处理：移除正则符号
+        testPath = pattern
+          .replace(/^\^/, '')
+          .replace(/\$$/, '')
+          .replace(/\\d\+/g, '123')
+          .replace(/\\w\+/g, 'test')
+          .replace(/\\/g, '');
+      }
+
+      // 确保路径以 / 开头
+      if (!testPath.startsWith('/')) {
+        testPath = '/' + testPath;
+      }
+
+      const url = `${RENDER_BASE}${testPath}`;
+
+      console.log(`Testing route: ${domain}${testPath}`);
+      window.open(url, '_blank');
+    }
+
+    // 页面加载时检查是否已登录
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedToken = localStorage.getItem('authToken');
+      if (savedToken) {
+        authToken = savedToken;
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('statsSection').style.display = 'grid';
+        document.getElementById('domainsSection').classList.add('active');
+        loadDomains();
+      }
+    });
+
+    // 回车登录
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('password').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          login();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

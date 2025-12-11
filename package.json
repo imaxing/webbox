@@ -1,0 +1,23 @@
+{
+  "name": "webbox-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:render": "npm run dev --workspace=packages/render-service",
+    "dev:api": "npm run dev --workspace=packages/api-service",
+    "dev:admin": "npm run dev --workspace=packages/admin-service",
+    "build:render": "npm run build --workspace=packages/render-service",
+    "build:api": "npm run build --workspace=packages/api-service",
+    "build:admin": "npm run build --workspace=packages/admin-service",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}

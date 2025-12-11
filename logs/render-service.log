@@ -1,0 +1,520 @@
+
+> @webbox/render-service@0.1.0 dev
+> tsx watch src/index.ts
+
+[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+📍 blaze.com/proto/terms
+📍 blaze.com/proto/terms
+📍 blaze.com/proto/terms
+📍 blaze.com/
+📍 blaze.com/
+📍 blaze.com/
+2:26:00 PM [tsx] change in ./src/index.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:inter2:26:19 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+2:30:42 PM [tsx] change in ./src/services/route-resolver.service.ts Process hasn't exited. Killing process...
+2:31:00 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+2:31:10 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+2:36:10 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+2:36:32 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+2:37:08 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+2:37:20 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+2:52:02 PM [tsx] change in ./../shared/src/index.ts Process hasn't exited. Killing process...
+2:55:35 PM [tsx] change in ./../shared/src/index.ts Process hasn't exited. Killing process...
+2:55:49 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+2:55:56 PM [tsx] unlink in ./src/utils/templates.ts Process hasn't exited. Killing process...
+3:01:52 PM [tsx] change in ./../shared/src/constants/response.ts Process hasn't exited. Killing process...
+3:02:10 PM [tsx] change in ./../shared/src/constants/response.ts Process hasn't exited. Killing process...
+3:05:17 PM [tsx] change in ./../shared/src/index.ts Process hasn't exited. Killing process...
+3:05:25 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+3:06:03 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+3:07:07 PM [tsx] change in ./../shared/src/index.ts Process hasn't exited. Killing process...
+3:07:31 PM [tsx] change in ./src/services/route-resolver.service.ts Process hasn't exited. Killing process...
+3:07:53 PM [tsx] change in ./src/services/route-resolver.service.ts Process hasn't exited. Killing process...
+3:07:54 PM [tsx] change in ./src/services/route-resolver.service.ts Process hasn't exited. Killing process...
+3:08:12 PM [tsx] change in ./src/services/route-resolver.service.ts Process hasn't exited. Killing process...
+3:08:15 PM [tsx] unlink in ./src/utils/cache.ts Process hasn't exited. Killing process...
+ hasn't exited. Killing process...
+3:05:25 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+3:06:03 PM [tsx] change in ./src/index.ts Process hasn't exited. Killing process...
+3:07:07 PM [tsx] change in ./../shared/src/index.ts Process hasn't exited. Killing process...
+3:07:31 PM [tsx] change in ./src/services/route-resolver.service.ts Process hasn't exited. Killing process...
+3:07:53 PM [tsx] change in ./src/services/route-resolver.service.ts Process hasn't exited. Killing process...
+3:07:54 PM [tsx] change in ./src/services/route-resolver.service.ts Process hasn't exited. Killing process...
+3:08:12 PM [tsx] change in ./src/services/route-resolver.service.ts Process hasn't exited. Killing process...
+3:08:15 PM [tsx] unlink in ./src/utils/cache.ts Process hasn't exited. Killing process...
+s (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+2:31:00 PM [tsx] change in ./src/index.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+2:31:10 PM [tsx] change in ./src/index.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+2:36:10 PM [tsx] change in ./src/index.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:286:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+2:36:32 PM [tsx] change in ./src/index.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+2:37:08 PM [tsx] change in ./src/index.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+2:37:20 PM [tsx] change in ./src/index.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+2:52:02 PM [tsx] change in ./../shared/src/index.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:284:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+2:55:35 PM [tsx] change in ./../shared/src/index.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+2:55:49 PM [tsx] change in ./src/index.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:283:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+2:55:56 PM [tsx] unlink in ./src/utils/templates.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+3:01:52 PM [tsx] change in ./../shared/src/constants/response.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+3:02:10 PM [tsx] change in ./../shared/src/constants/response.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:283:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+3:05:17 PM [tsx] change in ./../shared/src/index.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:283:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+3:05:25 PM [tsx] change in ./src/index.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+3:06:03 PM [tsx] change in ./src/index.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+3:07:07 PM [tsx] change in ./../shared/src/index.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ⚙️  suppress all logs with { quiet: true }
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:126:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+3:07:31 PM [tsx] change in ./src/services/route-resolver.service.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+3:07:53 PM [tsx] change in ./src/services/route-resolver.service.ts Restarting...
+c3:07:54 PM [tsx] change in ./src/services/route-resolver.service.ts Restarting...
+[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:126:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+3:08:12 PM [tsx] change in ./src/services/route-resolver.service.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ⚙️  override existing env vars with { override: true }
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+3:08:15 PM [tsx] unlink in ./src/utils/cache.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+3:10:36 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ⚙️  override existing env vars with { override: true }
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+3:10:54 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:126:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+3:07:53 PM [tsx] change in ./src/services/route-resolver.service.ts Rerunning...
+c3:07:54 PM [tsx] change in ./src/services/route-resolver.service.ts Restarting...
+[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com
+3:08:12 PM [tsx] change in ./src/services/route-resolver.service.ts Restarting...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:126:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+3:08:15 PM [tsx] unlink in ./src/utils/cache.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:126:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+3:10:36 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/render-service/src/index.ts:126:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v20.10.0
+3:10:54 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Rerunning...
+c[dotenv@17.2.3] injecting env (5) from ../../.env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+✅ MongoDB connected successfully
+🎨 Render Service is running on port 3001
+📡 Health check: http://localhost:3001/health
+🎯 Demo page: http://localhost:3001/demo
+🌐 Wildcard routing: All paths will be processed
+🔧 Environment: development
+🏠 DEV_HOST: blaze.com

@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # MongoDB 数据库
+  mongodb:
+    image: mongo:7
+    container_name: webbox-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=webbox
+    networks:
+      - webbox-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # API 服务
+  api-service:
+    build:
+      context: .
+      dockerfile: packages/api-service/Dockerfile
+    container_name: webbox-api
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017/webbox
+      - API_SERVICE_PORT=3002
+      - JWT_SECRET=your-secret-key-change-in-production
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - webbox-network
+    restart: unless-stopped
+
+  # 渲染服务
+  render-service:
+    build:
+      context: .
+      dockerfile: packages/render-service/Dockerfile
+    container_name: webbox-render
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017/webbox
+      - RENDER_SERVICE_PORT=3001
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - webbox-network
+    restart: unless-stopped
+
+  # Admin 管理服务
+  admin-service:
+    build:
+      context: .
+      dockerfile: packages/admin-service/Dockerfile
+    container_name: webbox-admin
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:3002
+    depends_on:
+      - api-service
+    networks:
+      - webbox-network
+    restart: unless-stopped
+
+networks:
+  webbox-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

@@ -103,7 +103,7 @@ export class RouteResolverService {
       // 3. 加载模板和域名配置
       const [template, domainConfig] = await Promise.all([
         CustomTemplate.findById(matchedRule.template_id).lean(),
-        Domain.findOne({ host }).lean()
+        Domain.findOne({ domain: host }).lean()
       ]);
 
       if (!template) {

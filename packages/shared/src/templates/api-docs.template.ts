@@ -235,16 +235,16 @@ function getLoginBar(): string {
   return `
         <!-- 登录栏 -->
         <div class="login-bar" id="loginBar">
-          <form class="login-form" id="loginForm" onsubmit="login(event); return false;">
+          <div class="login-form" id="loginForm">
             <span style="color: white; font-weight: 600;">🔐 登录获取 Token：</span>
-            <input type="text" id="username" name="username" placeholder="用户名" value="admin" autocomplete="username">
-            <input type="password" id="password" name="password" placeholder="密码" value="admin123" autocomplete="current-password">
-            <button type="submit" class="login-btn">登录</button>
-          </form>
+            <input type="text" id="username" placeholder="用户名" value="admin">
+            <input type="text" id="password" placeholder="密码" value="admin123">
+            <button type="button" class="login-btn" id="loginBtn">登录</button>
+          </div>
           <div class="login-status hidden" id="loginStatus">
             <span id="userDisplay">✓ 已登录</span>
             <span class="token-display" id="tokenDisplay"></span>
-            <button class="logout-btn" onclick="logout()">退出</button>
+            <button type="button" class="logout-btn" id="logoutBtn">退出</button>
           </div>
         </div>
   `;
@@ -575,17 +575,13 @@ function getApiDocsScripts(baseUrl: string): string {
         }
 
         // 登录
-        async function login(event) {
-          if (event) {
-            event.preventDefault();
-          }
-
+        async function login() {
           const username = document.getElementById('username').value;
           const password = document.getElementById('password').value;
 
           if (!username || !password) {
             showToast('请输入用户名和密码', 'error');
-            return false;
+            return;
           }
 
           try {
@@ -598,6 +594,7 @@ function getApiDocsScripts(baseUrl: string): string {
             });
 
             const result = await response.json();
+            console.log('登录响应:', result);
 
             // 检查业务状态码 1003 表示成功
             if (result.code === 1003 && result.data && result.data.token) {
@@ -606,6 +603,8 @@ function getApiDocsScripts(baseUrl: string): string {
 
               localStorage.setItem('apiDocToken', authToken);
               localStorage.setItem('apiDocUser', userName);
+
+              console.log('Token已保存:', authToken.substring(0, 20) + '...');
 
               // 显示登录状态
               document.getElementById('loginForm').classList.add('hidden');
@@ -617,13 +616,12 @@ function getApiDocsScripts(baseUrl: string): string {
               showToast('✓ 登录成功！现在复制的 cURL 命令将包含真实 Token');
             } else {
               showToast('登录失败: ' + (result.message || '未知错误'), 'error');
+              console.error('登录失败:', result);
             }
           } catch (error) {
             console.error('Login error:', error);
             showToast('登录失败: ' + error.message, 'error');
           }
-
-          return false;
         }
 
         // 退出登录
@@ -705,6 +703,18 @@ function getApiDocsScripts(baseUrl: string): string {
               document.getElementById('userDisplay').textContent = \`✓ 已登录: \${savedUser}\`;
             }
             document.getElementById('tokenDisplay').textContent = \`Token: \${authToken.substring(0, 20)}...\`;
+          }
+
+          // 添加登录和退出按钮的事件监听器
+          const loginBtn = document.getElementById('loginBtn');
+          const logoutBtn = document.getElementById('logoutBtn');
+
+          if (loginBtn) {
+            loginBtn.addEventListener('click', login);
+          }
+
+          if (logoutBtn) {
+            logoutBtn.addEventListener('click', logout);
           }
 
           // 为所有 API 项添加复制按钮

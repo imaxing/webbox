@@ -53,12 +53,8 @@ Error: listen EADDRINUSE: address already in use :::3002
 3:02:10 PM [tsx] change in ./../shared/src/constants/response.ts Process hasn't exited. Killing process...
 3:05:17 PM [tsx] change in ./../shared/src/index.ts Process hasn't exited. Killing process...
 3:07:07 PM [tsx] change in ./../shared/src/index.ts Process hasn't exited. Killing process...
-2
-}
-
-Node.js v20.10.0
-2:40:54 PM [tsx] change in ./src/index.ts Rerunning...
-c✅ MongoDB connected successfully
+3:23:45 PM [tsx] change in ./src/routes/auth.routes.ts Process hasn't exited. Killing process...
+ted successfully
 node:events:492
       throw er; // Unhandled 'error' event
       ^
@@ -501,20 +497,13 @@ Error: listen EADDRINUSE: address already in use :::3002
 3:07:07 PM [tsx] change in ./../shared/src/index.ts Process hasn't exited. Killing process...
 3:10:36 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Process hasn't exited. Killing process...
 3:10:54 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Process hasn't exited. Killing process...
-t: 30✅ MongoDB connected s3:01:52 PM [tsx] change in ./../shared/src/constants/response.ts Rerunning...
-c✅ MongoDB connected successfully
-node:events:492
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::3002
-    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
-    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
-    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
-    at listenInCluster (node:net:1920:12)
-    at Server.listen (node:net:2008:7)
-    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
-    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/api-service/src/index.ts:81:9)
+3:14:10 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Process hasn't exited. Killing process...
+3:14:29 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Process hasn't exited. Killing process...
+3:21:17 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Process hasn't exited. Killing process...
+3:21:41 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Process hasn't exited. Killing process...
+3:23:45 PM [tsx] change in ./src/routes/auth.routes.ts Process hasn't exited. Killing process...
+3:24:23 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Process hasn't exited. Killing process...
+t startServer (/Users/iamgx/panda/webbox-nextjs/packages/api-service/src/index.ts:81:9)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 Emitted 'error' event on Server instance at:
     at emitErrorNT (node:net:1899:8)
@@ -632,6 +621,162 @@ Emitted 'error' event on Server instance at:
 
 Node.js v20.10.0
 3:10:54 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Rerunning...
+c✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3002
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/api-service/src/index.ts:81:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3002
+}
+
+Node.js v20.10.0
+3:14:10 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Rerunning...
+c✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3002
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/api-service/src/index.ts:81:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3002
+}
+
+Node.js v20.10.0
+3:14:29 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Rerunning...
+c✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3002
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/api-service/src/index.ts:81:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3002
+}
+
+Node.js v20.10.0
+3:21:17 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Rerunning...
+c✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3002
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/api-service/src/index.ts:81:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3002
+}
+
+Node.js v20.10.0
+3:21:41 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Rerunning...
+c✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3002
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/api-service/src/index.ts:81:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3002
+}
+
+Node.js v20.10.0
+3:23:45 PM [tsx] change in ./src/routes/auth.routes.ts Rerunning...
+c✅ MongoDB connected successfully
+node:events:492
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3002
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvExceptionWithHostPort (node:internal/errors:660:12)
+    at Server.setupListenHandle [as _listen2] (node:net:1872:16)
+    at listenInCluster (node:net:1920:12)
+    at Server.listen (node:net:2008:7)
+    at Function.listen (/Users/iamgx/panda/webbox-nextjs/node_modules/express/lib/application.js:635:24)
+    at startServer (/Users/iamgx/panda/webbox-nextjs/packages/api-service/src/index.ts:81:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1899:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3002
+}
+
+Node.js v20.10.0
+3:24:23 PM [tsx] change in ./../shared/src/templates/api-docs.template.ts Rerunning...
 c✅ MongoDB connected successfully
 node:events:492
       throw er; // Unhandled 'error' event

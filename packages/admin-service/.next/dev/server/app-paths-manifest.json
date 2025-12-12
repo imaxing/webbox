@@ -2,12 +2,7 @@
   "/(admin)/domains/page": "app/(admin)/domains/page.js",
   "/(admin)/page": "app/(admin)/page.js",
   "/(admin)/routes/page": "app/(admin)/routes/page.js",
-  "/(admin)/templates/base/page": "app/(admin)/templates/base/page.js",
-  "/(admin)/templates/custom/page": "app/(admin)/templates/custom/page.js",
-  "/(admin)/templates/page": "app/(admin)/templates/page.js",
   "/(admin)/users/page": "app/(admin)/users/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
   "/api/[...path]/route": "app/api/[...path]/route.js",
-  "/demo/page": "app/demo/page.js",
   "/login/page": "app/login/page.js"
 }

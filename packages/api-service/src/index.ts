@@ -64,8 +64,8 @@ app.use(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    console.error("Error:", err);
-    Response.internalError(res, err.message || "Internal Server Error");
+    console.error("错误:", err);
+    Response.internalError(res, err.message || "服务器内部错误");
   }
 );
 
@@ -79,12 +79,12 @@ async function startServer() {
 
     // 启动HTTP服务
     app.listen(PORT, () => {
-      console.log(`🚀 API Service is running on port ${PORT}`);
-      console.log(`📡 Health check: http://localhost:${PORT}/health`);
-      console.log(`📖 API Docs: http://localhost:${PORT}/api-docs`);
+      console.log(`🚀 API 服务已启动，端口: ${PORT}`);
+      console.log(`📡 健康检查: http://localhost:${PORT}/health`);
+      console.log(`📖 API 文档: http://localhost:${PORT}/api-docs`);
     });
   } catch (error) {
-    console.error("Failed to start server:", error);
+    console.error("启动服务失败:", error);
     process.exit(1);
   }
 }

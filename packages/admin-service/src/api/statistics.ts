@@ -110,3 +110,10 @@ export const getDomainStatistics = async (): Promise<StatisticsResponse> => {
     by_project: Object.values(projectGroups),
   }
 }
+
+// 默认导出对象形式
+const statistics = {
+  domain: getDomainStatistics,
+};
+
+export default statistics;

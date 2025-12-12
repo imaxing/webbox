@@ -1,0 +1,60 @@
+{
+  "projects": [
+    {
+      "value": "joymeet",
+      "label": "JoyMeet",
+      "description": "JoyMeet项目"
+    },
+    {
+      "value": "viva",
+      "label": "Viva",
+      "description": "Viva项目"
+    },
+    {
+      "value": "blazex",
+      "label": "BlazeX",
+      "description": "BlazeX项目"
+    },
+    {
+      "value": "sparkon",
+      "label": "SparkOn",
+      "description": "SparkOn项目"
+    }
+  ],
+  "userRole": [
+    { "value": "admin", "label": "管理员" },
+    { "value": "editor", "label": "编辑员" },
+    { "value": "viewer", "label": "查看员" }
+  ],
+  "userStatus": [
+    { "value": "active", "label": "激活" },
+    { "value": "inactive", "label": "停用" },
+    { "value": "suspended", "label": "暂停" }
+  ],
+  "domainStatus": [
+    { "value": "active", "label": "生效" },
+    { "value": "inactive", "label": "停用" }
+  ],
+  "routeType": [
+    { "value": "exact", "label": "精确匹配" },
+    { "value": "wildcard", "label": "通配符" },
+    { "value": "regex", "label": "正则表达式" }
+  ],
+  "templateCategory": [
+    { "value": "policy", "label": "隐私政策" },
+    { "value": "terms", "label": "服务条款" },
+    { "value": "safety", "label": "安全政策" },
+    { "value": "other", "label": "其他" }
+  ],
+  "templateStatus": [
+    { "value": "draft", "label": "草稿" },
+    { "value": "active", "label": "生效" },
+    { "value": "archived", "label": "归档" }
+  ],
+  "variableType": [
+    { "value": "text", "label": "文本" },
+    { "value": "email", "label": "邮箱" },
+    { "value": "url", "label": "URL" },
+    { "value": "number", "label": "数字" }
+  ]
+}

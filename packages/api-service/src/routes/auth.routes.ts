@@ -56,7 +56,7 @@ router.post("/login", async (req, res) => {
       user: user.toSafeObject(),
     });
   } catch (error: any) {
-    console.error("Login error:", error);
+    console.error("登录失败:", error);
     Response.internalError(res, error.message);
   }
 });
@@ -84,7 +84,7 @@ router.get("/me", authMiddleware, async (req, res) => {
 
     Response.success(res, user.toSafeObject());
   } catch (error: any) {
-    console.error("Get current user error:", error);
+    console.error("获取当前用户信息失败:", error);
     Response.internalError(res, error.message);
   }
 });
@@ -112,7 +112,7 @@ router.post("/users", async (req, res) => {
 
     Response.created(res, user.toSafeObject());
   } catch (error: any) {
-    console.error("Create user error:", error);
+    console.error("创建用户失败:", error);
 
     if (error.code === 11000) {
       return Response.duplicateKey(res, "用户名或邮箱已存在");

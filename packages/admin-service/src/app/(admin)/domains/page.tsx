@@ -1,98 +1,55 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from "react";
 import {
   AntTable,
   AntButton,
   AntSelect,
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  Modal,
   type AntTableColumn,
   type AntSelectOption,
-} from '@/components';
-import { toast } from '@/lib/toast';
-import DomainFormDialog from '@/components/DomainFormDialog';
-import DomainConfigDialog from '@/components/DomainConfigDialog';
-import { Settings } from 'lucide-react';
-import {
-  getDomainList,
-  createDomain,
-  updateDomain,
-  deleteDomain,
-  type Domain,
-  type DomainFormData,
-} from '@/api/domain';
-
-// 状态映射
-const STATUS_MAP: Record<string, string> = {
-  active: '生效',
-  inactive: '停用',
-};
+} from "@/components";
+import { TableActions } from "@/components";
+import { toast } from "@/lib/toast";
+import { createDialog } from "@/lib/dialog.dynamic";
+import { DomainForm } from "@/components";
+import DomainConfigDialog from "@/components/business/DomainConfigDialog";
+import { useDict, useTableData } from "@/hooks";
+import api from "@/api";
+import type { Domain, DomainFormData } from "@/api/domain";
 
 export default function DomainManagementPage() {
-  const [data, setData] = useState<Domain[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [selectedProjectGroup, setSelectedProjectGroup] = useState<string>('all');
-  const [projectGroups, setProjectGroups] = useState<string[]>([]);
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 10,
-    total: 0,
-  });
-
-  // 表单对话框状态
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [editingDomain, setEditingDomain] = useState<Domain | undefined>(undefined);
-
-  // 配置对话框状态
-  const [configDialogOpen, setConfigDialogOpen] = useState(false);
-  const [configDomain, setConfigDomain] = useState<Domain | undefined>(undefined);
-
-  // 加载数据
-  const loadData = async (page = 1, pageSize = 10) => {
-    setLoading(true);
-    try {
-      const response = await getDomainList({
-        page,
-        limit: pageSize,
-      });
-      setData(response.data || []);
-      setPagination({
-        current: page,
-        pageSize: response.paging?.per_page || pageSize,
-        total: response.paging?.total || 0,
-      });
-    } catch (error) {
-      console.error('加载数据失败:', error);
-      toast.error('加载数据失败');
-    } finally {
-      setLoading(false);
+  const dicts = useDict();
+  const { data, loading, pagination, loadData, refresh } = useTableData<Domain>(
+    {
+      fetchData: api.domain.list,
+      initialPageSize: 20,
     }
-  };
+  );
+
+  const [selectedProjectGroup, setSelectedProjectGroup] =
+    useState<string>("all");
+  const [projectGroups, setProjectGroups] = useState<string[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
 
   useEffect(() => {
-    loadData();
     loadProjectGroups();
   }, []);
 
   // 加载项目组列表
   const loadProjectGroups = async () => {
     try {
-      const response = await fetch('/json/projects.json');
+      const response = await fetch("/json/projects.json");
       const data = await response.json();
       const groups = data.projects.map((project: any) => project.value);
       setProjectGroups(groups);
     } catch (error) {
-      console.error('加载项目组列表失败:', error);
+      console.error("加载项目组列表失败:", error);
     }
   };
 
   // 根据选择的项目组过滤数据
   const filteredData = useMemo(() => {
-    if (selectedProjectGroup === 'all') {
+    if (selectedProjectGroup === "all") {
       return data;
     }
     return data.filter((item) => item.project_group === selectedProjectGroup);
@@ -100,7 +57,7 @@ export default function DomainManagementPage() {
 
   // 项目组选项
   const projectOptions: AntSelectOption[] = [
-    { label: '全部项目组', value: 'all' },
+    { label: "全部项目组", value: "all" },
     ...projectGroups.map((group) => ({
       label: group,
       value: group,
@@ -109,80 +66,84 @@ export default function DomainManagementPage() {
 
   // 新增域名
   const handleCreate = () => {
-    setEditingDomain(undefined);
-    setDialogOpen(true);
+    const dialog = createDialog({
+      title: "新增域名",
+      width: 800,
+      component: (
+        <DomainForm
+          isEdit={false}
+          onSubmit={async (formData: DomainFormData) => {
+            await api.domain.create(formData);
+            toast.success("创建成功");
+            refresh();
+          }}
+        />
+      ),
+      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
+    });
   };
 
   // 编辑域名
   const handleEdit = (domain: Domain) => {
-    setEditingDomain(domain);
-    setDialogOpen(true);
-  };
-
-  // 提交表单
-  const handleSubmit = async (formData: DomainFormData) => {
-    try {
-      if (editingDomain && editingDomain._id) {
-        // 编辑
-        await updateDomain(editingDomain._id, formData);
-        toast.success('更新成功');
-      } else {
-        // 新增
-        await createDomain(formData);
-        toast.success('创建成功');
-      }
-      loadData(pagination.current, pagination.pageSize);
-    } catch (error: any) {
-      console.error('操作失败:', error);
-      toast.error(error.message || '操作失败');
-      throw error; // 重新抛出错误，让对话框保持打开状态
-    }
+    const dialog = createDialog({
+      title: "编辑域名",
+      width: 800,
+      component: (
+        <DomainForm
+          initialData={domain}
+          isEdit={true}
+          onSubmit={async (formData: DomainFormData) => {
+            await api.domain.update(domain._id, formData);
+            toast.success("更新成功");
+            refresh();
+          }}
+        />
+      ),
+      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
+    });
   };
 
   // 配置关联
   const handleConfig = (domain: Domain) => {
-    setConfigDomain(domain);
-    setConfigDialogOpen(true);
+    const dialog = createDialog({
+      title: `${domain.domain} - 配置关联`,
+      width: 1000,
+      component: (
+        <DomainConfigDialog
+          domain={domain}
+          onClose={() => dialog.close()}
+          onSuccess={() => {
+            dialog.close();
+            refresh();
+          }}
+        />
+      ),
+    });
   };
 
   // 删除域名
   const handleDelete = async (row: Domain) => {
-    Modal.confirm({
-      title: '确认删除',
-      content: '确定要删除该域名配置吗？',
-      type: 'warning',
-      onOk: async () => {
-        if (!row._id) {
-          toast.error('域名 ID 不存在');
-          return;
-        }
-        try {
-          await deleteDomain(row._id);
-          toast.success('删除成功');
-          loadData(pagination.current, pagination.pageSize);
-        } catch (error) {
-          console.error('删除失败:', error);
-          toast.error('删除失败');
-        }
-      },
-    });
+    if (!row._id) return;
+    await api.domain.delete(row._id);
+    toast.success("删除成功");
+    refresh();
   };
 
   // 表格列配置
   const columns: AntTableColumn<Domain>[] = [
     {
-      title: 'UUID',
-      dataIndex: 'uuid',
-      key: 'uuid',
+      title: "UUID",
+      dataIndex: "uuid",
+      key: "uuid",
       width: 280,
       render: (value) => (
-        <span className="font-mono text-xs text-gray-600">{value || '-'}</span>
+        <span className="font-mono text-xs text-gray-600">{value || "-"}</span>
       ),
     },
     {
-      title: '域名',
-      dataIndex: 'domain',
-      key: 'domain',
+      title: "域名",
+      dataIndex: "domain",
+      key: "domain",
       render: (value) => (
         <a
           href={value}
@@ -195,24 +156,24 @@ export default function DomainManagementPage() {
       ),
     },
     {
-      title: '应用名称',
-      dataIndex: 'app_name',
-      key: 'app_name',
+      title: "应用名称",
+      dataIndex: "app_name",
+      key: "app_name",
       width: 150,
     },
     {
-      title: '项目组',
-      dataIndex: 'project_group',
-      key: 'project_group',
+      title: "项目组",
+      dataIndex: "project_group",
+      key: "project_group",
       width: 120,
       render: (value) => (
-        <span className="text-sm text-gray-700">{value || '-'}</span>
+        <span className="text-sm text-gray-700">{value || "-"}</span>
       ),
     },
     {
-      title: '联系邮箱',
-      dataIndex: 'email',
-      key: 'email',
+      title: "联系邮箱",
+      dataIndex: "email",
+      key: "email",
       width: 200,
       render: (value) => (
         <a
@@ -224,61 +185,55 @@ export default function DomainManagementPage() {
       ),
     },
     {
-      title: '状态',
-      dataIndex: 'status',
-      key: 'status',
+      title: "状态",
+      dataIndex: "status",
+      key: "status",
       width: 100,
       render: (value) => (
         <span
           className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-            value === 'active'
-              ? 'bg-green-100 text-green-800'
-              : 'bg-gray-100 text-gray-800'
+            value === "active"
+              ? "bg-green-100 text-green-800"
+              : "bg-gray-100 text-gray-800"
           }`}
         >
-          {STATUS_MAP[value || 'inactive'] || value || 'inactive'}
+          {dicts.map.domainStatus[value || "inactive"] || value || "inactive"}
         </span>
       ),
     },
     {
-      title: '创建时间',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
+      title: "创建时间",
+      dataIndex: "createdAt",
+      key: "createdAt",
       width: 180,
       render: (value) => (
-        <span className="text-sm text-gray-600">{value || '-'}</span>
+        <span className="text-sm text-gray-600">{value || "-"}</span>
       ),
     },
     {
-      title: '操作',
-      key: 'action',
-      width: 260,
+      title: "操作",
+      key: "action",
+      width: 80,
       render: (_, record) => (
-        <div className="flex gap-2">
-          <AntButton
-            size="small"
-            type="link"
-            onClick={() => handleConfig(record)}
-            icon={<Settings className="h-3.5 w-3.5" />}
-          >
-            配置关联
-          </AntButton>
-          <AntButton
-            size="small"
-            type="link"
-            onClick={() => handleEdit(record)}
-          >
-            编辑
-          </AntButton>
-          <AntButton
-            size="small"
-            type="link"
-            danger
-            onClick={() => handleDelete(record)}
-          >
-            删除
-          </AntButton>
-        </div>
+        <TableActions
+          actions={[
+            {
+              text: "配置关联",
+              onClick: () => handleConfig(record),
+            },
+            {
+              text: "编辑",
+              onClick: () => handleEdit(record),
+            },
+            {
+              text: "删除",
+              onClick: () => handleDelete(record),
+              danger: true,
+              divider: true,
+              confirm: `确定要删除域名"${record.domain}"吗？`,
+            },
+          ]}
+        />
       ),
     },
   ];
@@ -312,36 +267,6 @@ export default function DomainManagementPage() {
           },
         }}
       />
-
-      {/* 表单对话框 */}
-      <DomainFormDialog
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        initialData={editingDomain}
-        onSubmit={handleSubmit}
-        isEdit={!!editingDomain}
-      />
-
-      {/* 配置关联对话框 */}
-      <Dialog open={configDialogOpen} onOpenChange={setConfigDialogOpen}>
-        <DialogContent className="max-w-[95vw] w-auto min-w-[800px] p-0 gap-0 overflow-hidden">
-          {configDomain && (
-            <>
-              <DialogHeader className="px-6 py-4 border-b">
-                <DialogTitle>{configDomain.domain} - 配置关联</DialogTitle>
-              </DialogHeader>
-              <DomainConfigDialog
-                domain={configDomain}
-                onSuccess={() => {
-                  setConfigDialogOpen(false);
-                  loadData(pagination.current, pagination.pageSize);
-                }}
-                onClose={() => setConfigDialogOpen(false)}
-              />
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

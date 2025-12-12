@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { AntInput, AntButton } from '@/components';
-import { Label } from '@/components/label';
-import { useAuth } from '@/contexts/AuthContext';
-import * as LucideIcons from 'lucide-react';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { AntInput, AntButton } from "@/components";
+import { Label } from "@/components/ui/label";
+import { useAuth } from "@/contexts/AuthContext";
+import * as LucideIcons from "lucide-react";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
@@ -43,9 +43,7 @@ export default function LoginPage() {
             </div>
           </div>
           <h1 className="text-3xl font-bold tracking-tight">欢迎回来</h1>
-          <p className="text-muted-foreground mt-2">
-            登录到 Webbox 管理后台
-          </p>
+          <p className="text-muted-foreground mt-2">登录到 Webbox 管理后台</p>
         </div>
 
         {/* 登录表单 */}
@@ -60,7 +58,9 @@ export default function LoginPage() {
                 placeholder="请输入用户名"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                prefix={<LucideIcons.User className="h-4 w-4 text-muted-foreground" />}
+                prefix={
+                  <LucideIcons.User className="h-4 w-4 text-muted-foreground" />
+                }
                 disabled={loading}
                 size="large"
               />
@@ -72,11 +72,13 @@ export default function LoginPage() {
               <div className="relative">
                 <AntInput
                   id="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="请输入密码"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  prefix={<LucideIcons.Lock className="h-4 w-4 text-muted-foreground" />}
+                  prefix={
+                    <LucideIcons.Lock className="h-4 w-4 text-muted-foreground" />
+                  }
                   disabled={loading}
                   size="large"
                 />
@@ -102,7 +104,10 @@ export default function LoginPage() {
               id="remember"
               className="h-4 w-4 rounded border-gray-300"
             />
-            <label htmlFor="remember" className="ml-2 text-sm text-muted-foreground">
+            <label
+              htmlFor="remember"
+              className="ml-2 text-sm text-muted-foreground"
+            >
               记住我
             </label>
           </div>
@@ -116,24 +121,9 @@ export default function LoginPage() {
             loading={loading}
             disabled={!username || !password || loading}
           >
-            {loading ? '登录中...' : '登录'}
+            {loading ? "登录中..." : "登录"}
           </AntButton>
         </form>
-
-        {/* 提示信息 */}
-        <div className="rounded-lg border bg-muted/50 p-4 text-sm text-muted-foreground">
-          <div className="flex items-start gap-2">
-            <LucideIcons.Info className="h-4 w-4 mt-0.5 shrink-0" />
-            <div>
-              <p className="font-medium text-foreground mb-1">演示说明</p>
-              <ul className="space-y-1 text-xs">
-                <li>• 请使用 API 服务创建的账号登录</li>
-                <li>• API 地址: {process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002'}</li>
-                <li>• 登录成功后将跳转到管理后台</li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

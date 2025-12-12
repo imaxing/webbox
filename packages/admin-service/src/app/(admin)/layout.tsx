@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { ScrollArea } from '@/components/scroll-area';
-import { AntButton } from '@/components';
+import React, { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { AntButton } from "@/components";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,16 +12,20 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/dropdown-menu';
-import { DynamicMenu } from '@/components/DynamicMenu';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { PageTransition } from '@/components/PageTransition';
-import { getMenus, type MenuConfig } from '@/api/menu';
-import { useAuth } from '@/contexts/AuthContext';
-import { toast } from '@/lib/toast';
-import * as LucideIcons from 'lucide-react';
+} from "@/components/ui/dropdown-menu";
+import { DynamicMenu } from "@/components";
+import { ThemeToggle } from "@/components";
+import { PageTransition } from "@/components";
+import { getMenus, type MenuConfig } from "@/api/menu";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "@/lib/toast";
+import * as LucideIcons from "lucide-react";
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, logout, isAuthenticated, loading: authLoading } = useAuth();
@@ -36,26 +40,26 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   useEffect(() => {
     const loadMenus = async () => {
       try {
-        console.log('[AdminLayout] 开始从接口加载菜单');
+        console.log("[AdminLayout] 开始从接口加载菜单");
         const config = await getMenus();
-        console.log('[AdminLayout] 菜单加载成功', config);
+        console.log("[AdminLayout] 菜单加载成功", config);
         setMenuConfig(config);
       } catch (error) {
-        console.error('[AdminLayout] 加载菜单失败:', error);
-        toast.error('加载菜单失败');
+        console.error("[AdminLayout] 加载菜单失败:", error);
+        toast.error("加载菜单失败");
         // 设置空菜单
         setMenuConfig({ main: [], others: [] });
       } finally {
-        console.log('[AdminLayout] 菜单加载完成');
+        console.log("[AdminLayout] 菜单加载完成");
         setMenuLoading(false);
       }
     };
 
     if (isAuthenticated) {
-      console.log('[AdminLayout] 已认证，加载菜单');
+      console.log("[AdminLayout] 已认证，加载菜单");
       loadMenus();
     } else {
-      console.log('[AdminLayout] 未认证，不加载菜单');
+      console.log("[AdminLayout] 未认证，不加载菜单");
       // 如果未认证也设置loading为false
       setMenuLoading(false);
     }
@@ -79,15 +83,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (user?.username) {
       return user.username.charAt(0).toUpperCase();
     }
-    return 'U';
+    return "U";
   };
 
   // 角色映射
   const getRoleLabel = (role: string) => {
     const roleMap: Record<string, string> = {
-      admin: '管理员',
-      editor: '编辑员',
-      viewer: '查看员',
+      admin: "管理员",
+      editor: "编辑员",
+      viewer: "查看员",
     };
     return roleMap[role] || role;
   };
@@ -97,12 +101,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* 侧边栏 */}
       <aside
         className={cn(
-          'bg-card border-r flex flex-col transition-all duration-300',
-          sidebarOpen ? 'w-64' : 'w-20'
+          "border-r flex flex-col bg-card transition-all duration-300 ease-in-out",
+          sidebarOpen ? "w-64" : "w-20"
         )}
       >
         {/* 头部 */}
-        <div className="flex h-16 items-center justify-center px-4 border-b shrink-0">
+        <div className="flex h-16 items-center justify-center px-4 shrink-0">
           <div className="flex items-center gap-2">
             <LucideIcons.Box className="h-6 w-6 text-primary" />
             {sidebarOpen && <h1 className="font-bold text-xl">Webbox</h1>}
@@ -125,19 +129,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   title="主菜单"
                 />
               )}
-
-              {/* 其他菜单 */}
-              {menuConfig.others && menuConfig.others.length > 0 && (
-                <DynamicMenu
-                  items={menuConfig.others}
-                  sidebarOpen={sidebarOpen}
-                  title="其他"
-                />
-              )}
             </div>
           ) : (
             <div className="text-center text-sm text-muted-foreground py-8">
-              {sidebarOpen ? '暂无菜单' : '无'}
+              {sidebarOpen ? "暂无菜单" : "无"}
             </div>
           )}
         </ScrollArea>
@@ -153,7 +148,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className="p-2 rounded-md hover:bg-muted transition-colors"
-                title={sidebarOpen ? '收起侧边栏' : '展开侧边栏'}
+                title={sidebarOpen ? "收起侧边栏" : "展开侧边栏"}
               >
                 {sidebarOpen ? (
                   <LucideIcons.PanelLeftClose className="h-5 w-5" />
@@ -191,15 +186,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   <DropdownMenuLabel>
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium">{user?.username}</p>
-                      <p className="text-xs text-muted-foreground">{user?.email}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {user?.email}
+                      </p>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => router.push('/profile')}>
+                  <DropdownMenuItem onClick={() => router.push("/profile")}>
                     <LucideIcons.User className="mr-2 h-4 w-4" />
                     个人资料
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => router.push('/settings')}>
+                  <DropdownMenuItem onClick={() => router.push("/settings")}>
                     <LucideIcons.Settings className="mr-2 h-4 w-4" />
                     设置
                   </DropdownMenuItem>
@@ -215,10 +212,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </header>
 
         {/* 内容区域 */}
-        <ScrollArea className="flex-1">
-          <div className="p-6">
-            <PageTransition>{children}</PageTransition>
-          </div>
+        <ScrollArea className="flex-grow min-h-0 p-3">
+          <PageTransition>{children}</PageTransition>
         </ScrollArea>
       </main>
     </div>

@@ -11,7 +11,7 @@ export interface IRouteRule extends Document {
   pattern: string;        // 路由模式（如 "/proto/child-safety-*"）
   type: 'exact' | 'wildcard' | 'regex'; // 匹配类型
   domain: string;         // 域名
-  template_id: mongoose.Types.ObjectId; // 关联的定制模板 ID
+  template_id?: mongoose.Types.ObjectId; // 关联的定制模板 ID（可选）
   priority: number;       // 优先级（0-100）
   enabled: boolean;       // 是否启用
   description?: string;   // 规则描述
@@ -44,7 +44,7 @@ const routeRuleSchema: Schema = new Schema(
     template_id: {
       type: Schema.Types.ObjectId,
       ref: 'CustomTemplate',
-      required: true,
+      required: false,
       index: true,
     },
     priority: {

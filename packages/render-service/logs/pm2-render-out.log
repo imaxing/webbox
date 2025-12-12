@@ -1,0 +1,36 @@
+2025-12-13 00:18:41: 
+2025-12-13 00:18:41: > @webbox/render-service@0.1.0 dev
+2025-12-13 00:18:41: > tsx watch src/index.ts
+2025-12-13 00:18:41: 
+2025-12-13 00:18:43: [dotenv@17.2.3] injecting env (4) from ../../.env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+2025-12-13 00:18:43: ✅ MongoDB connected successfully
+2025-12-13 00:22:20: 
+2025-12-13 00:22:20: > @webbox/render-service@0.1.0 dev
+2025-12-13 00:22:20: > tsx watch src/index.ts
+2025-12-13 00:22:20: 
+2025-12-13 00:22:21: [dotenv@17.2.3] injecting env (4) from ../../.env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+2025-12-13 00:22:21: ✅ MongoDB connected successfully
+2025-12-13 00:22:21: 🎨 Render Service is running on port 3001
+2025-12-13 00:22:21: 📡 Health check: http://localhost:3001/health
+2025-12-13 00:22:21: 🎯 Demo page: http://localhost:3001/demo
+2025-12-13 00:22:21: 🌐 Wildcard routing: All paths will be processed
+2025-12-13 00:22:21: 🔧 Environment: development
+2025-12-13 00:22:21: 🏠 DEV_HOST: blaze.com
+2025-12-13 00:25:56: 
+2025-12-13 00:25:56: > @webbox/render-service@0.1.0 dev
+2025-12-13 00:25:56: > tsx watch src/index.ts
+2025-12-13 00:25:56: 
+2025-12-13 00:25:57: [dotenv@17.2.3] injecting env (4) from ../../.env -- tip: ⚙️  suppress all logs with { quiet: true }
+2025-12-13 00:25:57: ✅ MongoDB connected successfully
+2025-12-13 00:25:57: 🎨 Render Service is running on port 3001
+2025-12-13 00:25:57: 📡 Health check: http://localhost:3001/health
+2025-12-13 00:25:57: 🎯 Demo page: http://localhost:3001/demo
+2025-12-13 00:25:57: 🌐 Wildcard routing: All paths will be processed
+2025-12-13 00:25:57: 🔧 Environment: development
+2025-12-13 00:25:57: 🏠 DEV_HOST: blaze.com
+2025-12-13 00:39:58: 12:39:58 AM [tsx] change in ./../../node_modules/dotenv/lib/main.js Restarting...
+2025-12-13 00:39:58: c
+2025-12-13 00:39:59: 12:39:59 AM [tsx] unlink in ./../../node_modules/mongodb-connection-string-url/node_modules/whatwg-url/lib/utils.js Restarting...
+2025-12-13 00:39:59: c
+2025-12-13 00:40:01: [dotenv@17.2.3] injecting env (4) from ../../.env -- tip: ⚙️  override existing env vars with { override: true }
+2025-12-13 00:40:01: ✅ MongoDB connected successfully

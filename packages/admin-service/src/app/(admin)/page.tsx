@@ -1,5 +1,4 @@
-import DomainMetrics from '@/components/DomainMetrics';
-import DomainRelationGraph from '@/components/DomainRelationGraph';
+import { DomainMetrics, DomainRelationGraph } from "@/components";
 
 export default function Home() {
   return (
@@ -8,12 +7,7 @@ export default function Home() {
       <DomainMetrics />
 
       {/* 域名关系图 */}
-      <div>
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-          域名关系图
-        </h2>
-        <DomainRelationGraph />
-      </div>
+      <DomainRelationGraph />
     </div>
   );
 }

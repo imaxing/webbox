@@ -8,8 +8,7 @@ import { addUUIDField } from '../utils/uuid';
  */
 export interface ICustomTemplate extends Document {
   uuid: string;
-  name: string;           // 定制模板名称
-  display_name: string;   // 显示名称
+  name: string;           // 模板名称（用于展示和唯一标识）
   base_template_id: mongoose.Types.ObjectId; // 关联的公共模板 ID
   content: string;        // 定制后的 HTML 内容
   variables: Map<string, string>; // 变量值映射
@@ -31,11 +30,6 @@ const customTemplateSchema: Schema = new Schema(
       trim: true,
       unique: true,
       index: true,
-    },
-    display_name: {
-      type: String,
-      required: true,
-      trim: true,
     },
     base_template_id: {
       type: Schema.Types.ObjectId,

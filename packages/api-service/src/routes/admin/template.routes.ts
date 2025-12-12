@@ -20,12 +20,12 @@ const customTemplateCtrl = new CrudController(CustomTemplate);
 router.get("/base-templates/options", authMiddleware, async (req, res) => {
   try {
     const templates = await BaseTemplate.find()
-      .select("_id name display_name")
+      .select("_id name")
       .lean();
 
     const options = templates.map((t) => ({
       value: t._id,
-      label: `${t.display_name} (${t.name})`,
+      label: t.name,
     }));
 
     Response.success(res, options);
@@ -60,17 +60,15 @@ router.post("/base-templates/batch-delete", authMiddleware, (req, res) =>
 // 定制模板选项（用于下拉框）
 router.get("/custom-templates/options", authMiddleware, async (req, res) => {
   try {
-    const { domain } = req.query;
-    const query = domain ? { domain, status: "active" } : { status: "active" };
+    const query = { status: "active" };
 
     const templates = await CustomTemplate.find(query)
-      .select("_id name display_name domain")
+      .select("_id name")
       .lean();
 
     const options = templates.map((t) => ({
       value: t._id,
-      label: `${t.display_name} (${t.name})`,
-      domain: t.domain,
+      label: t.name,
     }));
 
     Response.success(res, options);
@@ -201,10 +199,10 @@ router.post(
 // 复制模板（基础模板 → 定制模板）
 router.post("/templates/copy", authMiddleware, async (req, res) => {
   try {
-    const { baseTemplateId, name, domain, variables } = req.body;
+    const { baseTemplateId, name, variables } = req.body;
 
-    if (!baseTemplateId || !name || !domain) {
-      return Response.badRequest(res, "缺少必填字段：基础模板ID、名称、域名");
+    if (!baseTemplateId || !name) {
+      return Response.badRequest(res, "缺少必填字段：基础模板ID、名称");
     }
 
     // 查找基础模板
@@ -216,9 +214,7 @@ router.post("/templates/copy", authMiddleware, async (req, res) => {
     // 创建定制模板
     const customTemplate = await CustomTemplate.create({
       name,
-      display_name: baseTemplate.display_name,
       base_template_id: baseTemplate._id,
-      domain,
       content: baseTemplate.content,
       variables: new Map(Object.entries(variables || {})),
       status: "draft",

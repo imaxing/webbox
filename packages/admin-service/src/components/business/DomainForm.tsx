@@ -115,7 +115,7 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           setTemplateOptions(
             uniqueTemplates.map((t: any) => ({
               value: t._id,
-              label: t.display_name || t.name || "未命名模板",
+              label: t.name || "未命名模板",
             }))
           );
         } catch (error) {

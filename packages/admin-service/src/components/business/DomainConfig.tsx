@@ -454,7 +454,7 @@ export default function DomainConfig({
                                     config
                                   )}
                                 >
-                                  {tpl.display_name || tpl.name}
+                                  {tpl.name}
                                   {config.templateType === "custom" &&
                                     (tpl as CustomTemplate).status &&
                                     ` - ${

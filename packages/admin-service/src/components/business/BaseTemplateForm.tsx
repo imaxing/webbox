@@ -50,7 +50,6 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
 
     const [formData, setFormData] = useState<BaseTemplateFormData>({
       name: "",
-      display_name: "",
       category: "policy",
       content: "",
       variables: [],
@@ -65,7 +64,6 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
       if (initialData) {
         setFormData({
           name: initialData.name || "",
-          display_name: initialData.display_name || "",
           category: initialData.category || "policy",
           content: initialData.content || "",
           variables: initialData.variables || [],
@@ -85,7 +83,6 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
       } else {
         setFormData({
           name: "",
-          display_name: "",
           category: "policy",
           content: "",
           variables: [],
@@ -145,11 +142,7 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
       const newErrors: Record<string, string> = {};
 
       if (!formData.name.trim()) {
-        newErrors.name = "请填写模板标识";
-      }
-
-      if (!formData.display_name.trim()) {
-        newErrors.display_name = "请填写显示名称";
+        newErrors.name = "请填写模板名称";
       }
 
       if (!formData.category) {
@@ -208,41 +201,23 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
 
     return (
       <div className="space-y-4 max-h-[60vh] overflow-y-auto">
-        {/* 模板标识 */}
+        {/* 模板名称 */}
         <div className="space-y-2">
           <Label htmlFor="name">
-            模板标识 <span className="text-red-500">*</span>
+            模板名称 <span className="text-red-500">*</span>
           </Label>
           <Input
             id="name"
             type="text"
             value={formData.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
-            placeholder="例如: privacy-policy-template"
+            placeholder="例如: 隐私政策模板"
             className={errors.name ? "border-red-500" : ""}
           />
           {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
           <p className="text-xs text-muted-foreground">
-            模板的唯一标识符，建议使用英文字母和连字符
+            基础模板的名称
           </p>
-        </div>
-
-        {/* 显示名称 */}
-        <div className="space-y-2">
-          <Label htmlFor="display_name">
-            显示名称 <span className="text-red-500">*</span>
-          </Label>
-          <Input
-            id="display_name"
-            type="text"
-            value={formData.display_name}
-            onChange={(e) => handleInputChange("display_name", e.target.value)}
-            placeholder="例如: 隐私政策模板"
-            className={errors.display_name ? "border-red-500" : ""}
-          />
-          {errors.display_name && (
-            <p className="text-xs text-red-500">{errors.display_name}</p>
-          )}
         </div>
 
         {/* 分类 */}

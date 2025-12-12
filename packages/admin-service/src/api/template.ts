@@ -27,7 +27,6 @@ export interface BaseTemplate {
   _id?: string;
   uuid?: string;
   name: string;
-  display_name: string;
   category: TemplateCategory;
   content: string;
   variables: TemplateVariable[];
@@ -39,8 +38,8 @@ export interface BaseTemplate {
 // 自定义模板数据结构
 export interface CustomTemplate {
   _id?: string;
+  uuid?: string;
   name: string;
-  display_name: string;
   base_template_id: string;
   content: string;
   variables: Record<string, string>;
@@ -79,7 +78,6 @@ export interface ListResponse<T> {
 // 基础模板表单数据
 export interface BaseTemplateFormData {
   name: string;
-  display_name: string;
   category: TemplateCategory;
   content: string;
   variables?: TemplateVariable[];
@@ -89,7 +87,6 @@ export interface BaseTemplateFormData {
 // 自定义模板表单数据
 export interface CustomTemplateFormData {
   name: string;
-  display_name: string;
   base_template_id: string;
   content: string;
   variables?: Record<string, string>;

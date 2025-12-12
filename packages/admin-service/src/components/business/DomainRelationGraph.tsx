@@ -28,7 +28,6 @@ interface RouteData {
 interface TemplateData {
   _id?: string;
   name?: string;
-  display_name?: string;
 }
 
 interface DomainData {
@@ -244,7 +243,7 @@ export default function DomainRelationGraph() {
           type: "template",
           position: { x: templateX, y: routeY },
           data: {
-            label: templateData?.display_name || templateData?.name || templateId,
+            label: templateData?.name || templateId,
             url: fullUrl,
           },
         });

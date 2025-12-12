@@ -51,7 +51,6 @@ const CustomTemplateForm = forwardRef<
 
   const [formData, setFormData] = useState<CustomTemplateFormData>({
     name: "",
-    display_name: "",
     base_template_id: "",
     content: "",
     variables: {},
@@ -94,7 +93,6 @@ const CustomTemplateForm = forwardRef<
     if (initialData) {
       setFormData({
         name: initialData.name || "",
-        display_name: initialData.display_name || "",
         base_template_id: initialData.base_template_id || "",
         content: initialData.content || "",
         variables: initialData.variables || {},
@@ -120,7 +118,6 @@ const CustomTemplateForm = forwardRef<
     } else {
       setFormData({
         name: "",
-        display_name: "",
         base_template_id: "",
         content: "",
         variables: {},
@@ -217,10 +214,6 @@ const CustomTemplateForm = forwardRef<
       newErrors.name = "请填写模板名称";
     }
 
-    if (!formData.display_name.trim()) {
-      newErrors.display_name = "请填写显示名称";
-    }
-
     if (!formData.base_template_id) {
       newErrors.base_template_id = "请选择基础模板";
     }
@@ -289,29 +282,11 @@ const CustomTemplateForm = forwardRef<
           type="text"
           value={formData.name}
           onChange={(e) => handleInputChange("name", e.target.value)}
-          placeholder="例如: privacy-policy-blaze"
+          placeholder="例如: Blaze隐私政策"
           className={errors.name ? "border-red-500" : ""}
         />
         {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
-        <p className="text-xs text-muted-foreground">定制模板的唯一标识符</p>
-      </div>
-
-      {/* 显示名称 */}
-      <div className="space-y-2">
-        <Label htmlFor="display_name">
-          显示名称 <span className="text-red-500">*</span>
-        </Label>
-        <Input
-          id="display_name"
-          type="text"
-          value={formData.display_name}
-          onChange={(e) => handleInputChange("display_name", e.target.value)}
-          placeholder="例如: Blaze隐私政策"
-          className={errors.display_name ? "border-red-500" : ""}
-        />
-        {errors.display_name && (
-          <p className="text-xs text-red-500">{errors.display_name}</p>
-        )}
+        <p className="text-xs text-muted-foreground">定制模板的名称</p>
       </div>
 
       {/* 基础模板 */}

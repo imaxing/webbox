@@ -203,15 +203,9 @@ export default function TemplateManagementPage() {
       ),
     },
     {
-      title: "模板标识",
+      title: "模板名称",
       dataIndex: "name",
       key: "name",
-      render: (value) => <span className="font-mono text-sm">{value}</span>,
-    },
-    {
-      title: "显示名称",
-      dataIndex: "display_name",
-      key: "display_name",
     },
     {
       title: "分类",
@@ -280,12 +274,6 @@ export default function TemplateManagementPage() {
       title: "模板名称",
       dataIndex: "name",
       key: "name",
-      render: (value) => <span className="font-mono text-sm">{value}</span>,
-    },
-    {
-      title: "显示名称",
-      dataIndex: "display_name",
-      key: "display_name",
     },
     {
       title: "基础模板",

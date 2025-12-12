@@ -19,8 +19,7 @@ export interface IVariable {
  */
 export interface IBaseTemplate extends Document {
   uuid: string;
-  name: string;           // 模板唯一标识
-  display_name: string;   // 显示名称
+  name: string;           // 模板名称（用于展示和唯一标识）
   category: 'policy' | 'terms' | 'safety' | 'other'; // 分类
   content: string;        // HTML 模板内容
   variables: IVariable[]; // 可配置变量列表
@@ -40,11 +39,6 @@ const baseTemplateSchema: Schema = new Schema(
       unique: true,
       trim: true,
       index: true,
-    },
-    display_name: {
-      type: String,
-      required: true,
-      trim: true,
     },
     category: {
       type: String,

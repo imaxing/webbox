@@ -1,5 +1,7 @@
 // API 请求工具
 // 使用 Next.js API 路由作为代理（避免 CORS）
+import { toast } from "@/lib/toast";
+
 const isBrowser = typeof window !== "undefined";
 const API_BASE_URL = isBrowser
   ? "/api" // 浏览器端：使用本地 /api 路由代理
@@ -128,11 +130,14 @@ export async function request<T = any>(config: RequestConfig): Promise<T> {
         throw new RequestError("登录已过期，请重新登录", 401, errorData);
       }
 
-      throw new RequestError(
-        errorData.message || `请求失败: ${response.statusText}`,
-        response.status,
-        errorData
-      );
+      const errorMessage = errorData.message || `请求失败: ${response.statusText}`;
+
+      // 在浏览器端显示错误提示
+      if (isBrowser) {
+        toast.error(errorMessage);
+      }
+
+      throw new RequestError(errorMessage, response.status, errorData);
     }
 
     // 解析响应
@@ -158,9 +163,15 @@ export async function request<T = any>(config: RequestConfig): Promise<T> {
     if (error instanceof RequestError) {
       throw error;
     }
-    throw new RequestError(
-      error instanceof Error ? error.message : "网络请求失败"
-    );
+
+    const errorMessage = error instanceof Error ? error.message : "网络请求失败";
+
+    // 在浏览器端显示错误提示
+    if (isBrowser) {
+      toast.error(errorMessage);
+    }
+
+    throw new RequestError(errorMessage);
   }
 }
 

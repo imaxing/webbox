@@ -123,13 +123,13 @@ export function AntSelect({
   };
 
   return (
-    <div className={cn("relative inline-block", className)} style={style}>
+    <div className={cn("relative w-full", className)} style={style}>
       <Select
         value={internalValue ? String(internalValue) : undefined}
         onValueChange={handleValueChange}
         disabled={disabled}
       >
-        <SelectTrigger className={cn(sizeStyles[size], "min-w-[180px]")}>
+        <SelectTrigger className={cn(sizeStyles[size], "w-full")}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className={dropdownClassName}>

@@ -52,14 +52,31 @@ const DomainNode = ({ data }: any) => (
 );
 
 // 自定义模板节点
-const TemplateNode = ({ data }: any) => (
-  <div className="bg-green-50 dark:bg-green-900/20 border-2 border-green-500 dark:border-green-600 rounded-lg px-4 py-2.5 shadow-md min-w-[180px]">
-    <Handle type="target" position={Position.Left} />
-    <div className="text-sm text-green-800 dark:text-green-300 font-medium">
-      📄 {data.label}
+const TemplateNode = ({ data }: any) => {
+  const handleClick = () => {
+    if (data.url) {
+      window.open(data.url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  return (
+    <div
+      className="bg-green-50 dark:bg-green-900/20 border-2 border-green-500 dark:border-green-600 rounded-lg px-4 py-2.5 shadow-md min-w-[180px] cursor-pointer hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors"
+      onClick={handleClick}
+      title={data.url ? `点击打开: ${data.url}` : ''}
+    >
+      <Handle type="target" position={Position.Left} />
+      <div className="text-sm text-green-800 dark:text-green-300 font-medium">
+        📄 {data.label}
+      </div>
+      {data.url && (
+        <div className="text-xs text-green-600 dark:text-green-400 mt-1 truncate">
+          🔗 {data.url}
+        </div>
+      )}
     </div>
-  </div>
-);
+  );
+};
 
 // 自定义路由节点
 const RouteNode = ({ data }: any) => (
@@ -202,7 +219,25 @@ export default function DomainRelationGraph() {
           },
         });
 
-        // 2.2 创建该域名专属的模板节点
+        // 2.2 计算完整 URL
+        const baseUrl = domainData.domain.replace(/\/$/, "");
+        const pattern = routeData?.pattern || "";
+        let fullUrl = "";
+
+        if (pattern) {
+          let path = pattern;
+          // 处理通配符和正则
+          if (routeData?.type === "wildcard" && path.includes("*")) {
+            path = path.replace("*", "example");
+          } else if (routeData?.type === "regex") {
+            path = path.replace(/[\^$.*+?()[\]{}|\\]/g, "");
+          }
+
+          const finalPath = path.startsWith("/") ? path : `/${path}`;
+          fullUrl = `${baseUrl}${finalPath}`;
+        }
+
+        // 2.3 创建该域名专属的模板节点
         const templateNodeId = `domain-${domainIndex}-template-${mappingIndex}`;
         newNodes.push({
           id: templateNodeId,
@@ -210,10 +245,11 @@ export default function DomainRelationGraph() {
           position: { x: templateX, y: routeY },
           data: {
             label: templateData?.display_name || templateData?.name || templateId,
+            url: fullUrl,
           },
         });
 
-        // 2.3 创建边：域名 -> 路由
+        // 2.4 创建边：域名 -> 路由
         newEdges.push({
           id: `${domainNodeId}-${routeNodeId}`,
           source: domainNodeId,
@@ -224,7 +260,7 @@ export default function DomainRelationGraph() {
           markerEnd: { type: MarkerType.ArrowClosed, color: "#a855f7" },
         });
 
-        // 2.4 创建边：路由 -> 模板
+        // 2.5 创建边：路由 -> 模板
         newEdges.push({
           id: `${routeNodeId}-${templateNodeId}`,
           source: routeNodeId,

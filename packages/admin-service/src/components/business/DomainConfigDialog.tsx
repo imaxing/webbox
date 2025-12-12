@@ -36,6 +36,7 @@ export interface DomainConfigDialogProps {
 interface RouteConfig {
   _id?: string;
   template_id: string;
+  templateType?: TemplateType; // 每行独立的模板类型
   route_id?: string;
   pattern: string;
   type: RouteType;
@@ -53,7 +54,6 @@ export default function DomainConfigDialog({
   const dicts = useDict();
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [templateType, setTemplateType] = useState<TemplateType>("custom");
   const [baseTemplates, setBaseTemplates] = useState<BaseTemplate[]>([]);
   const [customTemplates, setCustomTemplates] = useState<CustomTemplate[]>([]);
   const [routes, setRoutes] = useState<RouteRule[]>([]);
@@ -75,9 +75,10 @@ export default function DomainConfigDialog({
 
   const domainHost = extractHost(domain.domain);
 
-  // 获取当前类型的模板列表
-  const currentTemplates =
-    templateType === "base" ? baseTemplates : customTemplates;
+  // 获取指定行的模板列表
+  const getTemplatesByType = (config: RouteConfig) => {
+    return config.templateType === "base" ? baseTemplates : customTemplates;
+  };
 
   // 加载数据
   useEffect(() => {
@@ -129,8 +130,8 @@ export default function DomainConfigDialog({
 
   // 添加配置行
   const handleAddRow = () => {
-    setConfigs([
-      ...configs,
+    setConfigs((prev) => [
+      ...prev,
       {
         template_id: "",
         pattern: "",
@@ -139,6 +140,17 @@ export default function DomainConfigDialog({
         enabled: true,
       },
     ]);
+  };
+
+  // 切换模板类型
+  const handleTemplateTypeChange = (index: number, type: TemplateType) => {
+    const newConfigs = [...configs];
+    newConfigs[index] = {
+      ...newConfigs[index],
+      templateType: type,
+      template_id: "", // 切换类型时清空已选模板
+    };
+    setConfigs(newConfigs);
   };
 
   // 模板变更
@@ -420,9 +432,13 @@ export default function DomainConfigDialog({
                               type="button"
                               size="sm"
                               variant={
-                                templateType === "base" ? "default" : "outline"
+                                config.templateType === "base"
+                                  ? "default"
+                                  : "outline"
                               }
-                              onClick={() => setTemplateType("base")}
+                              onClick={() =>
+                                handleTemplateTypeChange(index, "base")
+                              }
                               className="h-9 text-xs px-2"
                             >
                               基础
@@ -431,11 +447,13 @@ export default function DomainConfigDialog({
                               type="button"
                               size="sm"
                               variant={
-                                templateType === "custom"
+                                config.templateType === "custom"
                                   ? "default"
                                   : "outline"
                               }
-                              onClick={() => setTemplateType("custom")}
+                              onClick={() =>
+                                handleTemplateTypeChange(index, "custom")
+                              }
                               className="h-9 text-xs px-2"
                             >
                               自定义
@@ -451,7 +469,7 @@ export default function DomainConfigDialog({
                               <SelectValue placeholder="选择模板" />
                             </SelectTrigger>
                             <SelectContent>
-                              {currentTemplates.map((tpl) => (
+                              {getTemplatesByType(config).map((tpl) => (
                                 <SelectItem
                                   key={tpl._id}
                                   value={tpl._id!}
@@ -461,7 +479,7 @@ export default function DomainConfigDialog({
                                   )}
                                 >
                                   {tpl.display_name || tpl.name}
-                                  {templateType === "custom" &&
+                                  {config.templateType === "custom" &&
                                     (tpl as CustomTemplate).status &&
                                     ` - ${
                                       dicts.map.templateStatus[

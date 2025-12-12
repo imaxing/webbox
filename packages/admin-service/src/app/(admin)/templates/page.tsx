@@ -288,17 +288,6 @@ export default function TemplateManagementPage() {
       key: "display_name",
     },
     {
-      title: "域名",
-      dataIndex: "domain",
-      key: "domain",
-      width: 200,
-      render: (value) => (
-        <span className="text-sm text-gray-700 dark:text-gray-300">
-          {value || "-"}
-        </span>
-      ),
-    },
-    {
       title: "基础模板",
       dataIndex: "base_template_id",
       key: "base_template_id",

@@ -52,7 +52,6 @@ const CustomTemplateForm = forwardRef<
   const [formData, setFormData] = useState<CustomTemplateFormData>({
     name: "",
     display_name: "",
-    domain: "",
     base_template_id: "",
     content: "",
     variables: {},
@@ -65,9 +64,6 @@ const CustomTemplateForm = forwardRef<
   >([]);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
-  const [domainOptions, setDomainOptions] = useState<
-    { value: string; label: string }[]
-  >([]);
   const [baseTemplateOptions, setBaseTemplateOptions] = useState<
     { value: string; label: string }[]
   >([]);
@@ -81,13 +77,7 @@ const CustomTemplateForm = forwardRef<
     const loadOptions = async () => {
       setLoadingOptions(true);
       try {
-        const [domains, templates] = await Promise.all([
-          api.domain.options(),
-          api.template.base.options(),
-        ]);
-        setDomainOptions(
-          (domains || []).map((d: any) => ({ value: d.value, label: d.label }))
-        );
+        const templates = await api.template.base.options();
         setBaseTemplateOptions((templates as any) || []);
       } catch (error) {
         console.error("加载选项失败:", error);
@@ -105,7 +95,6 @@ const CustomTemplateForm = forwardRef<
       setFormData({
         name: initialData.name || "",
         display_name: initialData.display_name || "",
-        domain: initialData.domain || "",
         base_template_id: initialData.base_template_id || "",
         content: initialData.content || "",
         variables: initialData.variables || {},
@@ -132,7 +121,6 @@ const CustomTemplateForm = forwardRef<
       setFormData({
         name: "",
         display_name: "",
-        domain: "",
         base_template_id: "",
         content: "",
         variables: {},
@@ -233,10 +221,6 @@ const CustomTemplateForm = forwardRef<
       newErrors.display_name = "请填写显示名称";
     }
 
-    if (!formData.domain) {
-      newErrors.domain = "请选择域名";
-    }
-
     if (!formData.base_template_id) {
       newErrors.base_template_id = "请选择基础模板";
     }
@@ -328,36 +312,6 @@ const CustomTemplateForm = forwardRef<
         {errors.display_name && (
           <p className="text-xs text-red-500">{errors.display_name}</p>
         )}
-      </div>
-
-      {/* 域名选择 */}
-      <div className="space-y-2">
-        <Label htmlFor="domain">
-          域名 <span className="text-red-500">*</span>
-        </Label>
-        <Select
-          value={formData.domain}
-          onValueChange={(value) => handleInputChange("domain", value)}
-          disabled={loadingOptions}
-        >
-          <SelectTrigger
-            id="domain"
-            className={errors.domain ? "w-full border-red-500" : "w-full"}
-          >
-            <SelectValue placeholder="请选择域名" />
-          </SelectTrigger>
-          <SelectContent>
-            {domainOptions.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        {errors.domain && (
-          <p className="text-xs text-red-500">{errors.domain}</p>
-        )}
-        <p className="text-xs text-muted-foreground">模板所属的域名</p>
       </div>
 
       {/* 基础模板 */}

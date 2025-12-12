@@ -113,15 +113,6 @@ export default function RouteManagementPage() {
       ),
     },
     {
-      title: "域名",
-      dataIndex: "domain",
-      key: "domain",
-      width: 150,
-      render: (value) => (
-        <span className="font-mono text-sm text-gray-700">{value}</span>
-      ),
-    },
-    {
       title: "优先级",
       dataIndex: "priority",
       key: "priority",

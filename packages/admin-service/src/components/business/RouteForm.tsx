@@ -33,7 +33,6 @@ const RouteForm = forwardRef<RouteFormRef, RouteFormProps>(
     const [formData, setFormData] = useState<RouteFormData>({
       pattern: "",
       type: "exact",
-      domain: "",
       priority: 0,
       enabled: true,
       description: "",
@@ -41,33 +40,12 @@ const RouteForm = forwardRef<RouteFormRef, RouteFormProps>(
 
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [submitting, setSubmitting] = useState(false);
-    const [domainOptions, setDomainOptions] = useState<AntSelectOption[]>([]);
-    const [loadingDomains, setLoadingDomains] = useState(false);
-
-    // 加载域名选项
-    useEffect(() => {
-      const loadDomains = async () => {
-        setLoadingDomains(true);
-        try {
-          const domains = await api.domain.options();
-          setDomainOptions(
-            (domains || []).map((d) => ({ value: d.value, label: d.label }))
-          );
-        } catch (error) {
-          console.error("加载域名选项失败:", error);
-        } finally {
-          setLoadingDomains(false);
-        }
-      };
-      loadDomains();
-    }, []);
 
     useEffect(() => {
       if (initialData) {
         setFormData({
           pattern: initialData.pattern || "",
           type: initialData.type || "exact",
-          domain: initialData.domain || "",
           priority: initialData.priority || 0,
           enabled:
             initialData.enabled !== undefined ? initialData.enabled : true,
@@ -93,10 +71,6 @@ const RouteForm = forwardRef<RouteFormRef, RouteFormProps>(
 
       if (!formData.pattern.trim()) {
         newErrors.pattern = "请填写路由模式";
-      }
-
-      if (!formData.domain.trim()) {
-        newErrors.domain = "请选择域名";
       }
 
       if (formData.priority === undefined || formData.priority < 0) {
@@ -170,22 +144,6 @@ const RouteForm = forwardRef<RouteFormRef, RouteFormProps>(
             onChange={(value) => handleInputChange("type", value as RouteType)}
             options={dicts.options.routeType}
             placeholder="请选择匹配类型"
-          />
-        </FormField>
-
-        <FormField
-          label="域名"
-          name="domain"
-          required
-          error={errors.domain}
-          help="选择该路由规则关联的域名"
-        >
-          <AntSelect
-            value={formData.domain}
-            onChange={(value) => handleInputChange("domain", value as string)}
-            options={domainOptions}
-            loading={loadingDomains}
-            placeholder="请选择域名"
           />
         </FormField>
 

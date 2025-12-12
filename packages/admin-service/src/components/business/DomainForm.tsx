@@ -59,11 +59,8 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
       email: "",
       project_group: "",
       status: "active",
-      config: undefined,
       routes: [],
     });
-
-    const [configJson, setConfigJson] = useState("");
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [submitting, setSubmitting] = useState(false);
     const [projectOptions, setProjectOptions] = useState<ProjectOption[]>([]);
@@ -100,17 +97,25 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           const routes = routesRes.data || [];
           const templates = templatesRes.data || [];
 
+          // 去重：基于 _id
+          const uniqueRoutes = Array.from(
+            new Map(routes.map((r: any) => [r._id, r])).values()
+          );
           setRouteOptions(
-            routes.map((r: any) => ({
-              value: r._id || r.uuid,
-              label: `${r.pattern} (${r.domain})`,
+            uniqueRoutes.map((r: any) => ({
+              value: r._id,
+              label: `${r.pattern} (${dicts.map.routeType[r.type] || r.type})`,
             }))
           );
 
+          // 去重：基于 _id
+          const uniqueTemplates = Array.from(
+            new Map(templates.map((t: any) => [t._id, t])).values()
+          );
           setTemplateOptions(
-            templates.map((t: any) => ({
-              value: t._id || t.uuid,
-              label: t.name || t.display_name || "未命名模板",
+            uniqueTemplates.map((t: any) => ({
+              value: t._id,
+              label: t.display_name || t.name || "未命名模板",
             }))
           );
         } catch (error) {
@@ -129,16 +134,8 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           email: initialData.email || "",
           project_group: initialData.project_group || "",
           status: initialData.status || "active",
-          config: initialData.config,
           routes: initialData.routes || [],
         });
-
-        // 将 config 对象转换为 JSON 字符串
-        if (initialData.config) {
-          setConfigJson(JSON.stringify(initialData.config, null, 2));
-        } else {
-          setConfigJson("");
-        }
       } else {
         setFormData({
           domain: "",
@@ -146,10 +143,8 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           email: "",
           project_group: "",
           status: "active",
-          config: undefined,
           routes: [],
         });
-        setConfigJson("");
       }
       setErrors({});
     }, [initialData]);
@@ -219,18 +214,6 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
         newErrors.project_group = "请选择项目组";
       }
 
-      // 验证 config JSON
-      if (configJson.trim()) {
-        try {
-          const parsed = JSON.parse(configJson);
-          if (typeof parsed !== "object" || Array.isArray(parsed)) {
-            newErrors.config = '配置格式必须是对象类型，例如: {"key": "value"}';
-          }
-        } catch (e) {
-          newErrors.config = "配置格式无效，请输入有效的 JSON 对象";
-        }
-      }
-
       setErrors(newErrors);
       return Object.keys(newErrors).length === 0;
     };
@@ -242,12 +225,6 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
 
       setSubmitting(true);
       try {
-        // 解析 config JSON
-        let config: Record<string, any> | undefined = undefined;
-        if (configJson.trim()) {
-          config = JSON.parse(configJson);
-        }
-
         // 过滤掉空的路由-模板映射
         const routes = (formData.routes || []).filter(
           (mapping) => mapping.route && mapping.template
@@ -255,7 +232,6 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
 
         const submitData: DomainFormData = {
           ...formData,
-          config,
           routes,
         };
 
@@ -490,26 +466,6 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
 
           <p className="text-xs text-muted-foreground">
             配置域名下路由与模板的关联关系，用于生成完整的访问地址
-          </p>
-        </div>
-
-        {/* 额外配置 */}
-        <div className="space-y-2">
-          <Label htmlFor="config">额外配置 (JSON 格式，可选)</Label>
-          <Textarea
-            id="config"
-            value={configJson}
-            onChange={(e) => setConfigJson(e.target.value)}
-            placeholder='{"key1": "value1", "key2": "value2"}'
-            rows={6}
-            className={`font-mono ${errors.config ? "border-red-500" : ""}`}
-          />
-          {errors.config && (
-            <p className="text-xs text-red-500">{errors.config}</p>
-          )}
-          <p className="text-xs text-muted-foreground">
-            可选的额外配置项，格式为 JSON 对象: {"{"}
-            "key": "value"{"}"}
           </p>
         </div>
       </div>

@@ -36,7 +36,6 @@ export interface DomainFormData {
   email: string;
   project_group?: string; // 项目组
   status?: DomainStatus;
-  config?: Record<string, any>;
   routes?: RouteTemplateMapping[]; // 路由-模板映射数组
 }
 

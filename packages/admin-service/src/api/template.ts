@@ -41,7 +41,6 @@ export interface CustomTemplate {
   _id?: string;
   name: string;
   display_name: string;
-  domain: string;
   base_template_id: string;
   content: string;
   variables: Record<string, string>;
@@ -59,7 +58,6 @@ export interface TemplateListParams {
   sort?: string;
   name?: string;
   category?: TemplateCategory;
-  domain?: string;
   status?: CustomTemplateStatus;
   [key: string]: any;
 }
@@ -92,7 +90,6 @@ export interface BaseTemplateFormData {
 export interface CustomTemplateFormData {
   name: string;
   display_name: string;
-  domain: string;
   base_template_id: string;
   content: string;
   variables?: Record<string, string>;
@@ -117,7 +114,6 @@ export interface BatchDeleteParams {
 export interface TemplateOption {
   value: string;
   label: string;
-  domain?: string;
 }
 
 /**
@@ -192,11 +188,10 @@ export const batchDeleteBaseTemplates = (data: BatchDeleteParams) => {
  */
 
 // 获取自定义模板选项列表
-export const getCustomTemplateOptions = (params?: { domain?: string }) => {
+export const getCustomTemplateOptions = () => {
   return apiRequest<TemplateOption[]>({
     method: "get",
     url: "/admin/custom-templates/options",
-    params,
   });
 };
 

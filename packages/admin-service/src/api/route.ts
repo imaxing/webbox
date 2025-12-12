@@ -13,7 +13,6 @@ export interface RouteRule {
   uuid?: string;
   pattern: string;
   type: RouteType;
-  domain: string;
   template_id?: string | any; // 关联的模板ID，可能是字符串或填充的对象
   template?: any; // 填充后的模板对象
   priority: number;
@@ -30,7 +29,6 @@ export interface RouteListParams {
   sort?: string;
   pattern?: string;
   type?: RouteType;
-  domain?: string;
   enabled?: boolean;
   [key: string]: any;
 }
@@ -39,7 +37,6 @@ export interface RouteListParams {
 export interface RouteFormData {
   pattern: string;
   type: RouteType;
-  domain: string;
   template_id?: string; // 关联的模板ID
   priority?: number;
   enabled?: boolean;

@@ -4,14 +4,13 @@ import { addUUIDField } from '../utils/uuid';
 
 /**
  * 定制模板实例文档接口
- * 基于公共模板创建的定制化实例，绑定到特定域名
+ * 基于公共模板创建的定制化实例
  */
 export interface ICustomTemplate extends Document {
   uuid: string;
   name: string;           // 定制模板名称
   display_name: string;   // 显示名称
   base_template_id: mongoose.Types.ObjectId; // 关联的公共模板 ID
-  domain: string;         // 所属域名
   content: string;        // 定制后的 HTML 内容
   variables: Map<string, string>; // 变量值映射
   status: 'draft' | 'active' | 'archived'; // 状态
@@ -30,6 +29,7 @@ const customTemplateSchema: Schema = new Schema(
       type: String,
       required: true,
       trim: true,
+      unique: true,
       index: true,
     },
     display_name: {
@@ -41,12 +41,6 @@ const customTemplateSchema: Schema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'BaseTemplate',
       required: true,
-      index: true,
-    },
-    domain: {
-      type: String,
-      required: true,
-      trim: true,
       index: true,
     },
     content: {
@@ -81,11 +75,8 @@ const customTemplateSchema: Schema = new Schema(
   }
 );
 
-// 复合索引：按域名查询生效模板（高频查询）
-customTemplateSchema.index({ domain: 1, status: 1, updatedAt: -1 });
-
-// 唯一索引：同一域名下模板名称唯一
-customTemplateSchema.index({ domain: 1, name: 1 }, { unique: true });
+// 复合索引：按状态查询模板（高频查询）
+customTemplateSchema.index({ status: 1, updatedAt: -1 });
 
 // 添加 UUID 字段
 addUUIDField(customTemplateSchema);

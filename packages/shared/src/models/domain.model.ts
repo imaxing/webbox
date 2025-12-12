@@ -20,7 +20,6 @@ export interface IDomain extends Document {
   app_name: string;       // 应用名称
   email: string;          // 联系邮箱
   project_group: string;  // 项目组
-  config: Map<string, any>; // 其他自定义配置
   status: 'active' | 'inactive'; // 状态
   routes: IRouteTemplateMapping[]; // 路由-模板映射数组
   createdAt: Date;
@@ -55,11 +54,6 @@ const domainSchema: Schema = new Schema(
       trim: true,
       index: true,
       default: 'default',
-    },
-    config: {
-      type: Map,
-      of: Schema.Types.Mixed,
-      default: {},
     },
     status: {
       type: String,

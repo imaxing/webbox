@@ -10,7 +10,6 @@ export interface IRouteRule extends Document {
   uuid: string;
   pattern: string;        // 路由模式（如 "/proto/child-safety-*"）
   type: 'exact' | 'wildcard' | 'regex'; // 匹配类型
-  domain: string;         // 域名
   template_id?: mongoose.Types.ObjectId; // 关联的定制模板 ID（可选）
   priority: number;       // 优先级（0-100）
   enabled: boolean;       // 是否启用
@@ -28,18 +27,13 @@ const routeRuleSchema: Schema = new Schema(
       type: String,
       required: true,
       trim: true,
+      index: true,
     },
     type: {
       type: String,
       required: true,
       enum: ['exact', 'wildcard', 'regex'],
       default: 'exact',
-    },
-    domain: {
-      type: String,
-      required: true,
-      trim: true,
-      index: true,
     },
     template_id: {
       type: Schema.Types.ObjectId,
@@ -70,11 +64,11 @@ const routeRuleSchema: Schema = new Schema(
   }
 );
 
-// 复合索引：核心查询（按域名+启用状态+优先级排序）
-routeRuleSchema.index({ domain: 1, enabled: 1, priority: -1 });
+// 复合索引：核心查询（按启用状态+优先级排序）
+routeRuleSchema.index({ enabled: 1, priority: -1 });
 
-// 复合索引：同一域名下的路由模式应该唯一
-routeRuleSchema.index({ domain: 1, pattern: 1 }, { unique: true });
+// 唯一索引：路由模式应该全局唯一
+routeRuleSchema.index({ pattern: 1 }, { unique: true });
 
 // 添加 UUID 字段
 addUUIDField(routeRuleSchema);

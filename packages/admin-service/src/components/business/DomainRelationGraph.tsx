@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback, useMemo } from "react";
 import ReactFlow, {
   Node,
   Edge,
@@ -14,9 +14,10 @@ import ReactFlow, {
   MarkerType,
   Handle,
   Position,
-} from 'reactflow';
-import 'reactflow/dist/style.css';
-import api from '@/api';
+} from "reactflow";
+import "reactflow/dist/style.css";
+import api from "@/api";
+import { useDict } from "@/hooks";
 
 interface RouteData {
   id: string;
@@ -32,7 +33,7 @@ interface DomainData {
   domain: string;
   app_name: string;
   routes: Array<{
-    route: string;    // 路由 ID
+    route: string; // 路由 ID
     template: string; // 模板 ID
   }>;
 }
@@ -42,9 +43,7 @@ const DomainNode = ({ data }: any) => (
   <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg p-4 text-white shadow-lg min-w-[200px]">
     <Handle type="source" position={Position.Right} />
     <div className="font-bold text-base mb-1">{data.label}</div>
-    {data.appName && (
-      <div className="text-xs opacity-90">{data.appName}</div>
-    )}
+    {data.appName && <div className="text-xs opacity-90">{data.appName}</div>}
   </div>
 );
 
@@ -76,9 +75,8 @@ const nodeTypes = {
 };
 
 export default function DomainRelationGraph() {
+  const dicts = useDict();
   const [data, setData] = useState<DomainData[]>([]);
-  const [routes, setRoutes] = useState<Map<string, RouteData>>(new Map());
-  const [templates, setTemplates] = useState<Map<string, TemplateData>>(new Map());
   const [loading, setLoading] = useState(true);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
@@ -87,61 +85,20 @@ export default function DomainRelationGraph() {
     try {
       setLoading(true);
 
-      // 并行加载所有数据
-      const [domainsRes, templatesRes, routesRes] = await Promise.all([
-        getDomainList({ limit: 1000 }),
-        getCustomTemplateList({ limit: 10000 }),
-        getRouteList({ limit: 10000 }),
-      ]);
-
-      console.log('[DomainRelationGraph] API响应:', { domainsRes, templatesRes, routesRes });
-
+      // 只加载域名数据
+      const domainsRes = await api.domain.list({ limit: 1000 });
       const domains = domainsRes.data || [];
-      const templatesData = templatesRes.data || [];
-      const routesData = routesRes.data || [];
 
-      // 构建路由 Map (id -> RouteData)
-      const routeMap = new Map<string, RouteData>();
-      routesData.forEach((r: any) => {
-        const id = r._id || r.uuid;
-        if (id) {
-          routeMap.set(id, {
-            id,
-            pattern: r.pattern || '未命名路由'
-          });
-        }
-      });
-
-      // 构建模板 Map (id -> TemplateData)
-      const templateMap = new Map<string, TemplateData>();
-      templatesData.forEach((t: any) => {
-        const id = t._id || t.uuid;
-        if (id) {
-          templateMap.set(id, {
-            id,
-            name: t.name || t.display_name || '未命名模板'
-          });
-        }
-      });
-
-      // 构建域名关系数据（从 domain.routes 读取）
-      const relationData: DomainData[] = domains.map((domain: any) => {
-        return {
-          domain: domain.domain,
-          app_name: domain.app_name || '',
-          routes: domain.routes || [], // 从 domain.routes 读取路由-模板映射
-        };
-      });
-
-      console.log('[DomainRelationGraph] 路由Map:', routeMap);
-      console.log('[DomainRelationGraph] 模板Map:', templateMap);
-      console.log('[DomainRelationGraph] 最终关系数据:', relationData);
-
-      setRoutes(routeMap);
-      setTemplates(templateMap);
-      setData(relationData);
+      // 简化：只展示域名节点
+      setData(
+        domains.map((d: any) => ({
+          domain: d.domain,
+          app_name: d.app_name || "",
+          routes: [],
+        }))
+      );
     } catch (error) {
-      console.error('[DomainRelationGraph] 加载关系图数据失败:', error);
+      console.error("[DomainRelationGraph] 加载关系图数据失败:", error);
     } finally {
       setLoading(false);
     }
@@ -151,150 +108,36 @@ export default function DomainRelationGraph() {
     loadData();
   }, [loadData]);
 
-  // 生成节点和边
+  // 生成域名节点（简化版）
   useEffect(() => {
-    console.log('[DomainRelationGraph] useEffect 触发，data.length:', data.length, 'routes.size:', routes.size, 'templates.size:', templates.size);
-
     if (data.length === 0) {
-      console.log('[DomainRelationGraph] 数据为空，清空节点和边');
       setNodes([]);
-      setEdges([]);
       return;
     }
 
-    const newNodes: Node[] = [];
-    const newEdges: Edge[] = [];
-    let nodeId = 0;
-
-    const verticalSpacing = 300;
-    const horizontalSpacing = 400;
-    const resourceVerticalSpacing = 120;
-
-    // 全局模板节点映射（template_id -> node_id）
-    const globalTemplateNodeMap = new Map<string, string>();
-    let globalTemplateYOffset = 0;
-
-    data.forEach((domainData, domainIndex) => {
-      const domainId = `domain-${nodeId++}`;
-      const baseY = domainIndex * verticalSpacing;
-
-      // 域名节点（左列）
-      newNodes.push({
-        id: domainId,
-        type: 'domain',
-        position: { x: 0, y: baseY },
-        data: {
-          label: domainData.domain,
-          appName: domainData.app_name,
-        },
-      });
-
-      const routeNodeMap = new Map<string, string>(); // route_id -> routeNodeId
-      let routeOffset = 0;
-
-      // 遍历域名的路由-模板映射
-      domainData.routes.forEach((mapping) => {
-        const routeData = routes.get(mapping.route);
-        const templateData = templates.get(mapping.template);
-
-        if (!routeData) {
-          console.warn(`[DomainRelationGraph] 未找到路由: ${mapping.route}`);
-          return;
-        }
-
-        if (!templateData) {
-          console.warn(`[DomainRelationGraph] 未找到模板: ${mapping.template}`);
-          return;
-        }
-
-        // 创建路由节点（中列）
-        const routeNodeId = `route-${nodeId++}`;
-        routeNodeMap.set(mapping.route, routeNodeId);
-
-        newNodes.push({
-          id: routeNodeId,
-          type: 'route',
-          position: {
-            x: horizontalSpacing,
-            y: baseY + routeOffset - (domainData.routes.length * resourceVerticalSpacing / 4),
-          },
-          data: { label: routeData.pattern },
-        });
-
-        // 域名 → 路由 连线
-        newEdges.push({
-          id: `${domainId}-${routeNodeId}`,
-          source: domainId,
-          target: routeNodeId,
-          type: 'smoothstep',
-          animated: true,
-          style: { stroke: '#f97316', strokeWidth: 2 },
-          markerEnd: {
-            type: MarkerType.ArrowClosed,
-            color: '#f97316',
-            width: 20,
-            height: 20,
-          },
-        });
-
-        // 处理模板节点
-        let templateNodeId = globalTemplateNodeMap.get(mapping.template);
-
-        if (!templateNodeId) {
-          // 首次创建该模板节点（右列）
-          templateNodeId = `template-${nodeId++}`;
-          globalTemplateNodeMap.set(mapping.template, templateNodeId);
-
-          newNodes.push({
-            id: templateNodeId,
-            type: 'template',
-            position: {
-              x: horizontalSpacing * 2,
-              y: globalTemplateYOffset,
-            },
-            data: { label: templateData.name },
-          });
-
-          globalTemplateYOffset += resourceVerticalSpacing;
-        }
-
-        // 路由 → 模板 连线
-        newEdges.push({
-          id: `${routeNodeId}-${templateNodeId}`,
-          source: routeNodeId,
-          target: templateNodeId,
-          type: 'smoothstep',
-          animated: true,
-          style: { stroke: '#22c55e', strokeWidth: 2 },
-          markerEnd: {
-            type: MarkerType.ArrowClosed,
-            color: '#22c55e',
-            width: 20,
-            height: 20,
-          },
-        });
-
-        routeOffset += resourceVerticalSpacing;
-      });
-    });
-
-    console.log('[DomainRelationGraph] 生成的节点和边:', {
-      nodeCount: newNodes.length,
-      edgeCount: newEdges.length,
-      templateNodeCount: globalTemplateNodeMap.size,
-    });
+    const newNodes: Node[] = data.map((domainData, index) => ({
+      id: `domain-${index}`,
+      type: "domain",
+      position: {
+        x: 50 + (index % 3) * 300,
+        y: 50 + Math.floor(index / 3) * 150,
+      },
+      data: {
+        label: domainData.domain,
+        appName: domainData.app_name,
+      },
+    }));
 
     setNodes(newNodes);
-    setEdges(newEdges);
-  }, [data, routes, templates, setNodes, setEdges]);
+  }, [data, setNodes]);
 
   const totalStats = useMemo(() => {
     // 统计实际使用的路由和模板数量
     const usedRoutes = new Set<string>();
     const usedTemplates = new Set<string>();
 
-    data.forEach(item => {
-      item.routes.forEach(mapping => {
+    data.forEach((item) => {
+      item.routes.forEach((mapping) => {
         usedRoutes.add(mapping.route);
         usedTemplates.add(mapping.template);
       });
@@ -341,7 +184,10 @@ export default function DomainRelationGraph() {
       </div>
 
       {/* React Flow 画布 */}
-      <div className="border border-gray-200 dark:border-gray-700 rounded-lg" style={{ height: '800px' }}>
+      <div
+        className="border border-gray-200 dark:border-gray-700 rounded-lg"
+        style={{ height: "800px" }}
+      >
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -366,25 +212,34 @@ export default function DomainRelationGraph() {
           <MiniMap
             className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
             nodeColor={(node) => {
-              if (node.type === 'domain') return '#a855f7';
-              if (node.type === 'template') return '#22c55e';
-              if (node.type === 'route') return '#f97316';
-              return '#94a3b8';
+              if (node.type === "domain") return "#a855f7";
+              if (node.type === "template") return "#22c55e";
+              if (node.type === "route") return "#f97316";
+              return "#94a3b8";
             }}
           />
-          <Panel position="top-right" className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3">
+          <Panel
+            position="top-right"
+            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3"
+          >
             <div className="text-xs space-y-1">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></div>
-                <span className="text-gray-700 dark:text-gray-300">域名节点</span>
+                <span className="text-gray-700 dark:text-gray-300">
+                  域名节点
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span className="text-gray-700 dark:text-gray-300">模板节点</span>
+                <span className="text-gray-700 dark:text-gray-300">
+                  模板节点
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-                <span className="text-gray-700 dark:text-gray-300">路由节点</span>
+                <span className="text-gray-700 dark:text-gray-300">
+                  路由节点
+                </span>
               </div>
             </div>
           </Panel>
@@ -397,19 +252,25 @@ export default function DomainRelationGraph() {
           <p className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             {totalStats.domains}
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">域名总数</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            域名总数
+          </p>
         </div>
         <div className="text-center bg-green-50 dark:bg-green-900/20 rounded-lg p-3">
           <p className="text-2xl font-bold text-green-600 dark:text-green-400">
             {totalStats.templates}
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">模板总数</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            模板总数
+          </p>
         </div>
         <div className="text-center bg-orange-50 dark:bg-orange-900/20 rounded-lg p-3">
           <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
             {totalStats.routes}
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">路由总数</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            路由总数
+          </p>
         </div>
       </div>
     </div>

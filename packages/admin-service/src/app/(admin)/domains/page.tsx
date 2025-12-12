@@ -108,6 +108,7 @@ export default function DomainManagementPage() {
     const dialog = createDialog({
       title: `${domain.domain} - 配置关联`,
       width: 1000,
+      showCancel: false,
       component: (
         <DomainConfigDialog
           domain={domain}

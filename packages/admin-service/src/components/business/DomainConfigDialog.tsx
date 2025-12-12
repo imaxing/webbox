@@ -19,14 +19,8 @@ import { Trash2, Grid3x3 } from "lucide-react";
 import { toast } from "@/lib/toast";
 import { useDict } from "@/hooks";
 import api from "@/api";
-import type {
-  CustomTemplate,
-  BaseTemplate,
-} from "@/api/template";
-import type {
-  RouteRule,
-  RouteType,
-} from "@/api/route";
+import type { CustomTemplate, BaseTemplate } from "@/api/template";
+import type { RouteRule, RouteType } from "@/api/route";
 
 export interface DomainConfigDialogProps {
   domain: {
@@ -98,10 +92,10 @@ export default function DomainConfigDialog({
           allRoutesRes,
           domainRoutesRes,
         ] = await Promise.all([
-          getBaseTemplateList({ limit: 1000 }),
-          getCustomTemplateList({ limit: 1000 }),
-          getRouteList({ limit: 1000 }),
-          getRouteList({ domain: domainHost, limit: 1000 }),
+          api.template.base.list({ limit: 1000 }),
+          api.template.custom.list({ limit: 1000 }),
+          api.route.list({ limit: 1000 }),
+          api.route.list({ domain: domainHost, limit: 1000 }),
         ]);
 
         setBaseTemplates(baseTemplatesRes.data || []);
@@ -207,7 +201,7 @@ export default function DomainConfigDialog({
       if (!confirmed) return;
 
       try {
-        await deleteRoute(config._id);
+        await api.route.delete(config._id);
         toast.success("删除成功");
         setConfigs(configs.filter((_, i) => i !== index));
       } catch (error) {
@@ -275,7 +269,9 @@ export default function DomainConfigDialog({
           enabled: config.enabled,
         };
 
-        return config._id ? updateRoute(config._id, data) : createRoute(data);
+        return config._id
+          ? api.route.update(config._id, data)
+          : api.route.create(data);
       });
 
       await Promise.all(promises);

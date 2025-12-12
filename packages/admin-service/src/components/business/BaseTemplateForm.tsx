@@ -19,7 +19,7 @@ import {
   Button,
   AntButton,
 } from "@/components";
-import {
+import type {
   BaseTemplate,
   BaseTemplateFormData,
   TemplateCategory,
@@ -28,6 +28,7 @@ import {
 } from "@/api/template";
 import { Trash2 } from "lucide-react";
 import { RichTextEditor } from "@/components";
+import { useDict } from "@/hooks";
 
 export interface BaseTemplateFormProps {
   initialData?: BaseTemplate;
@@ -42,23 +43,11 @@ export interface BaseTemplateFormRef {
 }
 
 // 模板分类映射
-const CATEGORY_OPTIONS: { value: TemplateCategory; label: string }[] = [
-  { value: "policy", label: "隐私政策" },
-  { value: "terms", label: "服务条款" },
-  { value: "safety", label: "安全政策" },
-  { value: "other", label: "其他" },
-];
-
-// 变量类型映射
-const VARIABLE_TYPE_OPTIONS: { value: VariableType; label: string }[] = [
-  { value: "text", label: "文本" },
-  { value: "email", label: "邮箱" },
-  { value: "url", label: "URL" },
-  { value: "image", label: "图片" },
-];
 
 const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
   ({ initialData, onSubmit, onClose, isEdit = false }, ref) => {
+    const dicts = useDict();
+
     const [formData, setFormData] = useState<BaseTemplateFormData>({
       name: "",
       display_name: "",
@@ -274,7 +263,7 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {CATEGORY_OPTIONS.map((option) => (
+              {dicts.options.templateCategory.map((option: any) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
                 </SelectItem>
@@ -375,7 +364,7 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {VARIABLE_TYPE_OPTIONS.map((opt) => (
+                          {dicts.options.variableType.map((opt: any) => (
                             <SelectItem key={opt.value} value={opt.value}>
                               {opt.label}
                             </SelectItem>

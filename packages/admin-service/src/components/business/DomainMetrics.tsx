@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Grid3x3, FileText, GitBranch } from 'lucide-react';
-import { getDomainStatistics, OverallStatistics } from '@/api/statistics';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Grid3x3, FileText, GitBranch } from "lucide-react";
+import api from "@/api";
+import { OverallStatistics } from "@/api/statistics";
 
 export default function DomainMetrics() {
   const router = useRouter();
@@ -21,10 +22,10 @@ export default function DomainMetrics() {
     const loadStatistics = async () => {
       try {
         setLoading(true);
-        const data = await getDomainStatistics();
+        const data = await api.statistics.domain();
         setStats(data.overall);
       } catch (error) {
-        console.error('加载统计数据失败:', error);
+        console.error("加载统计数据失败:", error);
       } finally {
         setLoading(false);
       }
@@ -34,31 +35,31 @@ export default function DomainMetrics() {
 
   const metrics = [
     {
-      title: '总域名数',
+      title: "总域名数",
       value: stats.total_domains,
       subtitle: `生效: ${stats.active_domains}`,
       icon: Grid3x3,
-      color: 'bg-blue-50 dark:bg-blue-900/20',
-      iconColor: 'text-blue-600 dark:text-blue-400',
-      link: '/domains',
+      color: "bg-blue-50 dark:bg-blue-900/20",
+      iconColor: "text-blue-600 dark:text-blue-400",
+      link: "/domains",
     },
     {
-      title: '总模板数',
+      title: "总模板数",
       value: stats.total_templates,
       subtitle: `激活: ${stats.active_templates}`,
       icon: FileText,
-      color: 'bg-green-50 dark:bg-green-900/20',
-      iconColor: 'text-green-600 dark:text-green-400',
-      link: '/templates',
+      color: "bg-green-50 dark:bg-green-900/20",
+      iconColor: "text-green-600 dark:text-green-400",
+      link: "/templates",
     },
     {
-      title: '总路由数',
+      title: "总路由数",
       value: stats.total_routes,
       subtitle: `启用: ${stats.enabled_routes}`,
       icon: GitBranch,
-      color: 'bg-purple-50 dark:bg-purple-900/20',
-      iconColor: 'text-purple-600 dark:text-purple-400',
-      link: '/routes',
+      color: "bg-purple-50 dark:bg-purple-900/20",
+      iconColor: "text-purple-600 dark:text-purple-400",
+      link: "/routes",
     },
   ];
 

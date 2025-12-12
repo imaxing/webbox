@@ -25,6 +25,7 @@ import {
   RouteTemplateMapping,
 } from "@/api/domain";
 import api from "@/api";
+import { useDict } from "@/hooks";
 import * as LucideIcons from "lucide-react";
 
 export interface DomainFormProps {
@@ -40,10 +41,6 @@ export interface DomainFormRef {
 }
 
 // 状态选项
-const STATUS_OPTIONS: { value: DomainStatus; label: string }[] = [
-  { value: "active", label: "生效" },
-  { value: "inactive", label: "停用" },
-];
 
 // 项目组选项类型
 interface ProjectOption {
@@ -54,6 +51,8 @@ interface ProjectOption {
 
 const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
   ({ initialData, onSubmit, onClose, isEdit = false }, ref) => {
+    const dicts = useDict();
+
     const [formData, setFormData] = useState<DomainFormData>({
       domain: "",
       app_name: "",
@@ -94,8 +93,8 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
       const loadOptions = async () => {
         try {
           const [routesRes, templatesRes] = await Promise.all([
-            getRouteList({ limit: 10000 }),
-            getCustomTemplateList({ limit: 10000 }),
+            api.route.list({ limit: 10000 }),
+            api.template.custom.list({ limit: 10000 }),
           ]);
 
           const routes = routesRes.data || [];
@@ -392,7 +391,7 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {STATUS_OPTIONS.map((option) => (
+              {dicts.options.domainStatus.map((option: any) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
                 </SelectItem>

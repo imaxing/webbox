@@ -22,10 +22,10 @@ import {
   CustomTemplate,
   CustomTemplateFormData,
   CustomTemplateStatus,
-  getBaseTemplateInfo,
   TemplateVariable,
 } from "@/api/template";
 import api from "@/api";
+import { useDict } from "@/hooks";
 import { Plus, Trash2 } from "lucide-react";
 import { RichTextEditor } from "@/components";
 
@@ -42,16 +42,13 @@ export interface CustomTemplateFormRef {
 }
 
 // 状态选项
-const STATUS_OPTIONS: { value: CustomTemplateStatus; label: string }[] = [
-  { value: "draft", label: "草稿" },
-  { value: "active", label: "生效" },
-  { value: "archived", label: "归档" },
-];
 
 const CustomTemplateForm = forwardRef<
   CustomTemplateFormRef,
   CustomTemplateFormProps
 >(({ initialData, onSubmit, onClose, isEdit = false }, ref) => {
+  const dicts = useDict();
+
   const [formData, setFormData] = useState<CustomTemplateFormData>({
     name: "",
     display_name: "",
@@ -85,11 +82,11 @@ const CustomTemplateForm = forwardRef<
       setLoadingOptions(true);
       try {
         const [domains, templates] = await Promise.all([
-          getDomainOptions(),
-          getBaseTemplateOptions(),
+          api.domain.options(),
+          api.template.base.options(),
         ]);
         setDomainOptions(
-          (domains || []).map((d) => ({ value: d.value, label: d.label }))
+          (domains || []).map((d: any) => ({ value: d.value, label: d.label }))
         );
         setBaseTemplateOptions((templates as any) || []);
       } catch (error) {
@@ -172,7 +169,7 @@ const CustomTemplateForm = forwardRef<
     }
 
     try {
-      const template = await getBaseTemplateInfo(templateId);
+      const template = await api.template.base.getInfo(templateId);
       // 如果当前内容为空，则使用基础模板的内容
       if (!formData.content) {
         setFormData((prev) => ({ ...prev, content: template.content || "" }));
@@ -575,7 +572,7 @@ const CustomTemplateForm = forwardRef<
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {STATUS_OPTIONS.map((option) => (
+            {dicts.options.templateStatus.map((option: any) => (
               <SelectItem key={option.value} value={option.value}>
                 {option.label}
               </SelectItem>

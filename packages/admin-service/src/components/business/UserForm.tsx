@@ -7,21 +7,8 @@ import {
   AntSelect,
   type AntSelectOption,
 } from "@/components";
-import { User, UserFormData, UserRole, UserStatus } from "@/api/user";
-
-// 角色选项
-const ROLE_OPTIONS: AntSelectOption[] = [
-  { value: "admin", label: "管理员" },
-  { value: "editor", label: "编辑员" },
-  { value: "viewer", label: "查看员" },
-];
-
-// 状态选项
-const STATUS_OPTIONS: AntSelectOption[] = [
-  { value: "active", label: "激活" },
-  { value: "inactive", label: "停用" },
-  { value: "suspended", label: "暂停" },
-];
+import type { User, UserFormData, UserRole, UserStatus } from "@/api/user";
+import { useDict } from "@/hooks";
 
 export interface UserFormProps {
   /** 初始数据（编辑时） */
@@ -50,6 +37,8 @@ export interface UserFormRef {
  */
 const UserForm = forwardRef<UserFormRef, UserFormProps>(
   ({ initialData, onSubmit, onClose, isEdit = false }, ref) => {
+    const dicts = useDict();
+
     const [formData, setFormData] = useState<UserFormData>({
       username: "",
       email: "",
@@ -224,7 +213,7 @@ const UserForm = forwardRef<UserFormRef, UserFormProps>(
           <AntSelect
             value={formData.role}
             onChange={(value) => handleInputChange("role", value as UserRole)}
-            options={ROLE_OPTIONS}
+            options={dicts.options.userRole}
             placeholder="请选择角色"
           />
         </FormField>
@@ -242,7 +231,7 @@ const UserForm = forwardRef<UserFormRef, UserFormProps>(
             onChange={(value) =>
               handleInputChange("status", value as UserStatus)
             }
-            options={STATUS_OPTIONS}
+            options={dicts.options.userStatus}
             placeholder="请选择状态"
           />
         </FormField>

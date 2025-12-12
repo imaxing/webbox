@@ -16,7 +16,8 @@ import {
 import { DynamicMenu } from "@/components";
 import { ThemeToggle } from "@/components";
 import { PageTransition } from "@/components";
-import { getMenus, type MenuConfig } from "@/api/menu";
+import api from "@/api";
+import type { MenuConfig } from "@/api/menu";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "@/lib/toast";
 import * as LucideIcons from "lucide-react";
@@ -41,7 +42,7 @@ export default function AdminLayout({
     const loadMenus = async () => {
       try {
         console.log("[AdminLayout] 开始从接口加载菜单");
-        const config = await getMenus();
+        const config = await api.menu.getMenus();
         console.log("[AdminLayout] 菜单加载成功", config);
         setMenuConfig(config);
       } catch (error) {

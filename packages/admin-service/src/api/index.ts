@@ -14,7 +14,6 @@ import template from "./template";
 import domain from "./domain";
 import auth from "./auth";
 import menu from "./menu";
-import statistics from "./statistics";
 
 const api = {
   user,
@@ -23,10 +22,9 @@ const api = {
   domain,
   auth,
   menu,
-  statistics,
 };
 
 export default api;
 
 // 也可以单独导出
-export { user, route, template, domain, auth, menu, statistics };
+export { user, route, template, domain, auth, menu };

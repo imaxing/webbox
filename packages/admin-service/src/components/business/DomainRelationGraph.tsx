@@ -89,7 +89,7 @@ export default function DomainRelationGraph() {
     try {
       setLoading(true);
 
-      // 1. 先查询所有域名列表
+      // 1. 查询所有域名列表
       const domainsRes = await api.domain.list({ limit: 1000 });
       const domains = domainsRes.data || [];
 
@@ -98,7 +98,6 @@ export default function DomainRelationGraph() {
       // 2. 对每个域名，调用 relations 接口获取关联的路由和模板详情
       const domainRelationsPromises = domains.map(async (domain: any) => {
         try {
-          // 注意：request 库会自动提取后端响应的 data 字段，所以 relationsRes 已经是数据对象
           const relationsRes = await api.domain.getRelations(domain._id);
           const { routes = [], templates = [] } = relationsRes || {};
 
@@ -162,103 +161,87 @@ export default function DomainRelationGraph() {
     const newNodes: Node[] = [];
     const newEdges: Edge[] = [];
 
-    // 用于去重和快速查找
-    const routeNodeMap = new Map<string, number>();
-    const templateNodeMap = new Map<string, number>();
-
     // 布局参数
     const domainX = 50;
     const routeX = 400;
     const templateX = 750;
-    let domainY = 50;
-    const domainSpacing = 200;
-    const itemSpacing = 80;
+    const domainGroupSpacing = 200; // 域名组之间的垂直间距
+    const nodeSpacing = 80; // 同一域名内节点的垂直间距
+    let currentY = 50;
 
+    // 为每个域名创建独立的节点组
     data.forEach((domainData, domainIndex) => {
-      // 1. 创建域名节点
       const domainNodeId = `domain-${domainIndex}`;
+      const routesCount = (domainData.routes || []).length;
+
+      // 1. 创建域名节点
       newNodes.push({
         id: domainNodeId,
         type: "domain",
-        position: { x: domainX, y: domainY },
+        position: { x: domainX, y: currentY },
         data: {
           label: domainData.domain,
           appName: domainData.app_name,
         },
       });
 
-      let routeY = domainY;
+      let routeY = currentY;
 
-      // 2. 为该域名的每个路由-模板映射创建节点和边
-      (domainData.routes || []).forEach((mapping: any) => {
+      // 2. 为该域名的每个路由-模板映射创建独立的节点和边
+      (domainData.routes || []).forEach((mapping: any, mappingIndex: number) => {
         const { route: routeId, template: templateId, routeData, templateData } = mapping;
 
-        // 2.1 创建或获取路由节点
-        let routeNodeId: string;
-        if (routeNodeMap.has(routeId)) {
-          routeNodeId = `route-${routeNodeMap.get(routeId)}`;
-        } else {
-          const routeIndex = routeNodeMap.size;
-          routeNodeMap.set(routeId, routeIndex);
-          routeNodeId = `route-${routeIndex}`;
+        // 2.1 创建该域名专属的路由节点
+        const routeNodeId = `domain-${domainIndex}-route-${mappingIndex}`;
+        newNodes.push({
+          id: routeNodeId,
+          type: "route",
+          position: { x: routeX, y: routeY },
+          data: {
+            label: routeData?.pattern || routeId,
+          },
+        });
 
-          newNodes.push({
-            id: routeNodeId,
-            type: "route",
-            position: { x: routeX, y: routeY },
-            data: {
-              label: routeData?.pattern || routeId,
-            },
-          });
-        }
+        // 2.2 创建该域名专属的模板节点
+        const templateNodeId = `domain-${domainIndex}-template-${mappingIndex}`;
+        newNodes.push({
+          id: templateNodeId,
+          type: "template",
+          position: { x: templateX, y: routeY },
+          data: {
+            label: templateData?.display_name || templateData?.name || templateId,
+          },
+        });
 
-        // 2.2 创建或获取模板节点
-        let templateNodeId: string;
-        if (templateNodeMap.has(templateId)) {
-          templateNodeId = `template-${templateNodeMap.get(templateId)}`;
-        } else {
-          const templateIndex = templateNodeMap.size;
-          templateNodeMap.set(templateId, templateIndex);
-          templateNodeId = `template-${templateIndex}`;
-
-          newNodes.push({
-            id: templateNodeId,
-            type: "template",
-            position: { x: templateX, y: routeY },
-            data: {
-              label: templateData?.display_name || templateData?.name || templateId,
-            },
-          });
-        }
-
-        // 2.3 创建边：域名 -> 路由 -> 模板
+        // 2.3 创建边：域名 -> 路由
         newEdges.push({
           id: `${domainNodeId}-${routeNodeId}`,
           source: domainNodeId,
           target: routeNodeId,
           type: "smoothstep",
           animated: true,
-          style: { stroke: "#a855f7" },
+          style: { stroke: "#a855f7", strokeWidth: 2 },
           markerEnd: { type: MarkerType.ArrowClosed, color: "#a855f7" },
         });
 
+        // 2.4 创建边：路由 -> 模板
         newEdges.push({
           id: `${routeNodeId}-${templateNodeId}`,
           source: routeNodeId,
           target: templateNodeId,
           type: "smoothstep",
           animated: true,
-          style: { stroke: "#f97316" },
+          style: { stroke: "#f97316", strokeWidth: 2 },
           markerEnd: { type: MarkerType.ArrowClosed, color: "#f97316" },
         });
 
-        routeY += itemSpacing;
+        routeY += nodeSpacing;
       });
 
-      // 更新下一个域名的Y坐标
-      domainY += Math.max(
-        domainSpacing,
-        (domainData.routes || []).length * itemSpacing + 50
+      // 3. 更新下一个域名组的起始Y坐标
+      currentY += Math.max(
+        domainGroupSpacing,
+        routesCount * nodeSpacing + 50
       );
     });
 

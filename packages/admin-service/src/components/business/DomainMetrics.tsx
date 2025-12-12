@@ -4,7 +4,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Grid3x3, FileText, GitBranch } from "lucide-react";
 import api from "@/api";
-import { OverallStatistics } from "@/api/statistics";
+
+interface OverallStatistics {
+  total_domains: number;
+  active_domains: number;
+  total_templates: number;
+  active_templates: number;
+  total_routes: number;
+  enabled_routes: number;
+}
 
 export default function DomainMetrics() {
   const router = useRouter();
@@ -22,8 +30,27 @@ export default function DomainMetrics() {
     const loadStatistics = async () => {
       try {
         setLoading(true);
-        const data = await api.statistics.domain();
-        setStats(data.overall);
+
+        // 并行调用业务接口获取数据
+        const [domainsRes, routesRes, templatesRes] = await Promise.all([
+          api.domain.list({ limit: 1000 }),
+          api.route.list({ limit: 10000 }),
+          api.template.custom.list({ limit: 10000 }),
+        ]);
+
+        const domains = domainsRes.data || [];
+        const routes = routesRes.data || [];
+        const templates = templatesRes.data || [];
+
+        // 计算统计数据
+        setStats({
+          total_domains: domains.length,
+          active_domains: domains.filter((d: any) => d.status === 'active').length,
+          total_templates: templates.length,
+          active_templates: templates.filter((t: any) => t.status === 'active').length,
+          total_routes: routes.length,
+          enabled_routes: routes.filter((r: any) => r.enabled).length,
+        });
       } catch (error) {
         console.error("加载统计数据失败:", error);
       } finally {

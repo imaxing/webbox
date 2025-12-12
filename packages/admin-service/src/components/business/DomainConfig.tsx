@@ -27,6 +27,7 @@ export interface DomainConfigProps {
     _id: string;
     domain: string;
     app_name: string;
+    routes?: Array<{ route: string; template: string }>;
     [key: string]: any;
   };
   onSuccess?: () => void;
@@ -34,14 +35,11 @@ export interface DomainConfigProps {
 }
 
 interface RouteConfig {
-  _id?: string;
   template_id: string;
-  templateType?: TemplateType; // 每行独立的模板类型
-  route_id?: string;
-  pattern: string;
-  type: RouteType;
-  priority: number;
-  enabled: boolean;
+  templateType?: TemplateType;
+  route_id: string;
+  routeData?: RouteRule;
+  templateData?: BaseTemplate | CustomTemplate;
 }
 
 type TemplateType = "base" | "custom";
@@ -59,22 +57,6 @@ export default function DomainConfig({
   const [routes, setRoutes] = useState<RouteRule[]>([]);
   const [configs, setConfigs] = useState<RouteConfig[]>([]);
 
-  // 提取域名主机名
-  const extractHost = (domainUrl: string): string => {
-    if (!domainUrl) return "";
-    try {
-      const url = new URL(domainUrl);
-      return url.hostname;
-    } catch (error) {
-      return domainUrl
-        .replace(/^https?:\/\//, "")
-        .split(":")[0]
-        .split("/")[0];
-    }
-  };
-
-  const domainHost = extractHost(domain.domain);
-
   // 获取指定行的模板列表
   const getTemplatesByType = (config: RouteConfig) => {
     return config.templateType === "base" ? baseTemplates : customTemplates;
@@ -86,39 +68,56 @@ export default function DomainConfig({
       try {
         setLoading(true);
 
-        // 并行加载模板和路由数据
-        const [
-          baseTemplatesRes,
-          customTemplatesRes,
-          allRoutesRes,
-          domainRoutesRes,
-        ] = await Promise.all([
-          api.template.base.list({ limit: 1000 }),
-          api.template.custom.list({ limit: 1000 }),
-          api.route.list({ limit: 1000 }),
-          api.route.list({ domain: domainHost, limit: 1000 }),
+        // 1. 并行加载模板和路由数据
+        const [baseTemplatesRes, customTemplatesRes, allRoutesRes] =
+          await Promise.all([
+            api.template.base.list({ limit: 1000 }),
+            api.template.custom.list({ limit: 1000 }),
+            api.route.list({ limit: 10000 }),
+          ]);
+
+        const allBaseTemplates = baseTemplatesRes.data || [];
+        const allCustomTemplates = customTemplatesRes.data || [];
+        const allRoutes = allRoutesRes.data || [];
+
+        setBaseTemplates(allBaseTemplates);
+        setCustomTemplates(allCustomTemplates);
+        setRoutes(allRoutes);
+
+        // 2. 从 domain.routes 加载已配置的映射
+        const domainRoutes = domain.routes || [];
+
+        // 3. 构建路由和模板的映射
+        const routeMap = new Map(allRoutes.map((r: any) => [String(r._id), r]));
+        const templateMap = new Map([
+          ...allBaseTemplates.map((t: any) => [String(t._id), t]),
+          ...allCustomTemplates.map((t: any) => [String(t._id), t]),
         ]);
 
-        setBaseTemplates(baseTemplatesRes.data || []);
-        setCustomTemplates(customTemplatesRes.data || []);
-        setRoutes(allRoutesRes.data || []);
+        // 4. 转换为配置项
+        const initialConfigs = domainRoutes
+          .map((mapping: any) => {
+            const routeId = String(mapping.route);
+            const templateId = String(mapping.template);
+            const routeData = routeMap.get(routeId);
+            const templateData = templateMap.get(templateId);
 
-        // 将域名已有的路由转换为配置项
-        const domainRoutes = domainRoutesRes.data || [];
-        setConfigs(
-          domainRoutes.map((route: Record<string, any>) => ({
-            _id: route._id,
-            template_id:
-              typeof route.template === "object"
-                ? (route.template as any)._id
-                : (route.template_id as string),
-            route_id: route._id,
-            pattern: route.pattern,
-            type: route.type,
-            priority: route.priority,
-            enabled: route.enabled,
-          }))
-        );
+            // 确定模板类型
+            const isBaseTemplate = allBaseTemplates.some(
+              (t: any) => String(t._id) === templateId
+            );
+
+            return {
+              route_id: routeId,
+              template_id: templateId,
+              templateType: (isBaseTemplate ? "base" : "custom") as TemplateType,
+              routeData,
+              templateData,
+            };
+          })
+          .filter((c: any) => c.routeData && c.templateData); // 过滤掉无效的映射
+
+        setConfigs(initialConfigs);
       } catch (error) {
         console.error("加载数据失败:", error);
       } finally {
@@ -126,7 +125,7 @@ export default function DomainConfig({
       }
     };
     loadData();
-  }, [domainHost]);
+  }, [domain]);
 
   // 添加配置行
   const handleAddRow = () => {
@@ -134,10 +133,8 @@ export default function DomainConfig({
       ...prev,
       {
         template_id: "",
-        pattern: "",
-        type: "exact",
-        priority: 100,
-        enabled: true,
+        route_id: "",
+        templateType: "custom",
       },
     ]);
   };
@@ -148,7 +145,8 @@ export default function DomainConfig({
     newConfigs[index] = {
       ...newConfigs[index],
       templateType: type,
-      template_id: "", // 切换类型时清空已选模板
+      template_id: "",
+      templateData: undefined,
     };
     setConfigs(newConfigs);
   };
@@ -156,31 +154,29 @@ export default function DomainConfig({
   // 模板变更
   const handleTemplateChange = (index: number, templateId: string) => {
     const newConfigs = [...configs];
+    const templateData =
+      newConfigs[index].templateType === "base"
+        ? baseTemplates.find((t) => t._id === templateId)
+        : customTemplates.find((t) => t._id === templateId);
+
     newConfigs[index] = {
       ...newConfigs[index],
       template_id: templateId,
-      route_id: undefined,
-      pattern: "",
-      type: "exact",
-      priority: 100,
+      templateData,
     };
     setConfigs(newConfigs);
   };
 
   // 路由变更
   const handleRouteChange = (index: number, routeId: string) => {
-    const route = routes.find((r) => r._id === routeId);
-    if (route) {
-      const newConfigs = [...configs];
-      newConfigs[index] = {
-        ...newConfigs[index],
-        route_id: routeId,
-        pattern: route.pattern,
-        type: route.type,
-        priority: route.priority,
-      };
-      setConfigs(newConfigs);
-    }
+    const routeData = routes.find((r) => r._id === routeId);
+    const newConfigs = [...configs];
+    newConfigs[index] = {
+      ...newConfigs[index],
+      route_id: routeId,
+      routeData,
+    };
+    setConfigs(newConfigs);
   };
 
   // 检查模板是否被禁用 - 已选择的模板不可重复选择
@@ -205,36 +201,22 @@ export default function DomainConfig({
   };
 
   // 删除配置行
-  const handleDeleteRow = async (index: number) => {
-    const config = configs[index];
-
-    if (config._id) {
-      const confirmed = await toast.confirm("确定删除该配置吗？");
-      if (!confirmed) return;
-
-      try {
-        await api.route.delete(config._id);
-        toast.success("删除成功");
-        setConfigs(configs.filter((_, i) => i !== index));
-      } catch (error) {
-        console.error("删除失败:", error);
-      }
-    } else {
-      setConfigs(configs.filter((_, i) => i !== index));
-    }
+  const handleDeleteRow = (index: number) => {
+    setConfigs(configs.filter((_, i) => i !== index));
   };
 
   // 获取完整URL
   const getFullUrl = (config: RouteConfig): string => {
-    if (!config.pattern) return "-";
+    if (!config.routeData?.pattern) return "-";
 
     const baseUrl = domain.domain.replace(/\/$/, "");
-    let testPath = config.pattern;
+    const route = config.routeData;
+    let testPath = route.pattern;
 
-    if (config.type === "wildcard" && testPath.includes("*")) {
+    if (route.type === "wildcard" && testPath.includes("*")) {
       testPath = testPath.replace("*", "test");
-    } else if (config.type === "regex") {
-      testPath = config.pattern
+    } else if (route.type === "regex") {
+      testPath = route.pattern
         .replace(/[\^$.*+?()[\]{}|\\]/g, "")
         .replace(/\\/g, "/");
     }
@@ -252,7 +234,7 @@ export default function DomainConfig({
         toast.error(`第 ${i + 1} 行：请选择模板`);
         return;
       }
-      if (!config.route_id && !config.pattern) {
+      if (!config.route_id) {
         toast.error(`第 ${i + 1} 行：请选择路由规则`);
         return;
       }
@@ -271,27 +253,21 @@ export default function DomainConfig({
     try {
       setSubmitting(true);
 
-      const promises = configs.map((config) => {
-        const data = {
-          pattern: config.pattern,
-          type: config.type,
-          domain: domainHost,
-          template_id: config.template_id,
-          priority: config.priority,
-          enabled: config.enabled,
-        };
+      // 构建新的 routes 数组
+      const routes = configs.map((config) => ({
+        route: config.route_id,
+        template: config.template_id,
+      }));
 
-        return config._id
-          ? api.route.update(config._id, data)
-          : api.route.create(data);
-      });
+      // 更新 Domain.routes
+      await api.domain.update(domain._id, { routes });
 
-      await Promise.all(promises);
       toast.success("保存成功");
       onSuccess?.();
       onClose?.();
     } catch (error) {
       console.error("保存失败:", error);
+      toast.error("保存失败");
     } finally {
       setSubmitting(false);
     }
@@ -323,7 +299,7 @@ export default function DomainConfig({
                 域名:
               </span>
               <span className="font-mono text-sm font-medium text-gray-800 dark:text-gray-200">
-                {domainHost}
+                {domain.domain}
               </span>
             </div>
 
@@ -498,7 +474,6 @@ export default function DomainConfig({
                           onValueChange={(value) =>
                             handleRouteChange(index, value)
                           }
-                          disabled={!config.template_id}
                         >
                           <SelectTrigger className="w-full min-w-[200px]">
                             <SelectValue placeholder="选择路由规则" />
@@ -511,7 +486,7 @@ export default function DomainConfig({
                                 disabled={isRouteDisabled(route._id!, config)}
                               >
                                 {route.pattern} -{" "}
-                                {dicts.map.routeType[route.type]} (优先级
+                                {dicts.map.routeType[route.type]} (优先级{" "}
                                 {route.priority})
                               </SelectItem>
                             ))}
@@ -566,7 +541,7 @@ export default function DomainConfig({
                 温馨提示
               </div>
               <div className="text-xs text-gray-600 dark:text-gray-400">
-                配置将自动关联到当前域名。相同的模板和路由组合不能重复选择。
+                从已有的路由和模板中选择，配置路由-模板映射关系。相同的模板和路由组合不能重复选择。
               </div>
             </div>
           </div>

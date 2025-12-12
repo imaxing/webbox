@@ -1029,3 +1029,238 @@ You cannot have two parallel pages that resolve to the same path. Please check /
 [10:47:11.342] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
 [10:47:11.342] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
 [10:47:11.342] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:36:53.852] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[12:36:53.859] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[12:36:53.952] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[12:36:53.952] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:36:53.952] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:36:54.022] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[12:36:54.069] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[12:37:01.050] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[12:37:01.074] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[12:37:01.088] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[12:37:01.093] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[12:37:02.789] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:37:02.793] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:37:02.799] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:37:02.801] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:37:02.807] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:37:02.808] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:37:02.810] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:37:02.812] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:37:02.820] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:37:02.823] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:37:02.825] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:37:02.829] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:37:02.833] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:37:02.834] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:37:02.842] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:37:02.845] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:37:02.848] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:37:02.850] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:37:02.852] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:37:02.862] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:37:02.875] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:37:02.888] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:37:02.892] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:37:02.904] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:39:35.835] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[12:39:35.862] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[12:39:35.877] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[12:39:35.883] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[12:39:41.185] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[12:39:41.186] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:39:41.186] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:40:08.490] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[12:40:08.510] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[12:40:08.520] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[12:40:08.530] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[12:40:18.307] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[12:40:18.311] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[12:40:18.318] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[12:40:18.320] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[12:40:18.418] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[12:40:18.418] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:40:18.418] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:40:22.296] Server  LOG      ✓ Compiled in 193ms
+[12:40:28.968] Server  LOG      ✓ Compiled in 80ms
+[12:41:05.949] Server  LOG      ✓ Compiled in 104ms
+[12:41:06.289] Server  LOG      ✓ Compiled in 72ms
+[12:41:34.650] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:41:34.663] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:41:34.665] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:41:34.674] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:41:34.677] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:41:34.680] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:41:34.690] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:41:34.694] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:41:34.698] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:41:34.699] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:41:34.701] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:41:34.704] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:41:34.708] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:41:34.710] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:41:34.713] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:41:34.718] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:41:34.719] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:41:34.723] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:41:34.731] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:41:34.734] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:41:34.737] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:41:34.739] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:41:34.740] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:41:34.742] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:41:39.007] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[12:41:39.017] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[12:41:39.027] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[12:41:39.030] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[12:41:40.784] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:41:40.785] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:41:58.306] Server  LOG      ✓ Compiled in 281ms
+[12:44:15.468] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:44:15.477] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:44:15.490] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:44:15.505] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:44:15.508] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:44:15.512] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:44:15.522] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:44:15.529] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:44:15.536] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:44:15.538] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:44:15.541] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:44:15.543] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:44:15.558] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:44:15.564] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:44:15.570] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:44:15.612] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:44:15.613] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:44:15.621] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:44:15.627] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:44:15.630] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:44:15.633] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:44:15.636] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:44:15.642] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:44:15.646] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:44:41.559] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[12:44:41.568] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[12:44:41.575] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[12:44:41.579] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[12:44:43.030] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:44:43.030] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:45:52.398] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:45:52.403] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:45:52.413] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:45:52.426] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:45:52.434] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:45:52.440] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:45:52.458] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:45:52.464] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:45:52.469] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:45:52.472] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:45:52.474] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:45:52.476] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:45:52.490] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:45:52.494] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:45:52.501] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:45:52.503] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:45:52.507] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:45:52.513] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:45:52.541] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:45:52.546] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:45:52.550] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:45:52.555] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:45:52.562] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:45:52.567] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:45:58.539] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[12:45:58.552] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[12:45:58.566] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[12:45:58.573] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[12:46:00.867] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[12:46:00.875] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[12:46:00.883] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[12:46:00.894] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[12:52:17.238] Server  LOG      ✓ Compiled in 96ms
+[12:52:18.713] Server  LOG      ✓ Compiled in 105ms
+[12:52:20.389] Server  LOG      ✓ Compiled in 71ms
+[12:52:45.372] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[12:52:45.378] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[12:52:45.441] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[12:52:45.445] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[12:52:45.470] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[12:52:45.470] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:52:45.470] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:52:48.281] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[12:52:48.362] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[12:52:48.370] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[12:52:48.372] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[12:52:48.375] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[12:52:48.380] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[12:52:48.384] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[12:52:48.535] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[12:52:48.535] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[12:52:48.535] Browser LOG     [AuthContext] 本地用户信息: 存在
+[12:52:48.535] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[12:52:48.535] Browser LOG     [AdminLayout] 已认证，加载菜单
+[12:52:48.535] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[12:52:48.535] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[12:52:48.535] Browser LOG     [AdminLayout] 菜单加载完成
+[12:52:49.353] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[12:52:49.359] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[12:52:49.361] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[12:52:49.380] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[12:52:49.464] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[12:52:49.464] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:52:49.464] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:53:18.883] Browser LOG     [预览] 原始数据: {"content":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>{page_title}</title><style>body{font-family:Arial,sans-serif;max-width:800px;margin:50px auto;padding:20px;background:#f5f7fa}h1{color:#4CAF50;b","variables":{"description":"这是一个自动生成的测试页面","email":"zhangsan@example.com","page_title":"Webbox 测试页面","username":"张三"}}
+[12:53:18.884] Browser LOG     [预览] 解析后的变量: {"description":"这是一个自动生成的测试页面","email":"zhangsan@example.com","page_title":"Webbox 测试页面","username":"张三"}
+[12:53:18.884] Browser LOG     [预览] 替换: {{page_title}} -> Webbox 测试页面
+[12:53:18.884] Browser LOG     [预览] 替换: {{username}} -> 张三
+[12:53:18.884] Browser LOG     [预览] 替换: {{email}} -> zhangsan@example.com
+[12:53:18.884] Browser LOG     [预览] 替换: {{description}} -> 这是一个自动生成的测试页面
+[12:53:18.884] Browser LOG     [预览] 最终内容: <!DOCTYPE html><html><head><meta charset="UTF-8"><title>{page_title}</title><style>body{font-family:Arial,sans-serif;max-width:800px;margin:50px auto;padding:20px;background:#f5f7fa}h1{color:#4CAF50;b
+[12:54:26.274] Server  LOG      ✓ Compiled in 103ms
+[12:54:59.881] Browser LOG     [预览] 原始数据: {"content":"<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>{page_title}</title><style>body{font-family:Arial,sans-serif;max-width:800px;margin:50px auto;padding:20px;background:#f5f7fa}h1{color:#4CAF50;b","variables":{"description":"这是一个自动生成的测试页面","email":"zhangsan@example.com","page_title":"Webbox 测试页面","username":"张三"}}
+[12:54:59.881] Browser LOG     [预览] 解析后的变量: {"description":"这是一个自动生成的测试页面","email":"zhangsan@example.com","page_title":"Webbox 测试页面","username":"张三"}
+[12:54:59.881] Browser LOG     [预览] 替换: {{page_title}} 或 {page_title} -> Webbox 测试页面
+[12:54:59.881] Browser LOG     [预览] 替换: {{username}} 或 {username} -> 张三
+[12:54:59.881] Browser LOG     [预览] 替换: {{email}} 或 {email} -> zhangsan@example.com
+[12:54:59.881] Browser LOG     [预览] 替换: {{description}} 或 {description} -> 这是一个自动生成的测试页面
+[12:54:59.881] Browser LOG     [预览] 最终内容: <!DOCTYPE html><html><head><meta charset="UTF-8"><title>Webbox 测试页面</title><style>body{font-family:Arial,sans-serif;max-width:800px;margin:50px auto;padding:20px;background:#f5f7fa}h1{color:#4CAF50;bo
+[12:55:06.692] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[12:55:06.699] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[12:55:06.718] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[12:55:06.723] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[12:55:06.777] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[12:55:06.777] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:55:06.777] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:55:09.328] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[12:55:09.334] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[12:55:09.335] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[12:55:09.339] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[12:55:09.421] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[12:55:09.421] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:55:09.421] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[12:55:12.678] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:55:12.686] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:55:12.690] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:55:12.692] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:55:12.697] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:55:12.704] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:55:12.705] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:55:12.711] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:55:12.713] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:55:12.716] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:55:12.721] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:55:12.724] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:55:12.725] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:55:12.729] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:55:12.734] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:55:12.739] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:55:12.742] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[12:55:12.745] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:55:12.747] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[12:55:12.749] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[12:55:12.756] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[12:55:12.758] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[12:55:12.760] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[12:55:12.766] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200

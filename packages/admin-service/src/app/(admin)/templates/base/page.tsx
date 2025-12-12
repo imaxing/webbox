@@ -98,12 +98,21 @@ export default function BaseTemplateListPage() {
     let content = row.content || '<p>暂无内容</p>';
 
     // 替换变量为默认值或示例值
-    if (row.variables && row.variables.length > 0) {
-      row.variables.forEach((variable) => {
-        const placeholder = `{{${variable.name}}}`;
-        const value = variable.default_value || `[示例${variable.name}]`;
-        content = content.replace(new RegExp(placeholder, 'g'), value);
-      });
+    if (row.variables) {
+      const vars = Array.isArray(row.variables)
+        ? row.variables
+        : (typeof row.variables === 'string' ? JSON.parse(row.variables) : []);
+
+      if (vars && vars.length > 0) {
+        vars.forEach((variable: any) => {
+          const value = variable.default_value || `[示例${variable.name}]`;
+          // 支持两种格式：{{变量名}} 和 {变量名}
+          const placeholder1 = `{{${variable.name}}}`;
+          const placeholder2 = `{${variable.name}}`;
+          content = content.split(placeholder1).join(value);
+          content = content.split(placeholder2).join(value);
+        });
+      }
     }
 
     const newWindow = window.open('', '_blank');

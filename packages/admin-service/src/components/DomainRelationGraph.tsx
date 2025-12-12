@@ -4,27 +4,16 @@ import { useEffect, useState, useCallback } from 'react';
 import { getDomainList } from '@/api/domain';
 import { getCustomTemplateList } from '@/api/template';
 import { getRouteList } from '@/api/route';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  Cell,
-} from 'recharts';
 
-interface ChartData {
+interface DomainData {
   domain: string;
   app_name: string;
-  templates: number;
-  routes: number;
+  templates: Array<{ name: string }>;
+  routes: Array<{ pattern: string }>;
 }
 
 export default function DomainRelationGraph() {
-  const [data, setData] = useState<ChartData[]>([]);
+  const [data, setData] = useState<DomainData[]>([]);
   const [loading, setLoading] = useState(true);
 
   const loadData = useCallback(async () => {
@@ -42,24 +31,24 @@ export default function DomainRelationGraph() {
       const templates = templatesRes.data || [];
       const routes = routesRes.data || [];
 
-      const chartData: ChartData[] = domains.map((domain: any) => {
-        const templatesCount = templates.filter(
-          (t: any) => t.domain === domain.domain
-        ).length;
+      const relationData: DomainData[] = domains.map((domain: any) => {
+        const domainTemplates = templates
+          .filter((t: any) => t.domain === domain.domain)
+          .map((t: any) => ({ name: t.name || t.display_name }));
 
-        const routesCount = routes.filter(
-          (r: any) => r.domain === domain.domain
-        ).length;
+        const domainRoutes = routes
+          .filter((r: any) => r.domain === domain.domain)
+          .map((r: any) => ({ pattern: r.pattern }));
 
         return {
           domain: domain.domain,
           app_name: domain.app_name || '',
-          templates: templatesCount,
-          routes: routesCount,
+          templates: domainTemplates,
+          routes: domainRoutes,
         };
       });
 
-      setData(chartData);
+      setData(relationData);
     } catch (error) {
       console.error('加载关系图数据失败:', error);
     } finally {
@@ -92,94 +81,117 @@ export default function DomainRelationGraph() {
     );
   }
 
-  const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4">
-          <p className="font-semibold text-gray-900 dark:text-white mb-2">
-            {data.domain}
-          </p>
-          {data.app_name && (
-            <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-              应用: {data.app_name}
-            </p>
-          )}
-          <p className="text-sm text-green-600 dark:text-green-400">
-            📄 模板: {data.templates}
-          </p>
-          <p className="text-sm text-orange-600 dark:text-orange-400">
-            🛣️ 路由: {data.routes}
-          </p>
-        </div>
-      );
-    }
-    return null;
-  };
-
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-6">
-      <div className="mb-6">
-        <div className="flex items-center gap-6 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-[#48bb78]"></div>
-            <span className="text-gray-700 dark:text-gray-300">模板数量</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-[#f59e0b]"></div>
-            <span className="text-gray-700 dark:text-gray-300">路由数量</span>
-          </div>
-        </div>
+    <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-8">
+      {/* 标题 */}
+      <div className="mb-8">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+          域名关系图
+        </h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          展示域名与其关联的模板和路由关系
+        </p>
       </div>
 
-      <ResponsiveContainer width="100%" height={Math.max(400, data.length * 80)}>
-        <BarChart
-          data={data}
-          layout="vertical"
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid
-            strokeDasharray="3 3"
-            stroke="#e5e7eb"
-            className="dark:stroke-gray-700"
-          />
-          <XAxis
-            type="number"
-            stroke="#9ca3af"
-            className="dark:stroke-gray-400"
-          />
-          <YAxis
-            dataKey="domain"
-            type="category"
-            width={200}
-            stroke="#9ca3af"
-            className="dark:stroke-gray-400"
-            tick={{ fontSize: 12 }}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend />
-          <Bar dataKey="templates" fill="#48bb78" name="模板数量" radius={[0, 4, 4, 0]} />
-          <Bar dataKey="routes" fill="#f59e0b" name="路由数量" radius={[0, 4, 4, 0]} />
-        </BarChart>
-      </ResponsiveContainer>
+      {/* 树状关系图 */}
+      <div className="space-y-6">
+        {data.map((domain, idx) => (
+          <div key={idx} className="relative">
+            {/* 域名节点 */}
+            <div className="flex items-start gap-6">
+              {/* 左侧域名卡片 */}
+              <div className="flex-shrink-0 w-48">
+                <div className="relative bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg p-4 text-white shadow-lg">
+                  <div className="font-bold text-base mb-1 truncate">
+                    {domain.domain}
+                  </div>
+                  {domain.app_name && (
+                    <div className="text-xs opacity-90 truncate">
+                      {domain.app_name}
+                    </div>
+                  )}
+                  <div className="absolute top-1/2 -right-3 w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 transform rotate-45 -translate-y-1/2"></div>
+                </div>
+              </div>
 
-      {/* 数据概览 */}
-      <div className="mt-6 grid grid-cols-3 gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
-        <div className="text-center">
-          <p className="text-2xl font-bold text-gray-900 dark:text-white">
+              {/* 右侧资源列表 */}
+              <div className="flex-1 space-y-3 pt-2">
+                {/* 模板列表 */}
+                {domain.templates.length > 0 && (
+                  <div className="space-y-2">
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">
+                      📄 模板 ({domain.templates.length})
+                    </div>
+                    <div className="space-y-2">
+                      {domain.templates.map((template, tIdx) => (
+                        <div
+                          key={tIdx}
+                          className="relative pl-8 before:content-[''] before:absolute before:left-0 before:top-1/2 before:w-6 before:h-0.5 before:bg-gradient-to-r before:from-purple-400 before:to-transparent"
+                        >
+                          <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg px-4 py-2.5 text-sm text-green-800 dark:text-green-300 font-medium truncate shadow-sm hover:shadow-md transition-shadow">
+                            {template.name}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 路由列表 */}
+                {domain.routes.length > 0 && (
+                  <div className="space-y-2">
+                    <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">
+                      🛣️ 路由 ({domain.routes.length})
+                    </div>
+                    <div className="space-y-2">
+                      {domain.routes.map((route, rIdx) => (
+                        <div
+                          key={rIdx}
+                          className="relative pl-8 before:content-[''] before:absolute before:left-0 before:top-1/2 before:w-6 before:h-0.5 before:bg-gradient-to-r before:from-purple-400 before:to-transparent"
+                        >
+                          <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg px-4 py-2.5 text-sm text-orange-800 dark:text-orange-300 font-mono truncate shadow-sm hover:shadow-md transition-shadow">
+                            {route.pattern}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 无关联资源提示 */}
+                {domain.templates.length === 0 && domain.routes.length === 0 && (
+                  <div className="text-sm text-gray-400 dark:text-gray-600 italic">
+                    暂无关联的模板或路由
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* 分隔线 */}
+            {idx < data.length - 1 && (
+              <div className="mt-6 border-t border-gray-200 dark:border-gray-700"></div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* 统计概览 */}
+      <div className="mt-8 grid grid-cols-3 gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div className="text-center bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-4">
+          <p className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             {data.length}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">域名总数</p>
         </div>
-        <div className="text-center">
+        <div className="text-center bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
           <p className="text-2xl font-bold text-green-600 dark:text-green-400">
-            {data.reduce((sum, item) => sum + item.templates, 0)}
+            {data.reduce((sum, item) => sum + item.templates.length, 0)}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">模板总数</p>
         </div>
-        <div className="text-center">
+        <div className="text-center bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4">
           <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-            {data.reduce((sum, item) => sum + item.routes, 0)}
+            {data.reduce((sum, item) => sum + item.routes.length, 0)}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">路由总数</p>
         </div>

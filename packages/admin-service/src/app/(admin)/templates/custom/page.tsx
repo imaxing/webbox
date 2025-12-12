@@ -96,13 +96,34 @@ export default function CustomTemplateListPage() {
   const handlePreview = (row: CustomTemplate) => {
     let content = row.content || '<p>暂无内容</p>';
 
+    console.log('[预览] 原始数据:', { content: content.substring(0, 200), variables: row.variables });
+
     // 替换变量为实际配置的值
-    if (row.variables && Object.keys(row.variables).length > 0) {
-      Object.entries(row.variables).forEach(([name, value]) => {
-        const placeholder = `{{${name}}}`;
-        content = content.replace(new RegExp(placeholder, 'g'), value);
-      });
+    if (row.variables) {
+      try {
+        const vars = typeof row.variables === 'string'
+          ? JSON.parse(row.variables)
+          : row.variables;
+
+        console.log('[预览] 解析后的变量:', vars);
+
+        if (vars && typeof vars === 'object' && Object.keys(vars).length > 0) {
+          Object.entries(vars).forEach(([name, value]) => {
+            const actualValue = String(value || '');
+            // 支持两种格式：{{变量名}} 和 {变量名}
+            const placeholder1 = `{{${name}}}`;
+            const placeholder2 = `{${name}}`;
+            console.log(`[预览] 替换: ${placeholder1} 或 ${placeholder2} -> ${actualValue}`);
+            content = content.split(placeholder1).join(actualValue);
+            content = content.split(placeholder2).join(actualValue);
+          });
+        }
+      } catch (error) {
+        console.error('[预览] 变量解析失败:', error);
+      }
     }
+
+    console.log('[预览] 最终内容:', content.substring(0, 200));
 
     const newWindow = window.open('', '_blank');
     if (newWindow) {

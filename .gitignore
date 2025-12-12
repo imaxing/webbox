@@ -45,3 +45,6 @@ packages/*/node_modules
 .next
 **/.next
 /logs
+logs/
+*.log
+**/.next

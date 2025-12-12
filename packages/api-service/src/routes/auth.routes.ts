@@ -1,6 +1,7 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import { User, env, Response } from "@webbox/shared";
+import { authMiddleware } from "@/middleware/auth";
 
 const router = Router();
 
@@ -56,6 +57,34 @@ router.post("/login", async (req, res) => {
     });
   } catch (error: any) {
     console.error("Login error:", error);
+    Response.internalError(res, error.message);
+  }
+});
+
+/**
+ * 获取当前用户信息
+ */
+router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    if (!req.user) {
+      return Response.unauthorized(res);
+    }
+
+    // 从数据库获取完整的用户信息
+    const user = await User.findById(req.user.userId);
+
+    if (!user) {
+      return Response.notFound(res, "用户不存在");
+    }
+
+    // 检查用户状态
+    if (user.status !== "active") {
+      return Response.userInactive(res, user.status);
+    }
+
+    Response.success(res, user.toSafeObject());
+  } catch (error: any) {
+    console.error("Get current user error:", error);
     Response.internalError(res, error.message);
   }
 });

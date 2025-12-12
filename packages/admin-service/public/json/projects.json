@@ -1,0 +1,24 @@
+{
+  "projects": [
+    {
+      "value": "joymeet",
+      "label": "JoyMeet",
+      "description": "JoyMeet项目"
+    },
+    {
+      "value": "viva",
+      "label": "Viva",
+      "description": "Viva项目"
+    },
+    {
+      "value": "blazex",
+      "label": "BlazeX",
+      "description": "BlazeX项目"
+    },
+    {
+      "value": "sparkon",
+      "label": "SparkOn",
+      "description": "SparkOn项目"
+    }
+  ]
+}

@@ -1,1 +1,1031 @@
-[00:00:00.778] Server  LOG      ✓ Ready in 538ms
+[00:00:00.728] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:00.820] Server  LOG      ✓ Ready in 611ms
+[00:00:03.875] Server  LOG      ○ Compiling /routes ...
+[00:00:05.170] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:05.368] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[00:00:05.368] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[00:00:05.368] Browser LOG     [AuthContext] 本地用户信息: 存在
+[00:00:05.368] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[00:00:05.368] Browser LOG     [AdminLayout] 已认证，加载菜单
+[00:00:05.368] Browser LOG     [AdminLayout] 开始加载菜单
+[00:00:05.980] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[00:00:05.983] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[00:00:05.993] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[00:00:05.999] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[00:00:06.007] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[00:00:06.012] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[00:00:06.100] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"GridIcon","name":"Dashboard","path":"/"},{"icon":"PlugInIcon","name":"Web工具","subItems":[{"name":"路由管理","path":"/route-management"},{"name":"模板管理","path":"/template-management"},{"name":"域名管理","path":"/domain-management"},{"name":"自定义模板","path":"/custom-template"}]},{"icon":"UserCircleIcon","name":"用户管理","subItems":[{"name":"用户列表","path":"/user-list"}]}],"others":[]}
+[00:00:06.100] Browser LOG     [AdminLayout] 菜单加载完成
+[00:01:55.705] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[00:01:55.749] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[00:01:55.787] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:01:55.787] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:02:01.324] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:01.433] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[00:02:01.433] Browser LOG     [AuthContext] 本地用户信息: 存在
+[00:02:01.433] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[00:02:03.401] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:03.504] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[00:02:03.504] Browser LOG     [AuthContext] 本地用户信息: 存在
+[00:02:03.504] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[00:02:04.718] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:04.906] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[00:02:04.906] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[00:02:04.906] Browser LOG     [AuthContext] 本地用户信息: 存在
+[00:02:04.906] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[00:02:04.906] Browser LOG     [AdminLayout] 已认证，加载菜单
+[00:02:04.906] Browser LOG     [AdminLayout] 开始加载菜单
+[00:02:04.906] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"GridIcon","name":"Dashboard","path":"/"},{"icon":"PlugInIcon","name":"Web工具","subItems":[{"name":"路由管理","path":"/route-management"},{"name":"模板管理","path":"/template-management"},{"name":"域名管理","path":"/domain-management"},{"name":"自定义模板","path":"/custom-template"}]},{"icon":"UserCircleIcon","name":"用户管理","subItems":[{"name":"用户列表","path":"/user-list"}]}],"others":[]}
+[00:02:04.906] Browser LOG     [AdminLayout] 菜单加载完成
+[00:02:09.396] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[00:02:09.409] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[00:02:09.490] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:02:09.490] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:02:14.749] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[00:02:14.770] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[00:02:14.786] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[00:02:14.794] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[00:02:16.558] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[00:02:16.558] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:28:50.847] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:28:50.847] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:31:49.466] Server  LOG      ✓ Compiled in 173ms
+[08:32:40.735] Server  LOG      ✓ Compiled in 78ms
+[08:32:50.947] Server  LOG      ✓ Compiled in 131ms
+[08:33:01.504] Server  LOG      ✓ Compiled in 287ms
+[08:33:09.837] Server  LOG      ✓ Compiled in 76ms
+[08:33:17.222] Server  LOG      ✓ Compiled in 111ms
+[08:33:24.071] Server  LOG      ✓ Compiled in 66ms
+[08:33:35.303] Server  LOG      ✓ Compiled in 72ms
+[08:37:55.806] Browser ERROR   uncaughtError: Error: Tiptap Error: SSR has been detected, please set `immediatelyRender` explicitly to `false` to avoid hydration mismatches.
+[08:38:16.410] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[08:38:16.433] Server  LOG      ✓ Compiled in 79ms
+[08:38:16.873] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[08:38:16.873] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[08:38:16.873] Browser LOG     [AuthContext] 本地用户信息: 存在
+[08:38:16.873] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[08:38:16.873] Browser LOG     [AdminLayout] 已认证，加载菜单
+[08:38:16.873] Browser LOG     [AdminLayout] 开始加载菜单
+[08:38:16.886] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:38:16.895] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[08:38:17.006] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:17.086] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:17.297] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[08:38:17.423] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:38:17.427] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[08:38:17.481] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:17.535] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:17.546] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:38:17.631] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:17.735] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[08:38:17.735] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[08:38:17.735] Browser LOG     [AuthContext] 本地用户信息: 存在
+[08:38:17.735] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[08:38:17.735] Browser LOG     [AdminLayout] 已认证，加载菜单
+[08:38:17.735] Browser LOG     [AdminLayout] 开始加载菜单
+[08:38:17.735] Browser ERROR   加载基础模板数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:38:17.735] Browser ERROR   [AdminLayout] 加载菜单失败，使用默认菜单: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:38:17.735] Browser LOG     [AdminLayout] 菜单加载完成
+[08:38:17.735] Browser ERROR   加载基础模板数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:38:35.597] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[08:38:35.678] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:38:35.690] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[08:38:35.760] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:35.872] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:35.875] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[08:38:35.875] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[08:38:35.875] Browser LOG     [AuthContext] 本地用户信息: 存在
+[08:38:35.875] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[08:38:35.875] Browser LOG     [AdminLayout] 已认证，加载菜单
+[08:38:35.875] Browser LOG     [AdminLayout] 开始加载菜单
+[08:38:35.882] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:38:35.925] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:36.030] Browser ERROR   加载基础模板数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:38:36.030] Browser ERROR   [AdminLayout] 加载菜单失败，使用默认菜单: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:38:36.030] Browser LOG     [AdminLayout] 菜单加载完成
+[08:38:36.030] Browser ERROR   加载基础模板数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:38:47.114] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[08:38:47.199] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:38:47.203] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[08:38:47.269] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:47.321] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:47.334] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:38:47.403] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:38:47.512] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[08:38:47.512] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[08:38:47.512] Browser LOG     [AuthContext] 本地用户信息: 存在
+[08:38:47.512] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[08:38:47.512] Browser LOG     [AdminLayout] 已认证，加载菜单
+[08:38:47.512] Browser LOG     [AdminLayout] 开始加载菜单
+[08:38:47.512] Browser ERROR   加载基础模板数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:38:47.512] Browser ERROR   [AdminLayout] 加载菜单失败，使用默认菜单: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:38:47.512] Browser LOG     [AdminLayout] 菜单加载完成
+[08:38:47.512] Browser ERROR   加载基础模板数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:39:01.077] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:39:01.150] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:39:01.166] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:39:01.238] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:39:01.342] Browser ERROR   加载数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:39:01.342] Browser ERROR   加载数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:39:10.819] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[08:39:10.824] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[08:39:10.903] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:39:10.978] Server  ERROR   [API Proxy] 代理请求失败: TypeError: fetch failed
+[08:39:11.082] Browser ERROR   加载数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:39:11.082] Browser ERROR   加载数据失败: {"data":{"error":"fetch failed","message":"代理请求失败"},"name":"RequestError","status":500}
+[08:49:05.845] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[08:49:06.145] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[08:49:06.150] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[08:49:06.155] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[08:49:06.193] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[08:49:06.211] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[08:49:06.211] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[08:49:06.211] Browser LOG     [AuthContext] 本地用户信息: 存在
+[08:49:06.211] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[08:49:06.211] Browser LOG     [AdminLayout] 已认证，加载菜单
+[08:49:06.211] Browser LOG     [AdminLayout] 开始加载菜单
+[08:49:06.237] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[08:49:06.242] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[08:49:06.315] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","path":"/templates"}],"others":[]}
+[08:49:06.315] Browser LOG     [AdminLayout] 菜单加载完成
+[08:49:07.656] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[08:49:07.660] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[08:49:07.673] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[08:49:07.680] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[08:49:08.432] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:49:08.436] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:49:08.437] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:49:08.441] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:49:11.012] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:49:11.021] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[08:49:11.027] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:49:11.036] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[08:49:13.269] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[08:49:13.269] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:49:13.269] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:49:26.626] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[08:49:26.635] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[08:49:26.642] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[08:49:26.657] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[08:49:27.556] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:49:27.561] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:49:27.572] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:49:27.576] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:49:28.406] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[08:49:28.412] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[08:49:28.418] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[08:49:28.423] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[08:50:08.779] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:50:08.783] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:50:12.809] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:50:12.845] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:50:12.855] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:50:12.862] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:50:14.681] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:50:14.681] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:50:19.060] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[08:50:19.069] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[08:50:19.075] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[08:50:19.081] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[08:50:20.593] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[08:50:20.612] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[08:50:20.682] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:50:20.682] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[08:50:22.293] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:50:22.313] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[08:50:22.319] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[08:50:22.323] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[08:50:24.821] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:50:24.826] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:50:24.835] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:50:24.839] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:50:29.375] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[08:50:29.388] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[08:50:29.396] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[08:50:29.401] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[08:50:31.140] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:50:31.146] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:50:31.157] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:50:31.161] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:54:51.680] Server  LOG      ✓ Compiled in 101ms
+[08:54:59.222] Server  LOG      ✓ Compiled in 223ms
+[08:57:27.858] Server  LOG      ✓ Compiled in 94ms
+[08:57:36.407] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[08:57:36.424] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[08:57:36.430] Server  LOG      ✓ Compiled in 64ms
+[08:57:48.222] Server  LOG      ✓ Compiled in 63ms
+[08:57:59.687] Server  LOG      ✓ Compiled in 141ms
+[08:58:11.665] Server  LOG      ✓ Compiled in 66ms
+[09:11:01.863] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[09:11:01.944] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:11:01.956] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[09:11:01.983] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[09:11:01.986] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:11:02.002] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:11:02.010] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:11:02.105] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[09:11:02.105] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[09:11:02.105] Browser LOG     [AuthContext] 本地用户信息: 存在
+[09:11:02.105] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[09:11:02.105] Browser LOG     [AdminLayout] 已认证，加载菜单
+[09:11:02.105] Browser LOG     [AdminLayout] 开始加载菜单
+[09:11:02.105] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","path":"/templates"}],"others":[]}
+[09:11:02.105] Browser LOG     [AdminLayout] 菜单加载完成
+[09:11:04.567] Browser ERROR   uncaughtError: Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+Check the render method of `DomainManagementPage`.
+[09:11:51.610] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[09:11:51.719] Server  LOG      ✓ Compiled in 83ms
+[09:11:52.145] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[09:11:52.252] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[09:11:52.268] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:11:52.275] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[09:11:52.283] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:11:52.290] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:11:52.296] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:11:52.393] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[09:11:52.393] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[09:11:52.393] Browser LOG     [AuthContext] 本地用户信息: 存在
+[09:11:52.393] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[09:11:52.393] Browser LOG     [AdminLayout] 已认证，加载菜单
+[09:11:52.393] Browser LOG     [AdminLayout] 开始加载菜单
+[09:11:52.393] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","path":"/templates"}],"others":[]}
+[09:11:52.393] Browser LOG     [AdminLayout] 菜单加载完成
+[09:12:03.804] Server  LOG      ✓ Compiled in 108ms
+[09:13:19.523] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[09:13:19.613] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:13:19.617] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[09:13:19.649] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[09:13:19.653] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:13:19.665] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:13:19.669] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:13:19.758] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[09:13:19.758] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[09:13:19.758] Browser LOG     [AuthContext] 本地用户信息: 存在
+[09:13:19.758] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[09:13:19.758] Browser LOG     [AdminLayout] 已认证，加载菜单
+[09:13:19.758] Browser LOG     [AdminLayout] 开始加载菜单
+[09:13:19.758] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","path":"/templates"}],"others":[]}
+[09:13:19.758] Browser LOG     [AdminLayout] 菜单加载完成
+[09:13:20.699] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000
+[09:13:20.702] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000
+[09:13:20.706] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000
+[09:13:20.710] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000
+[09:13:20.716] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000 -> 200
+[09:13:20.719] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000 -> 200
+[09:13:20.726] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000
+[09:13:20.728] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000
+[09:13:20.729] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000 -> 200
+[09:13:20.732] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000 -> 200
+[09:13:20.734] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000 -> 200
+[09:13:20.736] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000 -> 200
+[09:13:20.740] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000
+[09:13:20.744] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000
+[09:13:20.745] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000 -> 200
+[09:13:20.748] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000 -> 200
+[09:14:14.516] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[09:14:14.639] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:14:14.645] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[09:14:14.652] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[09:14:14.657] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:14:14.667] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:14:14.673] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:14:14.772] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[09:14:14.772] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[09:14:14.772] Browser LOG     [AuthContext] 本地用户信息: 存在
+[09:14:14.772] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[09:14:14.772] Browser LOG     [AdminLayout] 已认证，加载菜单
+[09:14:14.772] Browser LOG     [AdminLayout] 开始加载菜单
+[09:14:14.772] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","path":"/templates"}],"others":[]}
+[09:14:14.772] Browser LOG     [AdminLayout] 菜单加载完成
+[09:16:24.359] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000
+[09:16:24.364] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000
+[09:16:24.368] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000
+[09:16:24.371] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000
+[09:16:24.379] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000 -> 200
+[09:16:24.382] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000 -> 200
+[09:16:24.385] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000 -> 200
+[09:16:24.394] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000
+[09:16:24.397] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000
+[09:16:24.401] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000
+[09:16:24.402] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000 -> 200
+[09:16:24.405] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000 -> 200
+[09:16:24.408] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000 -> 200
+[09:16:24.412] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000 -> 200
+[09:16:24.418] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000
+[09:16:24.423] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000 -> 200
+[09:16:53.729] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[09:16:53.729] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[09:17:00.118] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[09:17:00.145] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[09:17:00.152] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[09:17:00.156] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[09:17:08.232] Server  LOG      ✓ Compiled in 145ms
+[09:17:11.874] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[09:17:11.874] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[09:17:11.874] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[09:17:18.511] Server  LOG      ✓ Compiled in 87ms
+[09:17:49.337] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[09:17:49.355] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[09:17:49.367] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[09:17:49.375] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[09:17:50.127] Server  LOG      ✓ Compiled in 75ms
+[09:17:57.599] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[09:17:57.605] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[09:17:57.608] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[09:17:57.615] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[09:17:57.617] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[09:17:57.620] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[09:17:57.629] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[09:17:57.633] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[09:17:57.638] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[09:17:57.658] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[09:17:57.664] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[09:17:57.680] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[09:17:57.687] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[09:17:57.689] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[09:17:57.696] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[09:17:57.718] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[09:17:57.724] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[09:17:57.729] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[09:17:57.731] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[09:17:57.732] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[09:17:57.735] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[09:17:57.738] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[09:17:57.745] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[09:17:57.750] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[09:17:59.892] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[09:17:59.898] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[09:17:59.905] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[09:17:59.910] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[09:18:01.062] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:18:01.070] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:18:01.076] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:18:01.081] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:18:02.187] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[09:18:02.198] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[09:18:02.204] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[09:18:02.209] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[09:18:03.265] Server  LOG      ✓ Compiled in 73ms
+[09:18:03.519] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[09:18:03.524] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[09:18:03.533] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[09:18:03.538] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[09:18:31.808] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:18:31.831] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:18:31.837] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[09:18:31.850] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[09:18:32.910] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000
+[09:18:32.914] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000
+[09:18:32.919] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000
+[09:18:32.921] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000 -> 200
+[09:18:32.925] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000
+[09:18:32.932] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000
+[09:18:32.934] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000 -> 200
+[09:18:32.937] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000 -> 200
+[09:18:32.940] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000 -> 200
+[09:18:32.949] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000
+[09:18:32.953] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000
+[09:18:32.956] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000
+[09:18:32.957] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000 -> 200
+[09:18:32.960] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000 -> 200
+[09:18:32.964] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000 -> 200
+[09:18:32.966] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000 -> 200
+[09:18:32.989] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[09:18:32.989] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:06:28.059] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:06:28.059] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:11:11.444] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000
+[10:11:11.450] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000
+[10:11:11.461] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000
+[10:11:11.462] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:11:11.462] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:11:11.465] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000
+[10:11:11.520] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000 -> 200
+[10:11:11.524] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000 -> 200
+[10:11:11.526] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000 -> 200
+[10:11:11.528] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000 -> 200
+[10:11:11.544] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000
+[10:11:11.547] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000
+[10:11:11.552] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000
+[10:11:11.556] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000
+[10:11:11.558] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?limit=1000 -> 200
+[10:11:11.562] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=1000 -> 200
+[10:11:11.566] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=1000 -> 200
+[10:11:11.570] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?domain=blaze.com&limit=1000 -> 200
+[10:11:15.262] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:11:15.268] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:11:15.277] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:11:15.285] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:11:16.662] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[10:11:16.671] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[10:11:16.752] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:11:16.752] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:12:39.144] Server  LOG      ✓ Compiled in 706ms
+[10:12:39.508] Server  LOG      ✓ Compiled in 0ms
+[10:12:39.929] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:12:40.005] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:12:40.022] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:12:40.041] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:12:40.044] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:12:40.053] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:12:40.073] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:12:40.178] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:12:40.178] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:12:40.178] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:12:40.178] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:12:40.178] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:12:40.178] Browser LOG     [AdminLayout] 开始加载菜单
+[10:12:40.178] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","path":"/templates"}],"others":[]}
+[10:12:40.178] Browser LOG     [AdminLayout] 菜单加载完成
+[10:12:53.658] Server  LOG      ✓ Compiled in 571ms
+[10:12:54.090] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:12:54.187] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:12:54.196] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:12:54.207] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:12:54.211] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:12:54.226] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:12:54.231] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:12:54.314] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:12:54.314] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:12:54.314] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:12:54.314] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:12:54.314] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:12:54.314] Browser LOG     [AdminLayout] 开始加载菜单
+[10:12:54.314] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","path":"/templates"}],"others":[]}
+[10:12:54.314] Browser LOG     [AdminLayout] 菜单加载完成
+[10:13:13.801] Server  LOG      ✓ Compiled in 469ms
+[10:13:14.192] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:13:14.269] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:13:14.276] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:13:14.291] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:13:14.294] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:13:14.296] Server  LOG      ✓ Compiled in 43ms
+[10:13:14.299] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:13:14.303] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:13:14.398] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:13:14.398] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:13:14.398] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:13:14.398] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:13:14.398] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:13:14.398] Browser LOG     [AdminLayout] 开始加载菜单
+[10:13:14.398] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","path":"/templates"}],"others":[]}
+[10:13:14.398] Browser LOG     [AdminLayout] 菜单加载完成
+[10:13:47.610] Server  LOG      ✓ Compiled in 88ms
+[10:14:20.606] Server  LOG      ✓ Compiled in 82ms
+[10:14:30.127] Server  LOG      ✓ Compiled in 90ms
+[10:14:39.296] Server  LOG      ✓ Compiled in 80ms
+[10:16:05.874] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:16:05.921] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:16:05.927] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:16:05.931] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:16:06.392] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:16:06.401] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:16:06.409] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:16:06.413] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:18:35.190] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:18:35.238] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:18:35.250] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:18:35.261] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:18:41.800] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[10:18:41.810] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[10:18:41.817] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[10:18:41.824] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[10:19:06.815] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:19:06.815] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:20:04.665] Server  LOG      ✓ Compiled in 99ms
+[10:20:18.374] Server  LOG      ✓ Compiled in 402ms
+[10:20:35.968] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:20:35.984] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:20:35.995] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:20:36.000] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:20:37.425] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[10:20:37.432] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[10:20:37.443] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[10:20:37.448] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[10:21:09.206] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:21:09.221] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:21:09.229] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:21:09.234] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:21:39.519] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:21:39.603] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:21:39.608] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:21:39.613] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:21:39.615] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:21:39.620] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:21:39.624] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:21:39.738] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:21:39.738] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:21:39.738] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:21:39.738] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:21:39.738] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:21:39.738] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:21:39.738] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","path":"/templates"}],"others":[]}
+[10:21:39.738] Browser LOG     [AdminLayout] 菜单加载完成
+[10:23:10.087] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:23:10.206] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:23:10.210] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:23:10.232] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:23:10.238] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:23:10.249] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:23:10.262] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:23:10.351] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:23:10.351] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:23:10.351] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:23:10.351] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:23:10.351] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:23:10.351] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:23:10.351] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:23:10.351] Browser LOG     [AdminLayout] 菜单加载完成
+[10:23:14.022] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:23:14.129] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:23:14.129] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:23:14.129] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:23:15.643] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:23:15.833] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:23:15.833] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:23:15.833] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:23:15.833] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:23:15.833] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:23:15.833] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:23:15.833] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:23:15.833] Browser LOG     [AdminLayout] 菜单加载完成
+[10:23:17.366] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:23:17.470] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:23:17.470] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:23:17.470] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:23:18.468] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:23:18.651] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:23:18.651] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:23:18.651] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:23:18.651] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:23:18.651] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:23:18.651] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:23:18.651] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:23:18.651] Browser LOG     [AdminLayout] 菜单加载完成
+[10:23:20.330] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:23:20.365] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:23:20.374] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:23:20.380] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:23:22.064] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:23:22.166] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:23:22.166] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:23:22.166] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:24:08.038] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:24:08.141] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:24:08.141] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:24:08.141] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:24:09.543] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:24:09.728] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:24:09.728] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:24:09.728] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:24:09.728] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:24:09.728] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:24:09.728] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:24:09.728] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:24:09.728] Browser LOG     [AdminLayout] 菜单加载完成
+[10:24:47.665] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:24:47.670] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:24:47.683] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:24:47.691] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:24:47.702] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:24:47.708] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:24:47.710] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:24:47.712] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:24:47.819] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:24:47.819] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:24:47.819] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:24:47.819] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:24:47.819] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:24:47.819] Browser LOG     [AdminLayout] 菜单加载完成
+[10:24:47.819] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:24:47.819] Browser LOG     [AdminLayout] 菜单加载完成
+[10:25:01.260] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:25:01.384] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:25:01.384] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:25:01.384] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:25:02.770] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:25:02.966] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:25:02.966] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:25:02.966] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:25:02.966] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:25:02.966] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:25:02.966] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:25:02.966] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:25:02.966] Browser LOG     [AdminLayout] 菜单加载完成
+[10:25:11.749] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:25:12.075] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:25:12.089] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:25:12.093] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:25:12.093] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:25:12.093] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:25:12.093] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:25:12.093] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:25:12.093] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:25:12.095] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:25:12.097] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:25:12.109] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:25:12.114] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:25:12.208] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:25:12.208] Browser LOG     [AdminLayout] 菜单加载完成
+[10:25:33.477] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:25:33.525] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:25:33.564] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:25:33.599] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:25:35.009] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:25:35.152] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:25:35.152] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:25:35.152] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:27:50.148] Server  LOG      ✓ Compiled in 199ms
+[10:27:52.825] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:27:53.102] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:27:53.114] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[10:27:53.136] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[10:27:53.145] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:27:53.145] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:27:53.145] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:27:53.145] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:27:53.145] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:27:53.145] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:27:53.175] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:27:53.196] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[10:27:53.203] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[10:27:53.289] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:27:53.289] Browser LOG     [AdminLayout] 菜单加载完成
+[10:28:36.755] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.562] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:37.575] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.633] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.659] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.672] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.694] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.709] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.718] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:37.722] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.752] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.776] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.803] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.835] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.849] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.862] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.875] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.888] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.902] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.915] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.935] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.949] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.972] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:37.996] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.015] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.030] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.044] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.057] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.073] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.089] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.103] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.116] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.148] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.164] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.199] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.664] Browser ERROR   uncaughtError: Error: ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:28:38.837] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:44.389] Server  ERROR    ⨯ ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:29:44.853] Browser ERROR   uncaughtError: Error: ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:29:45.007] Browser ERROR   ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+[10:30:31.792] Server  LOG      ✓ Compiled in 516ms
+[10:30:32.065] Browser ERROR   uncaughtError: Error: ./packages/admin-service/src/app/demo
+You cannot have two parallel pages that resolve to the same path. Please check /(admin)/demo and /demo.
+
+[10:30:34.827] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:30:35.085] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[10:30:35.093] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:30:35.105] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[10:30:35.188] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:30:35.188] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:30:35.188] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:30:35.188] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:30:35.188] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:30:35.188] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:30:35.206] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:30:35.211] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[10:30:35.218] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[10:30:35.320] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:30:35.320] Browser LOG     [AdminLayout] 菜单加载完成
+[10:31:20.591] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[10:31:20.596] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[10:31:20.607] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[10:31:20.610] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[10:31:20.700] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[10:31:20.700] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:31:20.700] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:31:43.423] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[10:31:43.427] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[10:31:43.432] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[10:31:43.435] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[10:31:43.531] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[10:31:43.531] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:31:43.531] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:31:54.741] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:31:54.752] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:31:54.762] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:31:54.767] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:31:55.501] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:31:55.525] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:31:55.535] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:31:55.539] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:31:56.394] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:31:56.404] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:31:56.412] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:31:56.416] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:31:56.435] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:31:56.438] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:31:56.449] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:31:56.454] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:31:56.457] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:31:56.459] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:31:56.464] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:31:56.467] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:31:56.474] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:31:56.478] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:31:56.482] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:31:56.483] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:31:56.489] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:31:56.492] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:31:56.499] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:31:56.507] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:31:56.509] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:31:56.511] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:31:56.513] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:31:56.515] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:31:57.368] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[10:31:57.374] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[10:31:57.380] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[10:31:57.391] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[10:31:58.072] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:31:58.088] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:31:58.099] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:31:58.104] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:31:58.713] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:31:58.718] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:31:58.727] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:31:58.733] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:32:00.249] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:32:00.255] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:32:00.264] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10
+[10:32:00.272] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates?page=1&limit=10 -> 200
+[10:32:00.758] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[10:32:00.762] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[10:32:00.768] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[10:32:00.772] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[10:33:58.988] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[10:33:58.993] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[10:33:59.004] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[10:33:59.018] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[10:33:59.061] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[10:33:59.061] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:33:59.061] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:34:10.651] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:34:10.660] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:34:10.664] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:34:10.667] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:34:10.674] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:34:10.676] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:34:10.678] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:34:10.681] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:34:10.689] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:34:10.692] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:34:10.697] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:34:10.698] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:34:10.700] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:34:10.703] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:34:10.711] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:34:10.718] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:34:10.720] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:34:10.721] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:34:10.724] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:34:10.726] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:34:10.733] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:34:10.735] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:34:10.739] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:34:10.741] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:35:53.014] Server  LOG      ✓ Compiled in 122ms
+[10:36:01.192] Server  LOG      ✓ Compiled in 70ms
+[10:36:12.317] Server  LOG      ✓ Compiled in 76ms
+[10:36:12.703] Server  LOG      ✓ Compiled in 63ms
+[10:36:49.156] Server  LOG      ✓ Compiled in 71ms
+[10:36:49.625] Server  LOG      ✓ Compiled in 59ms
+[10:37:12.106] Server  LOG      ✓ Compiled in 77ms
+[10:37:12.616] Server  LOG      ✓ Compiled in 68ms
+[10:37:34.149] Server  LOG      ✓ Compiled in 72ms
+[10:37:34.706] Server  LOG      ✓ Compiled in 63ms
+[10:37:35.296] Server  LOG      ✓ Compiled in 64ms
+[10:38:25.672] Server  LOG      ✓ Compiled in 97ms
+[10:38:44.762] Server  LOG      ✓ Compiled in 70ms
+[10:39:42.690] Server  LOG      ✓ Compiled in 903ms
+[10:40:32.973] Server  LOG      ✓ Compiled in 714ms
+[10:40:33.193] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:40:33.200] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:40:33.203] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:40:33.213] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:40:33.218] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:40:33.221] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:43:12.985] Server  LOG      ✓ Compiled in 819ms
+[10:43:25.823] Server  LOG      ✓ Compiled in 1008ms
+[10:43:57.066] Server  LOG      ✓ Compiled in 140ms
+[10:44:05.271] Server  LOG      ✓ Compiled in 87ms
+[10:44:12.886] Server  LOG      ✓ Compiled in 482ms
+[10:44:13.263] Server  LOG      ✓ Compiled in 0ms
+[10:44:13.314] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:44:13.353] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:44:13.792] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:44:14.051] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:44:14.054] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:44:14.057] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:44:14.059] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:44:14.065] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus
+[10:44:14.066] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:44:14.069] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/menus -> 200
+[10:44:14.080] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:44:14.086] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:44:14.089] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:44:14.091] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:44:14.093] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:44:14.097] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:44:14.101] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:44:14.102] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:44:14.105] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:44:14.108] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:44:14.116] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:44:14.123] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:44:14.126] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000
+[10:44:14.128] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:44:14.130] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?limit=1000 -> 200
+[10:44:14.136] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000
+[10:44:14.141] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000
+[10:44:14.143] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?limit=10000 -> 200
+[10:44:14.147] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?limit=10000 -> 200
+[10:44:14.384] Browser LOG     [AdminLayout] 未认证，不加载菜单
+[10:44:14.384] Browser LOG     [AuthContext] 初始化认证，token: 存在
+[10:44:14.384] Browser LOG     [AuthContext] 本地用户信息: 存在
+[10:44:14.384] Browser LOG     [AuthContext] 使用本地缓存的用户信息
+[10:44:14.384] Browser LOG     [AdminLayout] 已认证，加载菜单
+[10:44:14.384] Browser LOG     [AdminLayout] 开始从接口加载菜单
+[10:44:14.384] Browser LOG     [AdminLayout] 菜单加载成功 {"main":[{"icon":"Home","name":"首页","path":"/"},{"icon":"Users","name":"用户管理","path":"/users"},{"icon":"Globe","name":"域名管理","path":"/domains"},{"icon":"Route","name":"路由管理","path":"/routes"},{"icon":"FileText","name":"模板管理","subItems":[{"name":"基础模板","path":"/templates/base"},{"name":"自定义模板","path":"/templates/custom"}]}],"others":[{"icon":"Component","name":"组件示例","path":"/demo"}]}
+[10:44:14.384] Browser LOG     [AdminLayout] 菜单加载完成
+[10:45:14.564] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[10:45:14.589] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[10:45:14.602] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10
+[10:45:14.607] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/users?page=1&limit=10 -> 200
+[10:45:15.324] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:45:15.337] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:45:15.355] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:45:15.360] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:45:16.259] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:45:16.270] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:45:16.282] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:45:16.303] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:45:40.748] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[10:45:40.787] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[10:45:40.825] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:45:40.826] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:45:42.692] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[10:45:42.697] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[10:45:42.778] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:45:42.778] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:45:48.638] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:45:48.649] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:45:48.662] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:45:48.667] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:45:52.535] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:45:52.542] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:45:52.550] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10
+[10:45:52.557] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/routes?page=1&limit=10 -> 200
+[10:45:53.489] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:45:53.499] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:45:53.505] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10
+[10:45:53.512] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains?page=1&limit=10 -> 200
+[10:45:58.233] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:45:58.233] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:46:09.925] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[10:46:09.942] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[10:46:09.949] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10
+[10:46:09.954] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/custom-templates?page=1&limit=10 -> 200
+[10:47:11.245] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options
+[10:47:11.253] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options
+[10:47:11.267] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/base-templates/options -> 200
+[10:47:11.277] Server  LOG     [API Proxy] GET http://localhost:3002/api/admin/domains/options -> 200
+[10:47:11.342] Browser WARN    [tiptap warn]: Duplicate extension names found: ['link', 'underline']. This can lead to issues.
+[10:47:11.342] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+[10:47:11.342] Browser WARN    Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.

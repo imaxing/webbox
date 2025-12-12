@@ -17,44 +17,47 @@ router.get('/menus', authMiddleware, async (req, res) => {
     const menuConfig = {
       main: [
         {
-          name: 'Dashboard',
-          icon: 'GridIcon',
+          name: '首页',
+          icon: 'Home',
           path: '/'
         },
         {
-          name: 'Web工具',
-          icon: 'PlugInIcon',
+          name: '用户管理',
+          icon: 'Users',
+          path: '/users'
+        },
+        {
+          name: '域名管理',
+          icon: 'Globe',
+          path: '/domains'
+        },
+        {
+          name: '路由管理',
+          icon: 'Route',
+          path: '/routes'
+        },
+        {
+          name: '模板管理',
+          icon: 'FileText',
           subItems: [
             {
-              name: '路由管理',
-              path: '/route-management'
-            },
-            {
-              name: '模板管理',
-              path: '/template-management'
-            },
-            {
-              name: '域名管理',
-              path: '/domain-management'
+              name: '基础模板',
+              path: '/templates/base'
             },
             {
               name: '自定义模板',
-              path: '/custom-template'
-            }
-          ]
-        },
-        {
-          name: '用户管理',
-          icon: 'UserCircleIcon',
-          subItems: [
-            {
-              name: '用户列表',
-              path: '/user-list'
+              path: '/templates/custom'
             }
           ]
         }
       ],
-      others: []
+      others: [
+        {
+          name: '组件示例',
+          icon: 'Component',
+          path: '/demo'
+        }
+      ]
     };
 
     Response.success(res, menuConfig, '获取菜单成功');

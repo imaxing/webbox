@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { Response } from '@webbox/shared';
+import authRoutes from '@/routes/admin/auth.routes';
 import domainRoutes from '@/routes/admin/domain.routes';
 import templateRoutes from '@/routes/admin/template.routes';
 import routeRoutes from '@/routes/admin/route.routes';
@@ -17,6 +18,7 @@ router.get('/health', (req, res) => {
 });
 
 // 注册各模块路由
+router.use(authRoutes);
 router.use(domainRoutes);
 router.use(templateRoutes);
 router.use(routeRoutes);

@@ -12,7 +12,7 @@ import { TableActions } from "@/components";
 import { toast } from "@/lib/toast";
 import { createDialog } from "@/lib/dialog.dynamic";
 import { DomainForm } from "@/components";
-import DomainConfigDialog from "@/components/business/DomainConfigDialog";
+import { DomainConfig } from "@/components";
 import { useDict, useTableData } from "@/hooks";
 import api from "@/api";
 import type { Domain, DomainFormData } from "@/api/domain";
@@ -110,7 +110,7 @@ export default function DomainManagementPage() {
       width: "1200px",
       showCancel: false,
       component: (
-        <DomainConfigDialog
+        <DomainConfig
           domain={domain}
           onClose={() => dialog.close()}
           onSuccess={() => {

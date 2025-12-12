@@ -35,11 +35,14 @@ router.get('/domains/:id/relations', authMiddleware, async (req, res) => {
       return Response.notFound(res, ResponseMessage.DOMAIN.NOT_FOUND);
     }
 
-    const [templates, routes] = await Promise.all([
-      CustomTemplate.find({ domain: domain.domain }).lean(),
-      RouteRule.find({ domain: domain.domain })
-        .populate('template_id', 'name display_name')
-        .lean()
+    // 从域名的 routes 字段中提取路由和模板 ID
+    const routeIds = (domain.routes || []).map(r => r.route);
+    const templateIds = (domain.routes || []).map(r => r.template);
+
+    // 批量查询路由和模板详情
+    const [routes, templates] = await Promise.all([
+      RouteRule.find({ _id: { $in: routeIds } }).lean(),
+      CustomTemplate.find({ _id: { $in: templateIds } }).lean()
     ]);
 
     Response.success(res, {

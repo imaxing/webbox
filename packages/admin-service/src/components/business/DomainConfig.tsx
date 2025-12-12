@@ -22,7 +22,7 @@ import api from "@/api";
 import type { CustomTemplate, BaseTemplate } from "@/api/template";
 import type { RouteRule, RouteType } from "@/api/route";
 
-export interface DomainConfigDialogProps {
+export interface DomainConfigProps {
   domain: {
     _id: string;
     domain: string;
@@ -46,11 +46,11 @@ interface RouteConfig {
 
 type TemplateType = "base" | "custom";
 
-export default function DomainConfigDialog({
+export default function DomainConfig({
   domain,
   onSuccess,
   onClose,
-}: DomainConfigDialogProps) {
+}: DomainConfigProps) {
   const dicts = useDict();
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);

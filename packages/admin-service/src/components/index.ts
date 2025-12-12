@@ -48,8 +48,8 @@ export { default as RouteForm } from "./business/RouteForm";
 export { default as DomainForm } from "./business/DomainForm";
 export { default as BaseTemplateForm } from "./business/BaseTemplateForm";
 export { default as CustomTemplateForm } from "./business/CustomTemplateForm";
-export { default as DomainConfigDialog } from "./business/DomainConfigDialog";
-export type { DomainConfigDialogProps } from "./business/DomainConfigDialog";
+export { default as DomainConfig } from "./business/DomainConfig";
+export type { DomainConfigProps } from "./business/DomainConfig";
 
 // 业务视图组件
 export { default as DomainMetrics } from "./business/DomainMetrics";

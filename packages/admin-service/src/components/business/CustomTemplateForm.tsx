@@ -22,11 +22,10 @@ import {
   CustomTemplate,
   CustomTemplateFormData,
   CustomTemplateStatus,
-  getBaseTemplateOptions,
   getBaseTemplateInfo,
   TemplateVariable,
 } from "@/api/template";
-import { getDomainOptions } from "@/api/domain";
+import api from "@/api";
 import { Plus, Trash2 } from "lucide-react";
 import { RichTextEditor } from "@/components";
 

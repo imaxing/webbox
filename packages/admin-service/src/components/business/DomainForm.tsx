@@ -24,8 +24,7 @@ import {
   DomainStatus,
   RouteTemplateMapping,
 } from "@/api/domain";
-import { getRouteList } from "@/api/route";
-import { getCustomTemplateList } from "@/api/template";
+import api from "@/api";
 import * as LucideIcons from "lucide-react";
 
 export interface DomainFormProps {

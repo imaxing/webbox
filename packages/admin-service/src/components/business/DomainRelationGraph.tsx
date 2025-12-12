@@ -16,9 +16,7 @@ import ReactFlow, {
   Position,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { getDomainList } from '@/api/domain';
-import { getCustomTemplateList } from '@/api/template';
-import { getRouteList } from '@/api/route';
+import api from '@/api';
 
 interface RouteData {
   id: string;

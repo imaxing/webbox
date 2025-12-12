@@ -10,8 +10,8 @@ import {
   Checkbox,
   Label,
 } from "@/components";
-import { RouteRule, RouteFormData, RouteType } from "@/api/route";
-import { getDomainOptions } from "@/api/domain";
+import api from "@/api";
+import type { RouteRule, RouteFormData, RouteType } from "@/api/route";
 
 // 路由类型选项
 const ROUTE_TYPE_OPTIONS: AntSelectOption[] = [
@@ -57,7 +57,7 @@ const RouteForm = forwardRef<RouteFormRef, RouteFormProps>(({
     const loadDomains = async () => {
       setLoadingDomains(true);
       try {
-        const domains = await getDomainOptions();
+        const domains = await api.domain.options();
         setDomainOptions(
           (domains || []).map((d) => ({ value: d.value, label: d.label }))
         );

@@ -18,17 +18,12 @@ import {
 import { Trash2, Grid3x3 } from "lucide-react";
 import { toast } from "@/lib/toast";
 import { useDict } from "@/hooks";
-import {
-  getCustomTemplateList,
-  getBaseTemplateList,
+import api from "@/api";
+import type {
   CustomTemplate,
   BaseTemplate,
 } from "@/api/template";
-import {
-  getRouteList,
-  createRoute,
-  updateRoute,
-  deleteRoute,
+import type {
   RouteRule,
   RouteType,
 } from "@/api/route";

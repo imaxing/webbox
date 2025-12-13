@@ -21,11 +21,27 @@ function buildRouteNameMap(items: MenuItem[], map: Record<string, string> = {}):
       const segments = item.path.split("/").filter(Boolean);
       const lastSegment = segments[segments.length - 1];
       if (lastSegment) {
-        map[lastSegment] = item.label;
+        map[lastSegment] = item.name;
       }
     }
-    if (item.children && item.children.length > 0) {
-      buildRouteNameMap(item.children, map);
+    // 递归处理子菜单
+    if (item.subItems && item.subItems.length > 0) {
+      item.subItems.forEach((subItem) => {
+        if (subItem.path) {
+          const segments = subItem.path.split("/").filter(Boolean);
+          // 为子路径的每一段建立映射
+          segments.forEach((segment, index) => {
+            // 第一段路径通常是父级分类（如 templates）
+            if (index === 0 && !map[segment]) {
+              map[segment] = item.name;
+            }
+            // 最后一段是具体的子项
+            if (index === segments.length - 1) {
+              map[segment] = subItem.name;
+            }
+          });
+        }
+      });
     }
   });
   return map;

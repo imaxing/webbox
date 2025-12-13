@@ -61,6 +61,9 @@ export { PageTransition } from "./business/PageTransition";
 export { Providers } from "./business/Providers";
 export { default as RichTextEditor } from "./business/RichTextEditor";
 
+// 布局组件
+export { Breadcrumb } from "./layout/Breadcrumb";
+
 // ==================== UI 基础组件（shadcn/ui 原始组件） ====================
 // ⚠️ 仅供 common 层封装使用，业务代码不应直接使用
 

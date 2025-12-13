@@ -16,6 +16,7 @@ import {
 import { DynamicMenu } from "@/components";
 import { ThemeToggle } from "@/components";
 import { PageTransition } from "@/components";
+import { Breadcrumb } from "@/components";
 import api from "@/api";
 import type { MenuConfig } from "@/api/menu";
 import { useAuth } from "@/contexts/AuthContext";
@@ -144,7 +145,7 @@ export default function AdminLayout({
         {/* 顶部导航栏 */}
         <header className="border-b bg-card shrink-0">
           <div className="h-16 px-6 flex items-center justify-between">
-            {/* 左侧：侧边栏切换按钮 */}
+            {/* 左侧：侧边栏切换按钮 + 面包屑 */}
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -157,6 +158,11 @@ export default function AdminLayout({
                   <LucideIcons.PanelLeftOpen className="h-5 w-5" />
                 )}
               </button>
+
+              {/* 面包屑导航 */}
+              <div className="border-l pl-4 h-6">
+                <Breadcrumb />
+              </div>
             </div>
 
             {/* 右侧：功能按钮 */}

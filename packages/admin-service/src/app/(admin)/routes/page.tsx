@@ -168,8 +168,7 @@ export default function RouteManagementPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">路由管理</h1>
+      <div className="flex items-center justify-end">
         <AntButton type="primary" onClick={handleCreate}>
           新增路由规则
         </AntButton>

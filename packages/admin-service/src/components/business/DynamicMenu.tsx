@@ -57,7 +57,7 @@ export function DynamicMenu({ items, sidebarOpen, title }: DynamicMenuProps) {
   return (
     <div className="space-y-1">
       {title && sidebarOpen && (
-        <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+        <div className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
           {title}
         </div>
       )}
@@ -73,23 +73,21 @@ export function DynamicMenu({ items, sidebarOpen, title }: DynamicMenuProps) {
             <Link key={item.name} href={item.path}>
               <div
                 className={cn(
-                  "flex items-center gap-3 rounded-md px-3 py-2 mb-1 text-sm font-medium transition-all duration-200 ease-in-out",
-                  "hover:bg-accent hover:text-accent-foreground",
-                  isActive && "bg-accent text-accent-foreground",
+                  "group flex items-center gap-2 rounded-lg px-3 py-2 mb-1 text-sm font-medium transition-colors",
+                  "hover:bg-muted hover:text-foreground",
+                  isActive && "bg-muted text-foreground",
                   !sidebarOpen && "justify-center px-2"
                 )}
               >
                 <Icon
                   className={cn(
-                    "h-5 w-5 transition-all duration-200",
-                    !sidebarOpen && "h-6 w-6"
+                    "text-muted-foreground transition-colors",
+                    sidebarOpen ? "h-4 w-4" : "h-5 w-5",
+                    (isActive || undefined) && "text-foreground",
+                    "group-hover:text-foreground"
                   )}
                 />
-                {sidebarOpen && (
-                  <span className="flex-1 transition-opacity duration-200">
-                    {item.name}
-                  </span>
-                )}
+                {sidebarOpen && <span className="flex-1">{item.name}</span>}
               </div>
             </Link>
           );
@@ -105,26 +103,26 @@ export function DynamicMenu({ items, sidebarOpen, title }: DynamicMenuProps) {
             >
               <CollapsibleTrigger
                 className={cn(
-                  "flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 ease-in-out",
-                  "hover:bg-accent hover:text-accent-foreground",
-                  isActive && "bg-accent text-accent-foreground",
+                  "group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  "hover:bg-muted hover:text-foreground",
+                  isActive && "bg-muted text-foreground",
                   !sidebarOpen && "justify-center px-2"
                 )}
               >
                 <Icon
                   className={cn(
-                    "h-5 w-5 transition-all duration-200",
-                    !sidebarOpen && "h-6 w-6"
+                    "text-muted-foreground transition-colors",
+                    sidebarOpen ? "h-4 w-4" : "h-5 w-5",
+                    (isActive || undefined) && "text-foreground",
+                    "group-hover:text-foreground"
                   )}
                 />
                 {sidebarOpen && (
                   <>
-                    <span className="flex-1 text-left transition-opacity duration-200">
-                      {item.name}
-                    </span>
+                    <span className="flex-1 text-left">{item.name}</span>
                     <LucideIcons.ChevronDown
                       className={cn(
-                        "h-4 w-4 transition-transform duration-300 ease-in-out",
+                        "h-4 w-4 text-muted-foreground transition-transform duration-300 ease-in-out",
                         isOpen && "rotate-180"
                       )}
                     />
@@ -132,15 +130,15 @@ export function DynamicMenu({ items, sidebarOpen, title }: DynamicMenuProps) {
                 )}
               </CollapsibleTrigger>
               {sidebarOpen && (
-                <CollapsibleContent className="space-y-1 pl-11 pt-1">
+                <CollapsibleContent className="space-y-1 pl-9 pt-1">
                   {item.subItems?.map((subItem) => (
                     <Link key={subItem.path} href={subItem.path}>
                       <div
                         className={cn(
-                          "flex items-center gap-2 rounded-md px-3 py-1.5 mb-1 text-sm transition-all duration-200 ease-in-out",
-                          "hover:bg-accent hover:text-accent-foreground",
+                          "flex items-center gap-2 rounded-lg px-3 py-1.5 mb-1 text-sm transition-colors",
+                          "hover:bg-muted hover:text-foreground",
                           isSubMenuActive(subItem.path) &&
-                            "bg-accent text-accent-foreground font-medium"
+                            "bg-muted text-foreground font-medium"
                         )}
                       >
                         <span className="flex-1">{subItem.name}</span>
@@ -174,11 +172,11 @@ export function DynamicMenu({ items, sidebarOpen, title }: DynamicMenuProps) {
           <div
             key={item.name}
             className={cn(
-              "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground",
+              "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground",
               !sidebarOpen && "justify-center px-2"
             )}
           >
-            <Icon className={cn("h-5 w-5", !sidebarOpen && "h-6 w-6")} />
+            <Icon className={cn(sidebarOpen ? "h-4 w-4" : "h-5 w-5")} />
             {sidebarOpen && <span className="flex-1">{item.name}</span>}
           </div>
         );

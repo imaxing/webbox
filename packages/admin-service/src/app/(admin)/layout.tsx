@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { AntButton } from "@/components";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,10 +12,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DynamicMenu } from "@/components";
-import { ThemeToggle } from "@/components";
-import { PageTransition } from "@/components";
-import { Breadcrumb } from "@/components";
+import {
+  DynamicMenu,
+  ThemeToggle,
+  PageTransition,
+  Breadcrumb,
+} from "@/components";
 import api from "@/api";
 import type { MenuItem } from "@/api/menu";
 import { useAuth } from "@/contexts/AuthContext";
@@ -28,7 +29,6 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
   const router = useRouter();
   const { user, logout, isAuthenticated, loading: authLoading } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -88,16 +88,6 @@ export default function AdminLayout({
     return "U";
   };
 
-  // 角色映射
-  const getRoleLabel = (role: string) => {
-    const roleMap: Record<string, string> = {
-      admin: "管理员",
-      editor: "编辑员",
-      viewer: "查看员",
-    };
-    return roleMap[role] || role;
-  };
-
   return (
     <div className="flex h-screen bg-background">
       {/* 侧边栏 */}
@@ -110,8 +100,8 @@ export default function AdminLayout({
         {/* 头部 */}
         <div className="flex h-16 items-center justify-center px-4 shrink-0">
           <div className="flex items-center gap-2">
-            <LucideIcons.Box className="h-6 w-6 text-primary" />
-            {sidebarOpen && <h1 className="font-bold text-xl">Webbox</h1>}
+            <LucideIcons.Box className="h-5 w-5 text-primary" />
+            {sidebarOpen && <h1 className="font-semibold text-lg">Webbox</h1>}
           </div>
         </div>
 
@@ -122,10 +112,7 @@ export default function AdminLayout({
               <LucideIcons.Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
             </div>
           ) : menus.length > 0 ? (
-            <DynamicMenu
-              items={menus}
-              sidebarOpen={sidebarOpen}
-            />
+            <DynamicMenu items={menus} sidebarOpen={sidebarOpen} />
           ) : (
             <div className="text-center text-sm text-muted-foreground py-8">
               {sidebarOpen ? "暂无菜单" : "无"}
@@ -138,12 +125,12 @@ export default function AdminLayout({
       <main className="flex-1 flex flex-col overflow-hidden">
         {/* 顶部导航栏 */}
         <header className="border-b bg-card shrink-0">
-          <div className="h-16 px-6 flex items-center justify-between">
+          <div className="h-16 px-3 flex items-center justify-between">
             {/* 左侧：侧边栏切换按钮 + 面包屑 */}
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="p-2 rounded-md hover:bg-muted transition-colors"
+                className="h-9 w-9 rounded-md inline-flex items-center justify-center hover:bg-muted transition-colors"
                 title={sidebarOpen ? "收起侧边栏" : "展开侧边栏"}
               >
                 {sidebarOpen ? (
@@ -204,8 +191,10 @@ export default function AdminLayout({
         </header>
 
         {/* 内容区域 */}
-        <ScrollArea className="flex-grow min-h-0 p-3">
-          <PageTransition>{children}</PageTransition>
+        <ScrollArea className="flex-grow min-h-0">
+          <div className="p-3">
+            <PageTransition>{children}</PageTransition>
+          </div>
         </ScrollArea>
       </main>
     </div>

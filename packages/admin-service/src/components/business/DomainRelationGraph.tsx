@@ -17,6 +17,8 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import api from "@/api";
+import { AntSelect } from "@/components";
+import { useTheme } from "next-themes";
 
 interface RouteData {
   _id?: string;
@@ -42,10 +44,12 @@ interface DomainData {
 
 // 自定义域名节点
 const DomainNode = ({ data }: any) => (
-  <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg p-4 text-white shadow-lg min-w-[200px]">
+  <div className="rounded-xl border border-border bg-card px-4 py-3 text-foreground shadow-sm min-w-[220px] dark:border-white/10 dark:bg-white/[0.04] dark:text-white">
     <Handle type="source" position={Position.Right} />
-    <div className="font-bold text-base mb-1">{data.label}</div>
-    {data.appName && <div className="text-xs opacity-90">{data.appName}</div>}
+    <div className="flex items-center gap-2">
+      <span className="h-2 w-2 rounded-full bg-blue-400" />
+      <div className="font-semibold text-sm">{data.label}</div>
+    </div>
   </div>
 );
 
@@ -59,18 +63,17 @@ const TemplateNode = ({ data }: any) => {
 
   return (
     <div
-      className="bg-green-50 dark:bg-green-900/20 border-2 border-green-500 dark:border-green-600 rounded-lg px-4 py-2.5 shadow-md min-w-[180px] cursor-pointer hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors"
+      className="rounded-xl border border-border bg-card px-4 py-3 shadow-sm min-w-[220px] cursor-pointer hover:border-border/70 transition-colors dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-white/20"
       onClick={handleClick}
       title={data.url ? `点击打开: ${data.url}` : ""}
     >
       <Handle type="target" position={Position.Left} />
-      <div className="text-sm text-green-800 dark:text-green-300 font-medium">
-        📄 {data.label}
+      <div className="flex items-center gap-2">
+        <span className="h-2 w-2 rounded-full bg-emerald-400" />
+        <div className="text-sm text-foreground font-medium dark:text-white">{data.label}</div>
       </div>
       {data.url && (
-        <div className="text-xs text-green-600 dark:text-green-400 mt-1 truncate">
-          🔗 {data.url}
-        </div>
+        <div className="text-xs text-muted-foreground mt-1 truncate dark:text-white/60">{data.url}</div>
       )}
     </div>
   );
@@ -78,11 +81,12 @@ const TemplateNode = ({ data }: any) => {
 
 // 自定义路由节点
 const RouteNode = ({ data }: any) => (
-  <div className="bg-orange-50 dark:bg-orange-900/20 border-2 border-orange-500 dark:border-orange-600 rounded-lg px-4 py-2.5 shadow-md min-w-[180px]">
+  <div className="rounded-xl border border-border bg-card px-4 py-3 shadow-sm min-w-[220px] dark:border-white/10 dark:bg-white/[0.04]">
     <Handle type="target" position={Position.Left} />
     <Handle type="source" position={Position.Right} />
-    <div className="text-sm text-orange-800 dark:text-orange-300 font-mono">
-      🛣️ {data.label}
+    <div className="flex items-center gap-2">
+      <span className="h-2 w-2 rounded-full bg-orange-400" />
+      <div className="text-sm text-foreground font-mono dark:text-white">{data.label}</div>
     </div>
   </div>
 );
@@ -94,10 +98,13 @@ const nodeTypes = {
 };
 
 export default function DomainRelationGraph() {
+  const { resolvedTheme } = useTheme();
+  const is_dark = resolvedTheme === "dark";
   const [data, setData] = useState<DomainData[]>([]);
   const [loading, setLoading] = useState(true);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [selectedDomain, setSelectedDomain] = useState<string>("all");
 
   const loadData = useCallback(async () => {
     try {
@@ -202,8 +209,7 @@ export default function DomainRelationGraph() {
         type: "domain",
         position: { x: domainX, y: currentY },
         data: {
-          label: domainData.domain,
-          appName: domainData.app_name,
+          label: domainData.app_name || "未命名应用",
         },
       });
 
@@ -313,12 +319,53 @@ export default function DomainRelationGraph() {
     };
   }, [data]);
 
+  const domainOptions = useMemo(() => {
+    return data
+      .map((item, index) => ({
+        value: item.domain,
+        label: item.app_name || "未命名应用",
+        count: (item.routes || []).length,
+        index,
+      }))
+      .filter((item) => item.value)
+      .sort((a, b) => {
+        // 有数据的优先展示：按 routes 数量降序，其次保持原始顺序
+        if (b.count !== a.count) return b.count - a.count;
+        return a.index - b.index;
+      })
+      .map(({ value, label }) => ({ value, label }));
+  }, [data]);
+
+  const quickDomains = useMemo(() => {
+    return domainOptions.slice(0, 2);
+  }, [domainOptions]);
+
+  const moreDomains = useMemo(() => {
+    return domainOptions.slice(2);
+  }, [domainOptions]);
+
+  const filteredNodes = useMemo(() => {
+    if (selectedDomain === "all") return nodes;
+    const domainIndex = data.findIndex((d) => d.domain === selectedDomain);
+    if (domainIndex < 0) return nodes;
+    const prefix = `domain-${domainIndex}`;
+    return (nodes as any[]).filter((n) => String(n.id).startsWith(prefix));
+  }, [nodes, data, selectedDomain]);
+
+  const filteredEdges = useMemo(() => {
+    if (selectedDomain === "all") return edges;
+    const idSet = new Set((filteredNodes as any[]).map((n) => String(n.id)));
+    return (edges as any[]).filter(
+      (e) => idSet.has(String(e.source)) && idSet.has(String(e.target))
+    );
+  }, [edges, filteredNodes, selectedDomain]);
+
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-[600px] bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+      <div className="flex items-center justify-center h-[600px] rounded-2xl border border-border bg-card shadow-sm dark:border-white/10 dark:bg-gradient-to-b dark:from-[#0b0f17] dark:to-[#070a0f]">
         <div className="text-center">
-          <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-purple-600 border-r-transparent"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">加载关系图...</p>
+          <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
+          <p className="mt-4 text-muted-foreground dark:text-white/60">加载关系图...</p>
         </div>
       </div>
     );
@@ -326,34 +373,72 @@ export default function DomainRelationGraph() {
 
   if (data.length === 0) {
     return (
-      <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-12">
-        <div className="text-center text-gray-500 dark:text-gray-400">
-          暂无域名关系数据
-        </div>
+      <div className="rounded-2xl border border-border bg-card p-12 shadow-sm dark:border-white/10 dark:bg-gradient-to-b dark:from-[#0b0f17] dark:to-[#070a0f]">
+        <div className="text-center text-muted-foreground dark:text-white/60">暂无域名关系数据</div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-6">
-      {/* 标题 */}
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-          域名关系图
-        </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          可拖拽、缩放的交互式流程图
-        </p>
+    <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden dark:border-white/10 dark:bg-gradient-to-b dark:from-[#0b0f17] dark:to-[#070a0f]">
+      {/* 标题栏（仅主题风格） */}
+      <div className="flex items-start justify-between gap-4 px-6 py-4 border-b border-border dark:border-white/10">
+        <div className="flex items-center gap-3">
+          <h3 className="text-lg font-semibold text-foreground dark:text-white">域名关系图</h3>
+          <div className="text-xs text-muted-foreground dark:text-white/50">
+            域名 {totalStats.domains} · 路由 {totalStats.routes} · 模板{" "}
+            {totalStats.templates}
+          </div>
+        </div>
+
+        {/* 域名筛选（2 个快捷 + 更多下拉） */}
+        <div className="flex items-center gap-2">
+          <div className="inline-flex items-center rounded-xl border border-border bg-background/70 backdrop-blur p-1 dark:border-white/10 dark:bg-black/30">
+            {quickDomains.map((name) => {
+              const active = selectedDomain === name.value;
+              return (
+                <button
+                  key={name.value}
+                  type="button"
+                  onClick={() => setSelectedDomain(name.value)}
+                  className={[
+                    "px-4 py-2 text-sm rounded-lg transition-colors",
+                    active
+                      ? "bg-primary/10 text-foreground dark:bg-white/[0.14] dark:text-white"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted dark:text-white/70 dark:hover:text-white dark:hover:bg-white/[0.08]",
+                  ].join(" ")}
+                >
+                  {name.label}
+                </button>
+              );
+            })}
+
+            <div className="w-px h-7 bg-border mx-1 dark:bg-white/10" />
+
+            <div className="min-w-[160px]">
+              <AntSelect
+                value={selectedDomain}
+                onChange={(value) => setSelectedDomain(String(value))}
+                options={[
+                  { label: "全部域名", value: "all" },
+                  ...moreDomains.map((item) => ({
+                    label: item.label,
+                    value: item.value,
+                  })),
+                ]}
+                placeholder="更多"
+                className="w-full"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* React Flow 画布 */}
-      <div
-        className="border border-gray-200 dark:border-gray-700 rounded-lg"
-        style={{ height: "800px" }}
-      >
+      <div className="rounded-b-2xl" style={{ height: "720px" }}>
         <ReactFlow
-          nodes={nodes}
-          edges={edges}
+          nodes={filteredNodes as any}
+          edges={filteredEdges as any}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           nodeTypes={nodeTypes}
@@ -362,47 +447,42 @@ export default function DomainRelationGraph() {
           minZoom={0.1}
           maxZoom={2}
           attributionPosition="bottom-left"
-          className="bg-gray-50 dark:bg-gray-950"
+          className={is_dark ? "bg-transparent" : "bg-background"}
           proOptions={{ hideAttribution: false }}
         >
           <Background
-            variant={BackgroundVariant.Dots}
-            gap={12}
+            variant={BackgroundVariant.Lines}
+            gap={28}
             size={1}
-            className="bg-gray-50 dark:bg-gray-950"
+            color={is_dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}
+            className={is_dark ? "bg-transparent" : "bg-background"}
           />
-          <Controls className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg" />
+          <Controls className="bg-background/70 backdrop-blur border border-border rounded-xl shadow-sm dark:bg-black/40 dark:border-white/10 [&_button]:border-border [&_button]:bg-background [&_button:hover]:bg-muted dark:[&_button]:border-white/10 dark:[&_button]:bg-white/[0.06] dark:[&_button:hover]:bg-white/[0.10]" />
           <MiniMap
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
+            className="bg-background/70 backdrop-blur border border-border rounded-xl shadow-sm dark:bg-black/40 dark:border-white/10"
             nodeColor={(node) => {
-              if (node.type === "domain") return "#a855f7";
-              if (node.type === "template") return "#22c55e";
-              if (node.type === "route") return "#f97316";
-              return "#94a3b8";
+              if (node.type === "domain") return "#60a5fa";
+              if (node.type === "template") return "#34d399";
+              if (node.type === "route") return "#fb923c";
+              return "#64748b";
             }}
           />
           <Panel
             position="top-right"
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3"
+            className="bg-background/70 backdrop-blur border border-border rounded-xl shadow-sm p-3 dark:bg-black/40 dark:border-white/10"
           >
             <div className="text-xs space-y-1">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></div>
-                <span className="text-gray-700 dark:text-gray-300">
-                  域名节点
-                </span>
+                <div className="w-3 h-3 rounded-full bg-blue-400"></div>
+                <span className="text-muted-foreground dark:text-white/70">域名节点</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span className="text-gray-700 dark:text-gray-300">
-                  模板节点
-                </span>
+                <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
+                <span className="text-muted-foreground dark:text-white/70">模板节点</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-                <span className="text-gray-700 dark:text-gray-300">
-                  路由节点
-                </span>
+                <div className="w-3 h-3 rounded-full bg-orange-400"></div>
+                <span className="text-muted-foreground dark:text-white/70">路由节点</span>
               </div>
             </div>
           </Panel>

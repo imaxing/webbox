@@ -4,13 +4,13 @@ import { addUUIDField } from '../utils/uuid';
 
 /**
  * 路由规则文档接口
- * 将 URL 路由模式映射到具体的定制模板
+ * 路由规则仅描述匹配规则本身
+ * ⚠️ 不与域名/模板做反向关联，关联关系由 Domain.routes 统一维护
  */
 export interface IRouteRule extends Document {
   uuid: string;
   pattern: string;        // 路由模式（如 "/proto/child-safety-*"）
   type: 'exact' | 'wildcard' | 'regex'; // 匹配类型
-  template_id?: mongoose.Types.ObjectId; // 关联的定制模板 ID（可选）
   priority: number;       // 优先级（0-100）
   enabled: boolean;       // 是否启用
   description?: string;   // 规则描述
@@ -34,12 +34,6 @@ const routeRuleSchema: Schema = new Schema(
       required: true,
       enum: ['exact', 'wildcard', 'regex'],
       default: 'exact',
-    },
-    template_id: {
-      type: Schema.Types.ObjectId,
-      ref: 'CustomTemplate',
-      required: false,
-      index: true,
     },
     priority: {
       type: Number,
@@ -67,8 +61,8 @@ const routeRuleSchema: Schema = new Schema(
 // 复合索引：核心查询（按启用状态+优先级排序）
 routeRuleSchema.index({ enabled: 1, priority: -1 });
 
-// 唯一索引：路由模式应该全局唯一
-routeRuleSchema.index({ pattern: 1 }, { unique: true });
+// 唯一索引：匹配类型+路由模式组合唯一
+routeRuleSchema.index({ type: 1, pattern: 1 }, { unique: true });
 
 // 添加 UUID 字段
 addUUIDField(routeRuleSchema);

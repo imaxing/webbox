@@ -69,12 +69,16 @@ export class RouteResolverService {
    * 解析路由并返回模板和变量
    */
   async resolve(host: string, path: string) {
+    const isDev = process.env.NODE_ENV === 'development';
     const cacheKey = `route:${host}:${path}`;
-    const cached = SimpleCache.get(cacheKey);
 
-    if (cached) {
-      console.log(`✓ Cache hit: ${cacheKey}`);
-      return cached;
+    // 开发环境跳过缓存
+    if (!isDev) {
+      const cached = SimpleCache.get(cacheKey);
+      if (cached) {
+        console.log(`✓ Cache hit: ${cacheKey}`);
+        return cached;
+      }
     }
 
     try {
@@ -149,8 +153,10 @@ export class RouteResolverService {
         ruleId: matchedRule._id
       };
 
-      // 7. 缓存结果（300秒 = 5分钟）
-      SimpleCache.set(cacheKey, result, 300);
+      // 7. 缓存结果（仅在生产环境缓存 300 秒）
+      if (!isDev) {
+        SimpleCache.set(cacheKey, result, 300);
+      }
 
       return result;
     } catch (error: any) {

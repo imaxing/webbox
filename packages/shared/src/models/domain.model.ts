@@ -1,13 +1,21 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import { addDateTimeTransform } from '../utils/datetime';
-import { addUUIDField } from '../utils/uuid';
+import mongoose, { Schema, Document } from "mongoose";
+import { addDateTimeTransform } from "../utils/datetime";
+import { addUUIDField } from "../utils/uuid";
+
+function normalize_domain(input: unknown): string {
+  if (typeof input !== "string") return "";
+  let value = input.trim();
+  value = value.replace(/^https?:\/\//i, "");
+  value = value.replace(/\/+$/, "");
+  return value;
+}
 
 /**
  * 路由-模板映射接口
  */
 export interface IRouteTemplateMapping {
-  route: mongoose.Types.ObjectId;     // 路由规则 ID
-  template: mongoose.Types.ObjectId;  // 模板 ID
+  route: mongoose.Types.ObjectId; // 路由规则 ID
+  template: mongoose.Types.ObjectId; // 模板 ID
 }
 
 /**
@@ -16,11 +24,11 @@ export interface IRouteTemplateMapping {
  */
 export interface IDomain extends Document {
   uuid: string;
-  domain: string;         // 完整域名（含协议）
-  app_name: string;       // 应用名称
-  email: string;          // 联系邮箱
-  project_group: string;  // 项目组
-  status: 'active' | 'inactive'; // 状态
+  domain: string; // 域名基础信息（不含协议）
+  app_name: string; // 应用名称
+  email: string; // 联系邮箱
+  project_group: string; // 项目组
+  status: "active" | "inactive"; // 状态
   routes: IRouteTemplateMapping[]; // 路由-模板映射数组
   createdAt: Date;
   updatedAt: Date;
@@ -36,6 +44,7 @@ const domainSchema: Schema = new Schema(
       required: true,
       unique: true,
       trim: true,
+      set: normalize_domain,
       index: true,
     },
     app_name: {
@@ -53,13 +62,13 @@ const domainSchema: Schema = new Schema(
       type: String,
       trim: true,
       index: true,
-      default: 'default',
+      default: "default",
     },
     status: {
       type: String,
       required: true,
-      enum: ['active', 'inactive'],
-      default: 'active',
+      enum: ["active", "inactive"],
+      default: "active",
       index: true,
     },
     routes: {
@@ -67,12 +76,12 @@ const domainSchema: Schema = new Schema(
         {
           route: {
             type: Schema.Types.ObjectId,
-            ref: 'RouteRule',
+            ref: "RouteRule",
             required: true,
           },
           template: {
             type: Schema.Types.ObjectId,
-            ref: 'CustomTemplate',
+            ref: "CustomTemplate",
             required: true,
           },
         },
@@ -82,7 +91,7 @@ const domainSchema: Schema = new Schema(
   },
   {
     timestamps: true,
-    collection: 'domains',
+    collection: "domains",
   }
 );
 
@@ -92,4 +101,4 @@ addUUIDField(domainSchema);
 // 添加时间格式化
 addDateTimeTransform(domainSchema);
 
-export const Domain = mongoose.model<IDomain>('Domain', domainSchema);
+export const Domain = mongoose.model<IDomain>("Domain", domainSchema);

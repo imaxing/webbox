@@ -1,16 +1,13 @@
 "use client";
 
 import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
-import { AntInput, AntSelect, AntButton, Label } from "@/components";
+import { AntInput, AntSelect, Label } from "@/components";
 import {
   Domain,
   DomainFormData,
   DomainStatus,
-  RouteTemplateMapping,
 } from "@/api/domain";
-import api from "@/api";
 import { useDict } from "@/hooks";
-import * as LucideIcons from "lucide-react";
 
 export interface DomainFormProps {
   initialData?: Domain;
@@ -22,6 +19,10 @@ export interface DomainFormProps {
 export interface DomainFormRef {
   submit: () => Promise<void>;
   cancel: () => void;
+}
+
+function normalize_domain(input: string) {
+  return input.trim().replace(/^https?:\/\//i, "").replace(/\/+$/, "");
 }
 
 // 状态选项
@@ -43,17 +44,10 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
       email: "",
       project_group: "",
       status: "active",
-      routes: [],
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [submitting, setSubmitting] = useState(false);
     const [projectOptions, setProjectOptions] = useState<ProjectOption[]>([]);
-    const [routeOptions, setRouteOptions] = useState<
-      Array<{ value: string; label: string }>
-    >([]);
-    const [templateOptions, setTemplateOptions] = useState<
-      Array<{ value: string; label: string }>
-    >([]);
 
     // 加载项目组选项
     useEffect(() => {
@@ -69,47 +63,6 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
       loadProjects();
     }, []);
 
-    // 加载路由和模板选项
-    useEffect(() => {
-      const loadOptions = async () => {
-        try {
-          const [routesRes, templatesRes] = await Promise.all([
-            api.route.list({ limit: 10000 }),
-            api.template.custom.list({ limit: 10000 }),
-          ]);
-
-          const routes = routesRes.data || [];
-          const templates = templatesRes.data || [];
-
-          // 去重：基于 _id
-          const uniqueRoutes = Array.from(
-            new Map(routes.map((r: any) => [r._id, r])).values()
-          );
-          setRouteOptions(
-            uniqueRoutes.map((r: any) => ({
-              value: r._id,
-              label: `${r.pattern} (${dicts.map.routeType[r.type] || r.type})`,
-            }))
-          );
-
-          // 去重：基于 _id
-          const uniqueTemplates = Array.from(
-            new Map(templates.map((t: any) => [t._id, t])).values()
-          );
-          setTemplateOptions(
-            uniqueTemplates.map((t: any) => ({
-              value: t._id,
-              label: t.name || "未命名模板",
-            }))
-          );
-        } catch (error) {
-          console.error("加载路由和模板选项失败:", error);
-        }
-      };
-
-      loadOptions();
-    }, []);
-
     useEffect(() => {
       if (initialData) {
         setFormData({
@@ -118,7 +71,6 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           email: initialData.email || "",
           project_group: initialData.project_group || "",
           status: initialData.status || "active",
-          routes: initialData.routes || [],
         });
       } else {
         setFormData({
@@ -127,7 +79,6 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           email: "",
           project_group: "",
           status: "active",
-          routes: [],
         });
       }
       setErrors({});
@@ -145,43 +96,21 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
       }
     };
 
-    // 添加路由-模板映射
-    const handleAddRouteMapping = () => {
-      setFormData((prev) => ({
-        ...prev,
-        routes: [...(prev.routes || []), { route: "", template: "" }],
-      }));
-    };
-
-    // 删除路由-模板映射
-    const handleRemoveRouteMapping = (index: number) => {
-      setFormData((prev) => ({
-        ...prev,
-        routes: (prev.routes || []).filter((_, i) => i !== index),
-      }));
-    };
-
-    // 更新路由-模板映射
-    const handleUpdateRouteMapping = (
-      index: number,
-      field: "route" | "template",
-      value: string
-    ) => {
-      setFormData((prev) => ({
-        ...prev,
-        routes: (prev.routes || []).map((mapping, i) =>
-          i === index ? { ...mapping, [field]: value } : mapping
-        ),
-      }));
-    };
-
     const validateForm = (): boolean => {
       const newErrors: Record<string, string> = {};
 
-      if (!formData.domain.trim()) {
-        newErrors.domain = "请填写完整域名";
-      } else if (!/^https?:\/\/.+/.test(formData.domain)) {
-        newErrors.domain = "域名格式不正确，需包含协议(http/https)";
+      const raw_domain = formData.domain.trim();
+      if (/^https?:\/\//i.test(raw_domain)) {
+        newErrors.domain = "域名不允许包含协议(http/https)";
+      }
+
+      const normalized_domain = normalize_domain(formData.domain);
+      if (!normalized_domain) {
+        newErrors.domain = "请填写域名";
+      } else if (normalized_domain.includes("/")) {
+        newErrors.domain = "域名不应包含路径";
+      } else if (!/^[a-z0-9.-]+(:\d+)?$/i.test(normalized_domain)) {
+        newErrors.domain = "域名格式不正确";
       }
 
       if (!formData.app_name.trim()) {
@@ -209,14 +138,10 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
 
       setSubmitting(true);
       try {
-        // 过滤掉空的路由-模板映射
-        const routes = (formData.routes || []).filter(
-          (mapping) => mapping.route && mapping.template
-        );
-
+        const normalized_domain = normalize_domain(formData.domain);
         const submitData: DomainFormData = {
           ...formData,
-          routes,
+          domain: normalized_domain,
         };
 
         await onSubmit(submitData);
@@ -251,14 +176,14 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
             type="text"
             value={formData.domain}
             onChange={(e) => handleInputChange("domain", e.target.value)}
-            placeholder="https://example.com 或 http://localhost:3000"
+            placeholder="example.com 或 localhost:3000"
             status={errors.domain ? "error" : undefined}
           />
           {errors.domain && (
             <p className="text-xs text-red-500">{errors.domain}</p>
           )}
           <p className="text-xs text-muted-foreground">
-            完整域名含协议，如: https://blaze.com 或 http://localhost:3000
+            仅填写域名或 host:port，不包含 http/https
           </p>
         </div>
 
@@ -339,86 +264,6 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           {errors.status && (
             <p className="text-xs text-red-500">{errors.status}</p>
           )}
-        </div>
-
-        {/* 路由-模板映射 */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <Label>路由-模板映射（可选）</Label>
-            <AntButton
-              type="button"
-              onClick={handleAddRouteMapping}
-              type="default"
-              size="small"
-              icon={<LucideIcons.Plus className="h-4 w-4" />}
-            >
-              添加映射
-            </AntButton>
-          </div>
-
-          {(formData.routes || []).length > 0 && (
-            <div className="space-y-3 border rounded-md p-3 bg-muted/30">
-              {(formData.routes || []).map((mapping, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-2 bg-background p-3 rounded-md border"
-                >
-                  <div className="flex-1 space-y-2">
-                    {/* 路由选择 */}
-                    <div>
-                      <Label className="text-xs">路由</Label>
-                      <AntSelect
-                        value={mapping.route}
-                        onChange={(value) =>
-                          handleUpdateRouteMapping(
-                            index,
-                            "route",
-                            String(value)
-                          )
-                        }
-                        placeholder="请选择路由"
-                        options={routeOptions}
-                      />
-                    </div>
-
-                    {/* 模板选择 */}
-                    <div>
-                      <Label className="text-xs">模板</Label>
-                      <AntSelect
-                        value={mapping.template}
-                        onChange={(value) =>
-                          handleUpdateRouteMapping(
-                            index,
-                            "template",
-                            String(value)
-                          )
-                        }
-                        placeholder="请选择模板"
-                        options={templateOptions}
-                      />
-                    </div>
-                  </div>
-
-                  {/* 删除按钮 */}
-                  <AntButton
-                    type="button"
-                    onClick={() => handleRemoveRouteMapping(index)}
-                    danger
-                    shape="circle"
-                    size="small"
-                    className="h-9 w-9 p-0"
-                    title="删除映射"
-                  >
-                    <LucideIcons.Trash2 className="h-4 w-4" />
-                  </AntButton>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <p className="text-xs text-muted-foreground">
-            配置域名下路由与模板的关联关系，用于生成完整的访问地址
-          </p>
         </div>
       </div>
     );

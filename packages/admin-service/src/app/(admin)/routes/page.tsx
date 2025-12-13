@@ -88,18 +88,12 @@ export default function RouteManagementPage() {
       dataIndex: "uuid",
       key: "uuid",
       width: 280,
-      render: (value) => (
-        <span className="font-mono text-xs text-gray-600">{value || "-"}</span>
-      ),
     },
     {
       title: "路由模式",
       dataIndex: "pattern",
       key: "pattern",
       width: 220,
-      render: (value) => (
-        <span className="font-mono font-medium text-sm">{value}</span>
-      ),
     },
     {
       title: "匹配类型",
@@ -117,22 +111,6 @@ export default function RouteManagementPage() {
       dataIndex: "priority",
       key: "priority",
       width: 80,
-      render: (value) => {
-        const priority = value || 0;
-        const bgColor =
-          priority > 50
-            ? "bg-red-100 text-red-800"
-            : priority > 20
-            ? "bg-yellow-100 text-yellow-800"
-            : "bg-gray-100 text-gray-800";
-        return (
-          <span
-            className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${bgColor}`}
-          >
-            {priority}
-          </span>
-        );
-      },
     },
     {
       title: "状态",
@@ -153,18 +131,12 @@ export default function RouteManagementPage() {
       title: "描述",
       dataIndex: "description",
       key: "description",
-      render: (value) => (
-        <span className="text-sm text-gray-600">{value || "-"}</span>
-      ),
     },
     {
       title: "创建时间",
       dataIndex: "createdAt",
       key: "createdAt",
       width: 180,
-      render: (value) => (
-        <span className="text-sm text-gray-600">{value || "-"}</span>
-      ),
     },
     {
       title: "操作",

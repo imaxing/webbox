@@ -137,24 +137,11 @@ export default function DomainManagementPage() {
       dataIndex: "uuid",
       key: "uuid",
       width: 280,
-      render: (value) => (
-        <span className="font-mono text-xs text-gray-600">{value || "-"}</span>
-      ),
     },
     {
       title: "域名",
       dataIndex: "domain",
       key: "domain",
-      render: (value) => (
-        <a
-          href={value}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-mono text-sm text-blue-600 hover:text-blue-700 hover:underline"
-        >
-          {value}
-        </a>
-      ),
     },
     {
       title: "应用名称",
@@ -167,23 +154,12 @@ export default function DomainManagementPage() {
       dataIndex: "project_group",
       key: "project_group",
       width: 120,
-      render: (value) => (
-        <span className="text-sm text-gray-700">{value || "-"}</span>
-      ),
     },
     {
       title: "联系邮箱",
       dataIndex: "email",
       key: "email",
       width: 200,
-      render: (value) => (
-        <a
-          href={`mailto:${value}`}
-          className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
-        >
-          {value}
-        </a>
-      ),
     },
     {
       title: "状态",
@@ -207,9 +183,6 @@ export default function DomainManagementPage() {
       dataIndex: "createdAt",
       key: "createdAt",
       width: 180,
-      render: (value) => (
-        <span className="text-sm text-gray-600">{value || "-"}</span>
-      ),
     },
     {
       title: "操作",

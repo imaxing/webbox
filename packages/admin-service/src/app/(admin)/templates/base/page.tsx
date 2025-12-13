@@ -12,20 +12,19 @@ import { useTableData, usePreview, useDict } from "@/hooks";
 
 export default function BaseTemplateListPage() {
   const dicts = useDict();
+  const preview = usePreview();
   const { data, loading, pagination, loadData, refresh } =
     useTableData<BaseTemplate>({
       fetchData: api.template.base.list,
       initialPageSize: 20,
     });
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
-  const preview = usePreview();
-
   // 新增基础模板
   const handleCreate = () => {
     createDialog({
       title: "新增基础模板",
       width: 750,
+      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
       component: (
         <BaseTemplateForm
           isEdit={false}
@@ -36,7 +35,6 @@ export default function BaseTemplateListPage() {
           }}
         />
       ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
     });
   };
 
@@ -45,6 +43,7 @@ export default function BaseTemplateListPage() {
     createDialog({
       title: "编辑基础模板",
       width: 750,
+      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
       component: (
         <BaseTemplateForm
           initialData={template}
@@ -58,13 +57,13 @@ export default function BaseTemplateListPage() {
           }}
         />
       ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
     });
   };
 
   // HTML预览
   const handlePreview = (row: BaseTemplate) => {
-    let content = row.content || "<p>暂无内容</p>";
+    if (!row.content) return;
+    let content = row.content;
 
     // 替换变量为默认值或示例值
     if (row.variables) {
@@ -76,7 +75,7 @@ export default function BaseTemplateListPage() {
 
       if (vars && vars.length > 0) {
         vars.forEach((variable: any) => {
-          const value = variable.default_value || `[示例${variable.name}]`;
+          const value = variable.default_value || "";
           // 支持两种格式：{{变量名}} 和 {变量名}
           const placeholder1 = `{{${variable.name}}}`;
           const placeholder2 = `{${variable.name}}`;
@@ -99,22 +98,8 @@ export default function BaseTemplateListPage() {
 
   // 表格列配置
   const columns: AntTableColumn<BaseTemplate>[] = [
-    {
-      title: "UUID",
-      dataIndex: "uuid",
-      key: "uuid",
-      width: 280,
-      render: (value) => (
-        <span className="font-mono text-xs text-gray-600 dark:text-gray-400">
-          {value || "-"}
-        </span>
-      ),
-    },
-    {
-      title: "模板名称",
-      dataIndex: "name",
-      key: "name",
-    },
+    { title: "UUID", dataIndex: "uuid", key: "uuid", width: 280 },
+    { title: "模板名称", dataIndex: "name", key: "name" },
     {
       title: "分类",
       dataIndex: "category",
@@ -137,17 +122,7 @@ export default function BaseTemplateListPage() {
         </span>
       ),
     },
-    {
-      title: "创建时间",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      width: 180,
-      render: (value) => (
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          {value || "-"}
-        </span>
-      ),
-    },
+    { title: "创建时间", dataIndex: "createdAt", key: "createdAt", width: 180 },
     {
       title: "操作",
       key: "action",

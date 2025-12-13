@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { AntTable, AntButton, Modal, type AntTableColumn } from "@/components";
+import { AntTable, AntButton, type AntTableColumn } from "@/components";
 import { TableActions } from "@/components";
 import { toast } from "@/lib/toast";
 import { createDialog } from "@/lib/dialog.dynamic";
@@ -12,20 +11,19 @@ import { useTableData, usePreview, useDict } from "@/hooks";
 
 export default function CustomTemplateListPage() {
   const dicts = useDict();
+  const preview = usePreview();
   const { data, loading, pagination, loadData, refresh } =
     useTableData<CustomTemplate>({
       fetchData: api.template.custom.list,
       initialPageSize: 20,
     });
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
-  const preview = usePreview();
-
   // 新增自定义模板
   const handleCreate = () => {
     createDialog({
       title: "新增自定义模板",
       width: 700,
+      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
       component: (
         <CustomTemplateForm
           isEdit={false}
@@ -36,7 +34,6 @@ export default function CustomTemplateListPage() {
           }}
         />
       ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
     });
   };
 
@@ -45,6 +42,7 @@ export default function CustomTemplateListPage() {
     createDialog({
       title: "编辑自定义模板",
       width: 700,
+      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
       component: (
         <CustomTemplateForm
           initialData={template}
@@ -58,18 +56,13 @@ export default function CustomTemplateListPage() {
           }}
         />
       ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
     });
   };
 
   // HTML预览
   const handlePreview = (row: CustomTemplate) => {
-    let content = row.content || "<p>暂无内容</p>";
-
-    console.log("[预览] 原始数据:", {
-      content: content.substring(0, 200),
-      variables: row.variables,
-    });
+    if (!row.content) return;
+    let content = row.content;
 
     // 替换变量为实际配置的值
     if (row.variables) {
@@ -114,23 +107,7 @@ export default function CustomTemplateListPage() {
 
   // 表格列配置
   const columns: AntTableColumn<CustomTemplate>[] = [
-    {
-      title: "模板名称",
-      dataIndex: "name",
-      key: "name",
-      width: 200,
-    },
-    {
-      title: "基础模板",
-      dataIndex: "base_template_id",
-      key: "base_template_id",
-      width: 180,
-      render: (value) => (
-        <span className="font-mono text-xs text-gray-600 dark:text-gray-400">
-          {value || "-"}
-        </span>
-      ),
-    },
+    { title: "模板名称", dataIndex: "name", key: "name", width: 200 },
     {
       title: "变量数量",
       dataIndex: "variables",
@@ -175,22 +152,12 @@ export default function CustomTemplateListPage() {
       dataIndex: "version",
       key: "version",
       width: 80,
-      render: (value) => (
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          v{value || 1}
-        </span>
-      ),
     },
     {
       title: "创建时间",
       dataIndex: "createdAt",
       key: "createdAt",
       width: 180,
-      render: (value) => (
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          {value || "-"}
-        </span>
-      ),
     },
     {
       title: "操作",

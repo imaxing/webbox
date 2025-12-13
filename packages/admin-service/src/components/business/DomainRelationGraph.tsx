@@ -17,7 +17,6 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import api from "@/api";
-import { useDict } from "@/hooks";
 
 interface RouteData {
   _id?: string;
@@ -54,7 +53,7 @@ const DomainNode = ({ data }: any) => (
 const TemplateNode = ({ data }: any) => {
   const handleClick = () => {
     if (data.url) {
-      window.open(data.url, '_blank', 'noopener,noreferrer');
+      window.open(data.url, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -62,7 +61,7 @@ const TemplateNode = ({ data }: any) => {
     <div
       className="bg-green-50 dark:bg-green-900/20 border-2 border-green-500 dark:border-green-600 rounded-lg px-4 py-2.5 shadow-md min-w-[180px] cursor-pointer hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors"
       onClick={handleClick}
-      title={data.url ? `点击打开: ${data.url}` : ''}
+      title={data.url ? `点击打开: ${data.url}` : ""}
     >
       <Handle type="target" position={Position.Left} />
       <div className="text-sm text-green-800 dark:text-green-300 font-medium">
@@ -95,7 +94,6 @@ const nodeTypes = {
 };
 
 export default function DomainRelationGraph() {
-  const dicts = useDict();
   const [data, setData] = useState<DomainData[]>([]);
   const [loading, setLoading] = useState(true);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -109,7 +107,7 @@ export default function DomainRelationGraph() {
       const domainsRes = await api.domain.list({ limit: 1000 });
       const domains = domainsRes.data || [];
 
-      console.log('[DomainRelationGraph] 查询到的域名列表:', domains);
+      console.log("[DomainRelationGraph] 查询到的域名列表:", domains);
 
       // 2. 对每个域名，调用 relations 接口获取关联的路由和模板详情
       const domainRelationsPromises = domains.map(async (domain: any) => {
@@ -117,16 +115,21 @@ export default function DomainRelationGraph() {
           const relationsRes = await api.domain.getRelations(domain._id);
           const { routes = [], templates = [] } = relationsRes || {};
 
-          console.log(`[DomainRelationGraph] 域名 ${domain.domain} 的关联数据:`, {
-            原始响应: relationsRes,
-            routes,
-            templates,
-            domainRoutes: domain.routes
-          });
+          console.log(
+            `[DomainRelationGraph] 域名 ${domain.domain} 的关联数据:`,
+            {
+              原始响应: relationsRes,
+              routes,
+              templates,
+              domainRoutes: domain.routes,
+            }
+          );
 
           // 创建路由和模板的 ID 映射
           const routeMap = new Map(routes.map((r: any) => [String(r._id), r]));
-          const templateMap = new Map(templates.map((t: any) => [String(t._id), t]));
+          const templateMap = new Map(
+            templates.map((t: any) => [String(t._id), t])
+          );
 
           // 构建包含详情的路由-模板映射
           return {
@@ -140,7 +143,10 @@ export default function DomainRelationGraph() {
             })),
           };
         } catch (error) {
-          console.error(`[DomainRelationGraph] 查询域名 ${domain.domain} 关联数据失败:`, error);
+          console.error(
+            `[DomainRelationGraph] 查询域名 ${domain.domain} 关联数据失败:`,
+            error
+          );
           return {
             domain: domain.domain,
             app_name: domain.app_name || "",
@@ -152,7 +158,7 @@ export default function DomainRelationGraph() {
       // 3. 等待所有域名的关联数据查询完成
       const finalData = await Promise.all(domainRelationsPromises);
 
-      console.log('[DomainRelationGraph] 最终拼接的数据:', finalData);
+      console.log("[DomainRelationGraph] 最终拼接的数据:", finalData);
 
       setData(finalData);
     } catch (error) {
@@ -204,80 +210,84 @@ export default function DomainRelationGraph() {
       let routeY = currentY;
 
       // 2. 为该域名的每个路由-模板映射创建独立的节点和边
-      (domainData.routes || []).forEach((mapping: any, mappingIndex: number) => {
-        const { route: routeId, template: templateId, routeData, templateData } = mapping;
+      (domainData.routes || []).forEach(
+        (mapping: any, mappingIndex: number) => {
+          const {
+            route: routeId,
+            template: templateId,
+            routeData,
+            templateData,
+          } = mapping;
 
-        // 2.1 创建该域名专属的路由节点
-        const routeNodeId = `domain-${domainIndex}-route-${mappingIndex}`;
-        newNodes.push({
-          id: routeNodeId,
-          type: "route",
-          position: { x: routeX, y: routeY },
-          data: {
-            label: routeData?.pattern || routeId,
-          },
-        });
+          // 2.1 创建该域名专属的路由节点
+          const routeNodeId = `domain-${domainIndex}-route-${mappingIndex}`;
+          newNodes.push({
+            id: routeNodeId,
+            type: "route",
+            position: { x: routeX, y: routeY },
+            data: {
+              label: routeData?.pattern || routeId,
+            },
+          });
 
-        // 2.2 计算完整 URL
-        const baseUrl = domainData.domain.replace(/\/$/, "");
-        const pattern = routeData?.pattern || "";
-        let fullUrl = "";
+          // 2.2 计算完整 URL
+          const baseUrl = domainData.domain.replace(/\/$/, "");
+          const pattern = routeData?.pattern || "";
+          let fullUrl = "";
 
-        if (pattern) {
-          let path = pattern;
-          // 处理通配符和正则
-          if (routeData?.type === "wildcard" && path.includes("*")) {
-            path = path.replace("*", "example");
-          } else if (routeData?.type === "regex") {
-            path = path.replace(/[\^$.*+?()[\]{}|\\]/g, "");
+          if (pattern) {
+            let path = pattern;
+            // 处理通配符和正则
+            if (routeData?.type === "wildcard" && path.includes("*")) {
+              path = path.replace("*", "example");
+            } else if (routeData?.type === "regex") {
+              path = path.replace(/[\^$.*+?()[\]{}|\\]/g, "");
+            }
+
+            const finalPath = path.startsWith("/") ? path : `/${path}`;
+            fullUrl = `${baseUrl}${finalPath}`;
           }
 
-          const finalPath = path.startsWith("/") ? path : `/${path}`;
-          fullUrl = `${baseUrl}${finalPath}`;
+          // 2.3 创建该域名专属的模板节点
+          const templateNodeId = `domain-${domainIndex}-template-${mappingIndex}`;
+          newNodes.push({
+            id: templateNodeId,
+            type: "template",
+            position: { x: templateX, y: routeY },
+            data: {
+              label: templateData?.name || templateId,
+              url: fullUrl,
+            },
+          });
+
+          // 2.4 创建边：域名 -> 路由
+          newEdges.push({
+            id: `${domainNodeId}-${routeNodeId}`,
+            source: domainNodeId,
+            target: routeNodeId,
+            type: "smoothstep",
+            animated: true,
+            style: { stroke: "#a855f7", strokeWidth: 2 },
+            markerEnd: { type: MarkerType.ArrowClosed, color: "#a855f7" },
+          });
+
+          // 2.5 创建边：路由 -> 模板
+          newEdges.push({
+            id: `${routeNodeId}-${templateNodeId}`,
+            source: routeNodeId,
+            target: templateNodeId,
+            type: "smoothstep",
+            animated: true,
+            style: { stroke: "#f97316", strokeWidth: 2 },
+            markerEnd: { type: MarkerType.ArrowClosed, color: "#f97316" },
+          });
+
+          routeY += nodeSpacing;
         }
-
-        // 2.3 创建该域名专属的模板节点
-        const templateNodeId = `domain-${domainIndex}-template-${mappingIndex}`;
-        newNodes.push({
-          id: templateNodeId,
-          type: "template",
-          position: { x: templateX, y: routeY },
-          data: {
-            label: templateData?.name || templateId,
-            url: fullUrl,
-          },
-        });
-
-        // 2.4 创建边：域名 -> 路由
-        newEdges.push({
-          id: `${domainNodeId}-${routeNodeId}`,
-          source: domainNodeId,
-          target: routeNodeId,
-          type: "smoothstep",
-          animated: true,
-          style: { stroke: "#a855f7", strokeWidth: 2 },
-          markerEnd: { type: MarkerType.ArrowClosed, color: "#a855f7" },
-        });
-
-        // 2.5 创建边：路由 -> 模板
-        newEdges.push({
-          id: `${routeNodeId}-${templateNodeId}`,
-          source: routeNodeId,
-          target: templateNodeId,
-          type: "smoothstep",
-          animated: true,
-          style: { stroke: "#f97316", strokeWidth: 2 },
-          markerEnd: { type: MarkerType.ArrowClosed, color: "#f97316" },
-        });
-
-        routeY += nodeSpacing;
-      });
+      );
 
       // 3. 更新下一个域名组的起始Y坐标
-      currentY += Math.max(
-        domainGroupSpacing,
-        routesCount * nodeSpacing + 50
-      );
+      currentY += Math.max(domainGroupSpacing, routesCount * nodeSpacing + 50);
     });
 
     setNodes(newNodes);
@@ -397,34 +407,6 @@ export default function DomainRelationGraph() {
             </div>
           </Panel>
         </ReactFlow>
-      </div>
-
-      {/* 统计概览 */}
-      <div className="mt-4 grid grid-cols-3 gap-4">
-        <div className="text-center bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-3">
-          <p className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            {totalStats.domains}
-          </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-            域名总数
-          </p>
-        </div>
-        <div className="text-center bg-green-50 dark:bg-green-900/20 rounded-lg p-3">
-          <p className="text-2xl font-bold text-green-600 dark:text-green-400">
-            {totalStats.templates}
-          </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-            模板总数
-          </p>
-        </div>
-        <div className="text-center bg-orange-50 dark:bg-orange-900/20 rounded-lg p-3">
-          <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-            {totalStats.routes}
-          </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-            路由总数
-          </p>
-        </div>
       </div>
     </div>
   );

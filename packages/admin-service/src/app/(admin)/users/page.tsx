@@ -21,13 +21,12 @@ export default function UserListPage() {
     initialPageSize: 20,
   });
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
-
   // 新增用户
   const handleCreate = () => {
     createDialog({
       title: "新增用户",
       width: 600,
+      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
       component: (
         <UserForm
           isEdit={false}
@@ -38,7 +37,6 @@ export default function UserListPage() {
           }}
         />
       ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
     });
   };
 
@@ -47,6 +45,7 @@ export default function UserListPage() {
     createDialog({
       title: "编辑用户",
       width: 600,
+      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
       component: (
         <UserForm
           initialData={user}
@@ -58,7 +57,6 @@ export default function UserListPage() {
           }}
         />
       ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
     });
   };
 
@@ -76,21 +74,12 @@ export default function UserListPage() {
       dataIndex: "username",
       key: "username",
       width: 150,
-      render: (value) => <span className="font-medium">{value}</span>,
     },
     {
       title: "邮箱",
       dataIndex: "email",
       key: "email",
       width: 220,
-      render: (value) => (
-        <a
-          href={`mailto:${value}`}
-          className="text-blue-600 hover:text-blue-700 hover:underline"
-        >
-          {value}
-        </a>
-      ),
     },
     {
       title: "角色",
@@ -135,22 +124,12 @@ export default function UserListPage() {
       dataIndex: "last_login_at",
       key: "last_login_at",
       width: 180,
-      render: (value) => (
-        <span className="text-sm text-muted-foreground">
-          {value ? new Date(value).toLocaleString("zh-CN") : "-"}
-        </span>
-      ),
     },
     {
       title: "创建时间",
       dataIndex: "createdAt",
       key: "createdAt",
       width: 180,
-      render: (value) => (
-        <span className="text-sm text-muted-foreground">
-          {value ? new Date(value).toLocaleString("zh-CN") : "-"}
-        </span>
-      ),
     },
     {
       title: "操作",

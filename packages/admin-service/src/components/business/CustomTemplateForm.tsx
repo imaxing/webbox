@@ -6,16 +6,7 @@ import {
   AntInput,
   AntTextArea,
   AntSelect,
-  type AntSelectOption,
   Label,
-  Input,
-  Textarea,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Button,
   AntButton,
 } from "@/components";
 import {
@@ -277,13 +268,13 @@ const CustomTemplateForm = forwardRef<
         <Label htmlFor="name">
           模板名称 <span className="text-red-500">*</span>
         </Label>
-        <Input
+        <AntInput
           id="name"
           type="text"
           value={formData.name}
           onChange={(e) => handleInputChange("name", e.target.value)}
           placeholder="例如: Blaze隐私政策"
-          className={errors.name ? "border-red-500" : ""}
+          status={errors.name ? "error" : undefined}
         />
         {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
         <p className="text-xs text-muted-foreground">定制模板的名称</p>
@@ -294,27 +285,13 @@ const CustomTemplateForm = forwardRef<
         <Label htmlFor="base_template">
           基础模板 <span className="text-red-500">*</span>
         </Label>
-        <Select
+        <AntSelect
           value={formData.base_template_id}
-          onValueChange={handleBaseTemplateChange}
+          onChange={(value) => handleBaseTemplateChange(String(value))}
           disabled={loadingOptions}
-        >
-          <SelectTrigger
-            id="base_template"
-            className={
-              errors.base_template_id ? "w-full border-red-500" : "w-full"
-            }
-          >
-            <SelectValue placeholder="请选择基础模板" />
-          </SelectTrigger>
-          <SelectContent>
-            {baseTemplateOptions.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          placeholder="请选择基础模板"
+          options={baseTemplateOptions}
+        />
         {errors.base_template_id && (
           <p className="text-xs text-red-500">{errors.base_template_id}</p>
         )}
@@ -325,15 +302,15 @@ const CustomTemplateForm = forwardRef<
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <Label>变量配置</Label>
-          <Button
+          <AntButton
             type="button"
-            size="sm"
-            variant="outline"
+            type="default"
+            size="small"
             onClick={() => handleAddVariable()}
+            icon={<Plus className="h-3 w-3" />}
           >
-            <Plus className="h-3 w-3 mr-1" />
             添加变量
-          </Button>
+          </AntButton>
         </div>
 
         {errors.variables && (
@@ -388,7 +365,7 @@ const CustomTemplateForm = forwardRef<
                       <Label htmlFor={`var-name-${index}`} className="text-xs">
                         名称 <span className="text-red-500">*</span>
                       </Label>
-                      <Input
+                      <AntInput
                         id={`var-name-${index}`}
                         type="text"
                         value={variable.name}
@@ -414,7 +391,7 @@ const CustomTemplateForm = forwardRef<
                           <span className="text-red-500">*</span>
                         )}
                       </Label>
-                      <Input
+                      <AntInput
                         id={`var-value-${index}`}
                         type="text"
                         value={variable.value}
@@ -453,15 +430,15 @@ const CustomTemplateForm = forwardRef<
                     基础模板变量 "{missingVar.name}" 尚未配置
                     {missingVar.required && " (必填)"}
                   </span>
-                  <Button
+                  <AntButton
                     type="button"
-                    size="sm"
-                    variant="ghost"
+                    type="text"
+                    size="small"
                     onClick={() => handleAddVariable(missingVar.name)}
                     className="h-6 text-xs"
                   >
                     添加
-                  </Button>
+                  </AntButton>
                 </div>
               ))}
           </div>
@@ -491,33 +468,23 @@ const CustomTemplateForm = forwardRef<
       {/* 状态 */}
       <div className="space-y-2">
         <Label htmlFor="status">状态</Label>
-        <Select
+        <AntSelect
           value={formData.status}
-          onValueChange={(value) =>
+          onChange={(value) =>
             handleInputChange("status", value as CustomTemplateStatus)
           }
-        >
-          <SelectTrigger id="status" className="w-full">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {dicts.options.templateStatus.map((option: any) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          options={dicts.options.templateStatus}
+        />
       </div>
 
       {/* 版本号 */}
       <div className="space-y-2">
         <Label htmlFor="version">版本号</Label>
-        <Input
+        <AntInput
           id="version"
           type="number"
           min={1}
-          value={formData.version}
+          value={String(formData.version)}
           onChange={(e) =>
             handleInputChange("version", parseInt(e.target.value) || 1)
           }

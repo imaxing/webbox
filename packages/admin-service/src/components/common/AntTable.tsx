@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
+import { AntButton } from "@/components/common/AntButton";
 import { cn } from "@/lib/utils";
 
 // 列定义类型
@@ -311,9 +311,9 @@ export function AntTable<T extends Record<string, any>>({
             共 {pagination.total || 0} 条
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
+            <AntButton
+              type="default"
+              size="small"
               disabled={pagination.current === 1}
               onClick={() =>
                 pagination.onChange?.(
@@ -323,15 +323,15 @@ export function AntTable<T extends Record<string, any>>({
               }
             >
               上一页
-            </Button>
+            </AntButton>
             <span className="text-sm">
               第 {pagination.current} /{" "}
               {Math.ceil((pagination.total || 0) / (pagination.pageSize || 10))}{" "}
               页
             </span>
-            <Button
-              variant="outline"
-              size="sm"
+            <AntButton
+              type="default"
+              size="small"
               disabled={
                 pagination.current ===
                 Math.ceil((pagination.total || 0) / (pagination.pageSize || 10))
@@ -344,7 +344,7 @@ export function AntTable<T extends Record<string, any>>({
               }
             >
               下一页
-            </Button>
+            </AntButton>
           </div>
         </div>
       )}

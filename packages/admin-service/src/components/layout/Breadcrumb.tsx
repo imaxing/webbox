@@ -55,8 +55,8 @@ export function Breadcrumb() {
   useEffect(() => {
     const loadMenus = async () => {
       try {
-        const menuConfig = await api.menu.getMenus();
-        const map = buildRouteNameMap(menuConfig.main || []);
+        const menus = await api.menu.getMenus();
+        const map = buildRouteNameMap(menus);
         setRouteNameMap(map);
       } catch (error) {
         console.error("[Breadcrumb] 加载菜单失败:", error);

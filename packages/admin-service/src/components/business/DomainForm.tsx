@@ -1,23 +1,7 @@
 "use client";
 
 import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
-import {
-  FormField,
-  AntInput,
-  AntTextArea,
-  AntSelect,
-  type AntSelectOption,
-  AntButton,
-  Label,
-  Input,
-  Textarea,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Button,
-} from "@/components";
+import { AntInput, AntSelect, AntButton, Label } from "@/components";
 import {
   Domain,
   DomainFormData,
@@ -262,13 +246,13 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           <Label htmlFor="domain">
             域名 <span className="text-red-500">*</span>
           </Label>
-          <Input
+          <AntInput
             id="domain"
             type="text"
             value={formData.domain}
             onChange={(e) => handleInputChange("domain", e.target.value)}
             placeholder="https://example.com 或 http://localhost:3000"
-            className={errors.domain ? "border-red-500" : ""}
+            status={errors.domain ? "error" : undefined}
           />
           {errors.domain && (
             <p className="text-xs text-red-500">{errors.domain}</p>
@@ -283,13 +267,13 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           <Label htmlFor="app_name">
             应用名称 <span className="text-red-500">*</span>
           </Label>
-          <Input
+          <AntInput
             id="app_name"
             type="text"
             value={formData.app_name}
             onChange={(e) => handleInputChange("app_name", e.target.value)}
             placeholder="请输入应用名称"
-            className={errors.app_name ? "border-red-500" : ""}
+            status={errors.app_name ? "error" : undefined}
           />
           {errors.app_name && (
             <p className="text-xs text-red-500">{errors.app_name}</p>
@@ -302,13 +286,13 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           <Label htmlFor="email">
             联系邮箱 <span className="text-red-500">*</span>
           </Label>
-          <Input
+          <AntInput
             id="email"
             type="email"
             value={formData.email}
             onChange={(e) => handleInputChange("email", e.target.value)}
             placeholder="contact@example.com"
-            className={errors.email ? "border-red-500" : ""}
+            status={errors.email ? "error" : undefined}
           />
           {errors.email && (
             <p className="text-xs text-red-500">{errors.email}</p>
@@ -323,26 +307,17 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           <Label htmlFor="project_group">
             项目组 <span className="text-red-500">*</span>
           </Label>
-          <Select
+          <AntSelect
             value={formData.project_group || ""}
-            onValueChange={(value) => handleInputChange("project_group", value)}
-          >
-            <SelectTrigger
-              id="project_group"
-              className={
-                errors.project_group ? "w-full border-red-500" : "w-full"
-              }
-            >
-              <SelectValue placeholder="请选择项目组" />
-            </SelectTrigger>
-            <SelectContent>
-              {projectOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            onChange={(value) =>
+              handleInputChange("project_group", String(value))
+            }
+            placeholder="请选择项目组"
+            options={projectOptions.map((option) => ({
+              value: option.value,
+              label: option.label,
+            }))}
+          />
           {errors.project_group && (
             <p className="text-xs text-red-500">{errors.project_group}</p>
           )}
@@ -354,26 +329,13 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
           <Label htmlFor="status">
             状态 <span className="text-red-500">*</span>
           </Label>
-          <Select
+          <AntSelect
             value={formData.status}
-            onValueChange={(value) =>
+            onChange={(value) =>
               handleInputChange("status", value as DomainStatus)
             }
-          >
-            <SelectTrigger
-              id="status"
-              className={errors.status ? "w-full border-red-500" : "w-full"}
-            >
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {dicts.options.domainStatus.map((option: any) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            options={dicts.options.domainStatus}
+          />
           {errors.status && (
             <p className="text-xs text-red-500">{errors.status}</p>
           )}
@@ -383,16 +345,15 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Label>路由-模板映射（可选）</Label>
-            <Button
+            <AntButton
               type="button"
-              variant="outline"
-              size="sm"
               onClick={handleAddRouteMapping}
-              className="h-8"
+              type="default"
+              size="small"
+              icon={<LucideIcons.Plus className="h-4 w-4" />}
             >
-              <LucideIcons.Plus className="h-4 w-4 mr-1" />
               添加映射
-            </Button>
+            </AntButton>
           </div>
 
           {(formData.routes || []).length > 0 && (
@@ -406,59 +367,50 @@ const DomainForm = forwardRef<DomainFormRef, DomainFormProps>(
                     {/* 路由选择 */}
                     <div>
                       <Label className="text-xs">路由</Label>
-                      <Select
+                      <AntSelect
                         value={mapping.route}
-                        onValueChange={(value) =>
-                          handleUpdateRouteMapping(index, "route", value)
+                        onChange={(value) =>
+                          handleUpdateRouteMapping(
+                            index,
+                            "route",
+                            String(value)
+                          )
                         }
-                      >
-                        <SelectTrigger className="w-full h-9">
-                          <SelectValue placeholder="请选择路由" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {routeOptions.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        placeholder="请选择路由"
+                        options={routeOptions}
+                      />
                     </div>
 
                     {/* 模板选择 */}
                     <div>
                       <Label className="text-xs">模板</Label>
-                      <Select
+                      <AntSelect
                         value={mapping.template}
-                        onValueChange={(value) =>
-                          handleUpdateRouteMapping(index, "template", value)
+                        onChange={(value) =>
+                          handleUpdateRouteMapping(
+                            index,
+                            "template",
+                            String(value)
+                          )
                         }
-                      >
-                        <SelectTrigger className="w-full h-9">
-                          <SelectValue placeholder="请选择模板" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {templateOptions.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        placeholder="请选择模板"
+                        options={templateOptions}
+                      />
                     </div>
                   </div>
 
                   {/* 删除按钮 */}
-                  <Button
+                  <AntButton
                     type="button"
-                    variant="ghost"
-                    size="sm"
                     onClick={() => handleRemoveRouteMapping(index)}
-                    className="h-9 w-9 p-0 text-red-600 hover:text-red-700 hover:bg-red-50"
+                    danger
+                    shape="circle"
+                    size="small"
+                    className="h-9 w-9 p-0"
                     title="删除映射"
                   >
                     <LucideIcons.Trash2 className="h-4 w-4" />
-                  </Button>
+                  </AntButton>
                 </div>
               ))}
             </div>

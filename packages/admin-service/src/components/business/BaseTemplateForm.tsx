@@ -6,17 +6,8 @@ import {
   AntInput,
   AntTextArea,
   AntSelect,
-  type AntSelectOption,
   Checkbox,
   Label,
-  Input,
-  Textarea,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Button,
   AntButton,
 } from "@/components";
 import type {
@@ -206,18 +197,16 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
           <Label htmlFor="name">
             模板名称 <span className="text-red-500">*</span>
           </Label>
-          <Input
+          <AntInput
             id="name"
             type="text"
             value={formData.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
             placeholder="例如: 隐私政策模板"
-            className={errors.name ? "border-red-500" : ""}
+            status={errors.name ? "error" : undefined}
           />
           {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
-          <p className="text-xs text-muted-foreground">
-            基础模板的名称
-          </p>
+          <p className="text-xs text-muted-foreground">基础模板的名称</p>
         </div>
 
         {/* 分类 */}
@@ -225,26 +214,13 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
           <Label htmlFor="category">
             分类 <span className="text-red-500">*</span>
           </Label>
-          <Select
+          <AntSelect
             value={formData.category}
-            onValueChange={(value) =>
+            onChange={(value) =>
               handleInputChange("category", value as TemplateCategory)
             }
-          >
-            <SelectTrigger
-              id="category"
-              className={errors.category ? "w-full border-red-500" : "w-full"}
-            >
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {dicts.options.templateCategory.map((option: any) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            options={dicts.options.templateCategory}
+          />
           {errors.category && (
             <p className="text-xs text-red-500">{errors.category}</p>
           )}
@@ -254,14 +230,9 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Label>变量配置</Label>
-            <Button
-              type="button"
-              size="sm"
-              variant="outline"
-              onClick={handleAddVariable}
-            >
+            <AntButton type="default" size="small" onClick={handleAddVariable}>
               添加变量
-            </Button>
+            </AntButton>
           </div>
 
           {errors.variables && (
@@ -305,7 +276,7 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
                       <Label htmlFor={`var-name-${index}`} className="text-xs">
                         名称 <span className="text-red-500">*</span>
                       </Label>
-                      <Input
+                      <AntInput
                         id={`var-name-${index}`}
                         type="text"
                         value={variable.name}
@@ -322,30 +293,18 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
                       <Label htmlFor={`var-type-${index}`} className="text-xs">
                         类型
                       </Label>
-                      <Select
+                      <AntSelect
                         value={variable.type}
-                        onValueChange={(value) =>
+                        onChange={(value) =>
                           handleUpdateVariable(
                             index,
                             "type",
                             value as VariableType
                           )
                         }
-                      >
-                        <SelectTrigger
-                          id={`var-type-${index}`}
-                          className="h-8 text-sm w-full"
-                        >
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {dicts.options.variableType.map((opt: any) => (
-                            <SelectItem key={opt.value} value={opt.value}>
-                              {opt.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                        size="small"
+                        options={dicts.options.variableType}
+                      />
                     </div>
 
                     {/* 描述 */}
@@ -353,7 +312,7 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
                       <Label htmlFor={`var-desc-${index}`} className="text-xs">
                         描述
                       </Label>
-                      <Input
+                      <AntInput
                         id={`var-desc-${index}`}
                         type="text"
                         value={variable.description}
@@ -413,7 +372,7 @@ const BaseTemplateForm = forwardRef<BaseTemplateFormRef, BaseTemplateFormProps>(
         {/* 描述 */}
         <div className="space-y-2">
           <Label htmlFor="description">描述</Label>
-          <Textarea
+          <AntTextArea
             id="description"
             value={formData.description}
             onChange={(e) => handleInputChange("description", e.target.value)}

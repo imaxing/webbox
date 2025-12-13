@@ -1,7 +1,12 @@
 "use client";
 
-import { AntTable, AntButton, type AntTableColumn } from "@/components";
-import { TableActions } from "@/components";
+import {
+  AntTable,
+  AntButton,
+  type AntTableColumn,
+  TableActions,
+  EnumBadge,
+} from "@/components";
 import { toast } from "@/lib/toast";
 import { createDialog } from "@/lib/dialog.dynamic";
 import { CustomTemplateForm } from "@/components";
@@ -126,25 +131,24 @@ export default function CustomTemplateListPage() {
       key: "status",
       width: 100,
       render: (value) => {
-        let colorClass =
-          "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400";
-        if (value === "active") {
-          colorClass =
-            "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400";
-        } else if (value === "draft") {
-          colorClass =
-            "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400";
-        } else if (value === "archived") {
-          colorClass =
-            "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400";
-        }
-
         return (
-          <span
-            className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${colorClass}`}
-          >
-            {dicts.map.templateStatus[value] || value}
-          </span>
+          <EnumBadge
+            value={value}
+            items={{
+              active: {
+                text: dicts.map.templateStatus.active || "active",
+                variant: "success",
+              },
+              draft: {
+                text: dicts.map.templateStatus.draft || "draft",
+                variant: "warning",
+              },
+              archived: {
+                text: dicts.map.templateStatus.archived || "archived",
+                variant: "error",
+              },
+            }}
+          />
         );
       },
     },

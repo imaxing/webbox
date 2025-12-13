@@ -6,6 +6,7 @@ import {
   AntButton,
   type AntTableColumn,
   TableActions,
+  EnumBadge,
 } from "@/components";
 import { toast } from "@/lib/toast";
 import { createDialog } from "@/lib/dialog.dynamic";
@@ -87,38 +88,54 @@ export default function UserListPage() {
       dataIndex: "role",
       key: "role",
       width: 120,
-      render: (value) => (
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-            value === "admin"
-              ? "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400"
-              : value === "editor"
-              ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
-              : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"
-          }`}
-        >
-          {dicts.map.userRole[value] || value}
-        </span>
-      ),
+      render: (value) => {
+        return (
+          <EnumBadge
+            value={value}
+            items={{
+              admin: {
+                text: dicts.map.userRole.admin || "admin",
+                variant: "purple",
+              },
+              editor: {
+                text: dicts.map.userRole.editor || "editor",
+                variant: "blue",
+              },
+              viewer: {
+                text: dicts.map.userRole.viewer || "viewer",
+                variant: "gray",
+              },
+            }}
+          />
+        );
+      },
     },
     {
       title: "状态",
       dataIndex: "status",
       key: "status",
       width: 100,
-      render: (value) => (
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-            value === "active"
-              ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-              : value === "suspended"
-              ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"
-              : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
-          }`}
-        >
-          {dicts.map.userStatus[value] || value}
-        </span>
-      ),
+      render: (value) => {
+        return (
+          <EnumBadge
+            value={value}
+            items={{
+              active: {
+                text: dicts.map.userStatus.active || "active",
+                variant: "success",
+              },
+              suspended: {
+                text: dicts.map.userStatus.suspended || "suspended",
+                variant: "warning",
+              },
+              inactive: {
+                text: dicts.map.userStatus.inactive || "inactive",
+                variant: "error",
+              },
+            }}
+          />
+        );
+      },
     },
     {
       title: "最后登录时间",

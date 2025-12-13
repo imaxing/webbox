@@ -18,7 +18,7 @@ import { ThemeToggle } from "@/components";
 import { PageTransition } from "@/components";
 import { Breadcrumb } from "@/components";
 import api from "@/api";
-import type { MenuConfig } from "@/api/menu";
+import type { MenuItem } from "@/api/menu";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "@/lib/toast";
 import * as LucideIcons from "lucide-react";
@@ -32,7 +32,7 @@ export default function AdminLayout({
   const router = useRouter();
   const { user, logout, isAuthenticated, loading: authLoading } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [menuConfig, setMenuConfig] = useState<MenuConfig | null>(null);
+  const [menus, setMenus] = useState<MenuItem[]>([]);
   const [menuLoading, setMenuLoading] = useState(true);
 
   // 注意：认证重定向已由 middleware.ts 在服务器端处理
@@ -43,14 +43,14 @@ export default function AdminLayout({
     const loadMenus = async () => {
       try {
         console.log("[AdminLayout] 开始从接口加载菜单");
-        const config = await api.menu.getMenus();
-        console.log("[AdminLayout] 菜单加载成功", config);
-        setMenuConfig(config);
+        const menuList = await api.menu.getMenus();
+        console.log("[AdminLayout] 菜单加载成功", menuList);
+        setMenus(menuList);
       } catch (error) {
         console.error("[AdminLayout] 加载菜单失败:", error);
         toast.error("加载菜单失败");
         // 设置空菜单
-        setMenuConfig({ main: [], others: [] });
+        setMenus([]);
       } finally {
         console.log("[AdminLayout] 菜单加载完成");
         setMenuLoading(false);
@@ -121,17 +121,11 @@ export default function AdminLayout({
             <div className="flex items-center justify-center py-8">
               <LucideIcons.Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
             </div>
-          ) : menuConfig ? (
-            <div className="space-y-6">
-              {/* 主菜单 */}
-              {menuConfig.main && menuConfig.main.length > 0 && (
-                <DynamicMenu
-                  items={menuConfig.main}
-                  sidebarOpen={sidebarOpen}
-                  title="主菜单"
-                />
-              )}
-            </div>
+          ) : menus.length > 0 ? (
+            <DynamicMenu
+              items={menus}
+              sidebarOpen={sidebarOpen}
+            />
           ) : (
             <div className="text-center text-sm text-muted-foreground py-8">
               {sidebarOpen ? "暂无菜单" : "无"}

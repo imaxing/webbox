@@ -6,6 +6,7 @@ import {
   AntButton,
   type AntTableColumn,
   TableActions,
+  StatusBadge,
 } from "@/components";
 import { toast } from "@/lib/toast";
 import { createDialog } from "@/lib/dialog.dynamic";
@@ -102,9 +103,10 @@ export default function RouteManagementPage() {
       key: "type",
       width: 110,
       render: (value) => (
-        <span className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-          {dicts.map.routeType[value] || value}
-        </span>
+        <StatusBadge
+          text={dicts.map.routeType[value] || value}
+          variant="info"
+        />
       ),
     },
     {
@@ -119,13 +121,10 @@ export default function RouteManagementPage() {
       key: "enabled",
       width: 80,
       render: (value) => (
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-            value ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
-          }`}
-        >
-          {value ? "启用" : "禁用"}
-        </span>
+        <StatusBadge
+          text={value ? "启用" : "禁用"}
+          variant={value ? "success" : "error"}
+        />
       ),
     },
     {

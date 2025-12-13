@@ -16,17 +16,11 @@ export interface SubMenuItem {
   new?: boolean;
 }
 
-// 菜单配置类型
-export interface MenuConfig {
-  main: MenuItem[];
-  others: MenuItem[];
-}
-
 /**
  * 获取菜单配置
  */
 export const getMenus = () => {
-  return apiRequest<MenuConfig>({
+  return apiRequest<MenuItem[]>({
     method: "get",
     url: "/admin/menus",
   });

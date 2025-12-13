@@ -38,6 +38,10 @@ export { default as DataTable } from "./common/DataTable";
 export { TableActions } from "./common/TableActions";
 export { FormDialog } from "./common/FormDialog";
 export type { FormDialogProps } from "./common/FormDialog";
+export { StatusBadge } from "./common/StatusBadge";
+export type { StatusBadgeProps, StatusVariant } from "./common/StatusBadge";
+export { EnumBadge } from "./common/EnumBadge";
+export type { EnumBadgeProps, EnumBadgeItem } from "./common/EnumBadge";
 
 // ==================== Business 业务组件 ====================
 // 这些是项目特定的业务组件

@@ -2,12 +2,8 @@
 
 import { useState, useEffect } from "react";
 import {
-  Button,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  AntButton,
+  AntSelect,
   Table,
   TableBody,
   TableCell,
@@ -110,7 +106,9 @@ export default function DomainConfig({
             return {
               route_id: routeId,
               template_id: templateId,
-              templateType: (isBaseTemplate ? "base" : "custom") as TemplateType,
+              templateType: (isBaseTemplate
+                ? "base"
+                : "custom") as TemplateType,
               routeData,
               templateData,
             };
@@ -356,9 +354,9 @@ export default function DomainConfig({
                 {configs.length} 条
               </span>
             </div>
-            <Button size="sm" onClick={handleAddRow}>
+            <AntButton size="small" type="default" onClick={handleAddRow}>
               新增配置
-            </Button>
+            </AntButton>
           </div>
         </div>
 
@@ -404,13 +402,13 @@ export default function DomainConfig({
                       <TableCell className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <div className="flex items-center gap-1 flex-shrink-0">
-                            <Button
+                            <AntButton
                               type="button"
-                              size="sm"
-                              variant={
+                              size="small"
+                              type={
                                 config.templateType === "base"
-                                  ? "default"
-                                  : "outline"
+                                  ? "primary"
+                                  : "default"
                               }
                               onClick={() =>
                                 handleTemplateTypeChange(index, "base")
@@ -418,14 +416,14 @@ export default function DomainConfig({
                               className="h-9 text-xs px-2"
                             >
                               基础
-                            </Button>
-                            <Button
+                            </AntButton>
+                            <AntButton
                               type="button"
-                              size="sm"
-                              variant={
+                              size="small"
+                              type={
                                 config.templateType === "custom"
-                                  ? "default"
-                                  : "outline"
+                                  ? "primary"
+                                  : "default"
                               }
                               onClick={() =>
                                 handleTemplateTypeChange(index, "custom")
@@ -433,65 +431,47 @@ export default function DomainConfig({
                               className="h-9 text-xs px-2"
                             >
                               自定义
-                            </Button>
+                            </AntButton>
                           </div>
-                          <Select
+                          <AntSelect
                             value={config.template_id}
-                            onValueChange={(value) =>
-                              handleTemplateChange(index, value)
+                            onChange={(value) =>
+                              handleTemplateChange(index, String(value))
                             }
-                          >
-                            <SelectTrigger className="flex-1 min-w-[200px]">
-                              <SelectValue placeholder="选择模板" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {getTemplatesByType(config).map((tpl) => (
-                                <SelectItem
-                                  key={tpl._id}
-                                  value={tpl._id!}
-                                  disabled={isTemplateDisabled(
-                                    tpl._id!,
-                                    config
-                                  )}
-                                >
-                                  {tpl.name}
-                                  {config.templateType === "custom" &&
-                                    (tpl as CustomTemplate).status &&
-                                    ` - ${
+                            placeholder="选择模板"
+                            className="flex-1 min-w-[200px]"
+                            options={getTemplatesByType(config).map((tpl) => ({
+                              value: tpl._id!,
+                              label:
+                                config.templateType === "custom" &&
+                                (tpl as CustomTemplate).status
+                                  ? `${tpl.name} - ${
                                       dicts.map.templateStatus[
                                         (tpl as CustomTemplate).status
                                       ]
-                                    }`}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
+                                    }`
+                                  : tpl.name,
+                              disabled: isTemplateDisabled(tpl._id!, config),
+                            }))}
+                          />
                         </div>
                       </TableCell>
                       <TableCell className="px-6 py-4">
-                        <Select
+                        <AntSelect
                           value={config.route_id || ""}
-                          onValueChange={(value) =>
-                            handleRouteChange(index, value)
+                          onChange={(value) =>
+                            handleRouteChange(index, String(value))
                           }
-                        >
-                          <SelectTrigger className="w-full min-w-[200px]">
-                            <SelectValue placeholder="选择路由规则" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {routes.map((route) => (
-                              <SelectItem
-                                key={route._id}
-                                value={route._id!}
-                                disabled={isRouteDisabled(route._id!, config)}
-                              >
-                                {route.pattern} -{" "}
-                                {dicts.map.routeType[route.type]} (优先级{" "}
-                                {route.priority})
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                          placeholder="选择路由规则"
+                          className="w-full min-w-[200px]"
+                          options={routes.map((route) => ({
+                            value: route._id!,
+                            label: `${route.pattern} - ${
+                              dicts.map.routeType[route.type]
+                            } (优先级 ${route.priority})`,
+                            disabled: isRouteDisabled(route._id!, config),
+                          }))}
+                        />
                       </TableCell>
                       <TableCell className="px-6 py-4">
                         <div
@@ -503,15 +483,16 @@ export default function DomainConfig({
                       </TableCell>
                       <TableCell className="px-6 py-4">
                         <div className="flex items-center justify-center gap-1">
-                          <Button
-                            variant="ghost"
-                            size="sm"
+                          <AntButton
+                            type="text"
+                            size="small"
+                            danger
                             onClick={() => handleDeleteRow(index)}
                             className="p-2 text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full transition-colors"
                             title="删除"
                           >
                             <Trash2 className="h-4 w-4" />
-                          </Button>
+                          </AntButton>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -546,12 +527,17 @@ export default function DomainConfig({
             </div>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline" onClick={onClose}>
+            <AntButton type="default" onClick={onClose}>
               取消
-            </Button>
-            <Button onClick={handleSubmit} disabled={submitting}>
+            </AntButton>
+            <AntButton
+              type="primary"
+              onClick={handleSubmit}
+              disabled={submitting}
+              loading={submitting}
+            >
               {submitting ? "保存中..." : "保存所有配置"}
-            </Button>
+            </AntButton>
           </div>
         </div>
       </div>

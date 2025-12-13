@@ -38,6 +38,7 @@ export function AntButton({
   onClick,
   children,
 }: AntButtonProps) {
+  const has_children = React.Children.count(children) > 0;
   // 映射 type 到 shadcn variant
   const getVariant = () => {
     if (danger) return "destructive";
@@ -90,7 +91,9 @@ export function AntButton({
       {loading && (
         <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
       )}
-      {!loading && icon && <span className="mr-2">{icon}</span>}
+      {!loading && icon && (
+        <span className={has_children ? "mr-2" : undefined}>{icon}</span>
+      )}
       {children}
     </ShadcnButton>
   );

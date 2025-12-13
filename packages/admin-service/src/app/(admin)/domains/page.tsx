@@ -7,8 +7,9 @@ import {
   AntSelect,
   type AntTableColumn,
   type AntSelectOption,
+  TableActions,
+  StatusBadge,
 } from "@/components";
-import { TableActions } from "@/components";
 import { toast } from "@/lib/toast";
 import { createDialog } from "@/lib/dialog.dynamic";
 import { DomainForm } from "@/components";
@@ -168,15 +169,10 @@ export default function DomainManagementPage() {
       key: "status",
       width: 100,
       render: (value) => (
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-            value === "active"
-              ? "bg-green-100 text-green-800"
-              : "bg-gray-100 text-gray-800"
-          }`}
-        >
-          {dicts.map.domainStatus[value || "inactive"] || value || "inactive"}
-        </span>
+        <StatusBadge
+          text={dicts.map.domainStatus[value || "inactive"] || value || "inactive"}
+          variant={value === "active" ? "success" : "gray"}
+        />
       ),
     },
     {

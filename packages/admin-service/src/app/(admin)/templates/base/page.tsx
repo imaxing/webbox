@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { AntTable, AntButton, Modal, type AntTableColumn } from "@/components";
-import { TableActions } from "@/components";
+import { AntTable, AntButton, Modal, type AntTableColumn, TableActions, StatusBadge } from "@/components";
 import { toast } from "@/lib/toast";
 import { createDialog } from "@/lib/dialog.dynamic";
 import { BaseTemplateForm } from "@/components";
@@ -107,9 +106,10 @@ export default function BaseTemplateListPage() {
       key: "category",
       width: 120,
       render: (value) => (
-        <span className="inline-flex items-center rounded-full bg-brand-100 px-2.5 py-0.5 text-xs font-medium text-brand-800 dark:bg-brand-900/30 dark:text-brand-400">
-          {dicts.map.templateCategory[value] || value}
-        </span>
+        <StatusBadge
+          text={dicts.map.templateCategory[value] || value}
+          variant="info"
+        />
       ),
     },
     {

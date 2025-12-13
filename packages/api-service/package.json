@@ -6,7 +6,9 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "migrate:domain-routes": "tsx scripts/migrate-domain-routes.ts"
+    "migrate:domain-routes": "tsx scripts/migrate-domain-routes.ts",
+    "clean:templates": "tsx scripts/clean-old-templates.ts",
+    "clean:templates:dry": "tsx scripts/clean-old-templates.ts --dry-run --verbose"
   },
   "dependencies": {
     "@webbox/shared": "*",

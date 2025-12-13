@@ -1,43 +1,64 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-// 路由名称映射配置
-const routeNameMap: Record<string, string> = {
-  // 域名管理
-  domains: "域名管理",
-
-  // 路由管理
-  routes: "路由管理",
-
-  // 模板管理
-  templates: "模板管理",
-  base: "基础模板",
-  custom: "自定义模板",
-
-  // 菜单管理
-  menus: "菜单管理",
-
-  // 用户管理
-  users: "用户管理",
-  profile: "个人资料",
-  settings: "设置",
-
-  // 其他
-  dashboard: "控制台",
-};
+import api from "@/api";
+import type { MenuItem } from "@/api/menu";
 
 interface BreadcrumbItem {
   label: string;
   href?: string;
 }
 
+// 从菜单项递归构建路由名称映射
+function buildRouteNameMap(items: MenuItem[], map: Record<string, string> = {}): Record<string, string> {
+  items.forEach((item) => {
+    if (item.path) {
+      // 提取路径的最后一段作为 key
+      const segments = item.path.split("/").filter(Boolean);
+      const lastSegment = segments[segments.length - 1];
+      if (lastSegment) {
+        map[lastSegment] = item.label;
+      }
+    }
+    if (item.children && item.children.length > 0) {
+      buildRouteNameMap(item.children, map);
+    }
+  });
+  return map;
+}
+
 export function Breadcrumb() {
   const pathname = usePathname();
+  const [routeNameMap, setRouteNameMap] = useState<Record<string, string>>({});
+
+  // 从菜单接口加载路由名称映射
+  useEffect(() => {
+    const loadMenus = async () => {
+      try {
+        const menuConfig = await api.menu.getMenus();
+        const map = buildRouteNameMap(menuConfig.main || []);
+        setRouteNameMap(map);
+      } catch (error) {
+        console.error("[Breadcrumb] 加载菜单失败:", error);
+        // 设置默认映射
+        setRouteNameMap({
+          domains: "域名管理",
+          routes: "路由管理",
+          templates: "模板管理",
+          base: "基础模板",
+          custom: "自定义模板",
+          users: "用户管理",
+          menus: "菜单管理",
+        });
+      }
+    };
+
+    loadMenus();
+  }, []);
 
   const breadcrumbs = useMemo(() => {
     // 过滤掉空字符串并移除 (admin) 路由组
@@ -64,7 +85,7 @@ export function Breadcrumb() {
     });
 
     return items;
-  }, [pathname]);
+  }, [pathname, routeNameMap]);
 
   return (
     <nav className="flex items-center gap-2 text-sm">

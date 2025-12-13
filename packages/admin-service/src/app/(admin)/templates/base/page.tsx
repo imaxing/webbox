@@ -9,6 +9,7 @@ import { BaseTemplateForm } from "@/components";
 import api from "@/api";
 import type { BaseTemplate, BaseTemplateFormData } from "@/api/template";
 import { useTableData, usePreview, useDict } from "@/hooks";
+import { RefreshCw } from "lucide-react";
 
 export default function BaseTemplateListPage() {
   const dicts = useDict();
@@ -153,8 +154,14 @@ export default function BaseTemplateListPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">基础模板</h1>
+      <div className="flex items-center justify-end gap-3">
+        <AntButton
+          icon={<RefreshCw className="h-4 w-4" />}
+          onClick={refresh}
+          title="刷新列表"
+        >
+          刷新
+        </AntButton>
         <AntButton type="primary" onClick={handleCreate}>
           新增基础模板
         </AntButton>

@@ -1,425 +1,331 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { AntTable, AntButton, Modal, type AntTableColumn } from "@/components";
-import { TableActions } from "@/components";
-import { toast } from "@/lib/toast";
-import { createDialog } from "@/lib/dialog.dynamic";
-import { BaseTemplateForm, CustomTemplateForm } from "@/components";
+import React, { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { Card, AntButton } from "@/components";
 import api from "@/api";
-import type {
-  BaseTemplate,
-  CustomTemplate,
-  BaseTemplateFormData,
-  CustomTemplateFormData,
-} from "@/api/template";
-import { useTableData, usePreview, useDict } from "@/hooks";
+import type { BaseTemplate, CustomTemplate } from "@/api/template";
+import { useDict } from "@/hooks";
+import {
+  FileText,
+  Plus,
+  Copy,
+  Edit,
+  Eye,
+  ArrowRight,
+  TrendingUp,
+  Clock,
+  AlertCircle,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
-// Tab 类型
-type TabType = "base" | "custom";
-
-export default function TemplateManagementPage() {
-  const [activeTab, setActiveTab] = useState<TabType>("base");
+export default function TemplateOverviewPage() {
+  const router = useRouter();
   const dicts = useDict();
+  const [loading, setLoading] = useState(true);
+  const [baseTemplates, setBaseTemplates] = useState<BaseTemplate[]>([]);
+  const [customTemplates, setCustomTemplates] = useState<CustomTemplate[]>([]);
 
-  // 基础模板数据
-  const {
-    data: baseData,
-    loading: baseLoading,
-    pagination: basePagination,
-    loadData: loadBaseData,
-    refresh: refreshBase,
-  } = useTableData<BaseTemplate>({
-    fetchData: api.template.base.list,
-    initialPageSize: 20,
-  });
-
-  // 自定义模板数据
-  const {
-    data: customData,
-    loading: customLoading,
-    pagination: customPagination,
-    loadData: loadCustomData,
-    refresh: refreshCustom,
-  } = useTableData<CustomTemplate>({
-    fetchData: api.template.custom.list,
-    initialPageSize: 20,
-  });
-
-  const preview = usePreview();
-
+  // 加载数据
   useEffect(() => {
-    if (activeTab === "base") {
-      refreshBase();
-    } else {
-      refreshCustom();
-    }
-  }, [activeTab]);
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const [baseRes, customRes] = await Promise.all([
+          api.template.base.list({ limit: 100 }),
+          api.template.custom.list({ limit: 100 }),
+        ]);
+        setBaseTemplates(baseRes.data || []);
+        setCustomTemplates(customRes.data || []);
+      } catch (error) {
+        console.error("加载模板数据失败:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // ==================== 基础模板操作 ====================
+    loadData();
+  }, []);
 
-  // 新增基础模板
-  const handleCreateBase = () => {
-    createDialog({
-      title: "新增基础模板",
-      width: 750,
-      component: (
-        <BaseTemplateForm
-          isEdit={false}
-          onSubmit={async (formData: BaseTemplateFormData) => {
-            await api.template.base.create(formData);
-            toast.success("创建成功");
-            refreshBase();
-          }}
-        />
-      ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
-    });
-  };
+  // 统计数据
+  const stats = useMemo(() => {
+    // 基础模板按分类统计
+    const baseByCategoryCount = baseTemplates.reduce((acc, t) => {
+      acc[t.category] = (acc[t.category] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
 
-  // 编辑基础模板
-  const handleEditBase = (template: BaseTemplate) => {
-    createDialog({
-      title: "编辑基础模板",
-      width: 750,
-      component: (
-        <BaseTemplateForm
-          initialData={template}
-          isEdit={true}
-          onSubmit={async (formData: BaseTemplateFormData) => {
-            if (template._id) {
-              await api.template.base.update(template._id, formData);
-              toast.success("更新成功");
-              refreshBase();
-            }
-          }}
-        />
-      ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
-    });
-  };
+    // 自定义模板按状态统计
+    const customByStatus = customTemplates.reduce((acc, t) => {
+      acc[t.status] = (acc[t.status] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
 
-  // 提交基础模板表单
+    return {
+      baseTotal: baseTemplates.length,
+      customTotal: customTemplates.length,
+      baseByCategoryCount,
+      customByStatus,
+      draftCount: customByStatus.draft || 0,
+      activeCount: customByStatus.active || 0,
+      archivedCount: customByStatus.archived || 0,
+    };
+  }, [baseTemplates, customTemplates]);
 
-  // HTML预览（基础模板）
-  const handleBasePreview = (row: BaseTemplate) => {
-    let content = row.content || "<p>暂无内容</p>";
-    if (row.variables && row.variables.length > 0) {
-      row.variables.forEach((variable) => {
-        const regex = new RegExp(`{${variable.name}}`, "g");
-        content = content.replace(regex, variable.default_value || "");
-      });
-    }
-    preview(content);
-  };
+  // 最近更新的模板
+  const recentTemplates = useMemo(() => {
+    const allTemplates = [
+      ...baseTemplates.map((t) => ({ ...t, type: "base" as const })),
+      ...customTemplates.map((t) => ({ ...t, type: "custom" as const })),
+    ];
 
-  // 删除基础模板
-  const handleDeleteBase = async (row: BaseTemplate) => {
-    if (!row._id) return;
-    await api.template.base.delete(row._id);
-    toast.success("删除成功");
-    refreshBase();
-  };
+    return allTemplates
+      .sort((a, b) => {
+        const dateA = new Date(a.updatedAt || a.createdAt || 0).getTime();
+        const dateB = new Date(b.updatedAt || b.createdAt || 0).getTime();
+        return dateB - dateA;
+      })
+      .slice(0, 5);
+  }, [baseTemplates, customTemplates]);
 
-  // ==================== 自定义模板操作 ====================
+  // 按分类分组基础模板
+  const baseTemplatesByCategory = useMemo(() => {
+    return baseTemplates.reduce((acc, t) => {
+      if (!acc[t.category]) {
+        acc[t.category] = [];
+      }
+      acc[t.category].push(t);
+      return acc;
+    }, {} as Record<string, BaseTemplate[]>);
+  }, [baseTemplates]);
 
-  // 新增自定义模板
-  const handleCreateCustom = () => {
-    createDialog({
-      title: "新增自定义模板",
-      width: 700,
-      component: (
-        <CustomTemplateForm
-          isEdit={false}
-          onSubmit={async (formData: CustomTemplateFormData) => {
-            await api.template.custom.create(formData);
-            toast.success("创建成功");
-            refreshCustom();
-          }}
-        />
-      ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
-    });
-  };
-
-  // 编辑自定义模板
-  const handleEditCustom = (template: CustomTemplate) => {
-    createDialog({
-      title: "编辑自定义模板",
-      width: 700,
-      component: (
-        <CustomTemplateForm
-          initialData={template}
-          isEdit={true}
-          onSubmit={async (formData: CustomTemplateFormData) => {
-            if (template._id) {
-              await api.template.custom.update(template._id, formData);
-              toast.success("更新成功");
-              loadCustomData(
-                customPagination.current,
-                customPagination.pageSize
-              );
-            }
-          }}
-        />
-      ),
-      buttons: [{ text: "确定", callback: "submit", type: "primary" }],
-    });
-  };
-
-  // 提交自定义模板表单
-
-  // HTML预览（自定义模板）
-  const handleCustomPreview = (row: CustomTemplate) => {
-    let content = row.content || "<p>暂无内容</p>";
-    if (row.variables) {
-      Object.entries(row.variables).forEach(([key, value]) => {
-        const regex = new RegExp(`{${key}}`, "g");
-        content = content.replace(regex, value || "");
-      });
-    }
-    preview(content);
-  };
-
-  // 删除自定义模板
-  const handleDeleteCustom = async (row: CustomTemplate) => {
-    if (!row._id) return;
-    await api.template.custom.delete(row._id);
-    toast.success("删除成功");
-    refreshCustom();
-  };
-
-  // 基础模板表格列配置
-  const baseColumns: AntTableColumn<BaseTemplate>[] = [
-    {
-      title: "UUID",
-      dataIndex: "uuid",
-      key: "uuid",
-      width: 280,
-      render: (value) => (
-        <span className="font-mono text-xs text-gray-600 dark:text-gray-400">
-          {value || "-"}
-        </span>
-      ),
-    },
-    {
-      title: "模板名称",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "分类",
-      dataIndex: "category",
-      key: "category",
-      width: 120,
-      render: (value) => (
-        <span className="inline-flex items-center rounded-full bg-brand-100 px-2.5 py-0.5 text-xs font-medium text-brand-800 dark:bg-brand-900/30 dark:text-brand-400">
-          {dicts.map.templateCategory[value] || value}
-        </span>
-      ),
-    },
-    {
-      title: "变量数量",
-      dataIndex: "variables",
-      key: "variables",
-      width: 100,
-      render: (value) => (
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          {value ? value.length : 0}
-        </span>
-      ),
-    },
-    {
-      title: "创建时间",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      width: 180,
-      render: (value) => (
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          {value || "-"}
-        </span>
-      ),
-    },
-    {
-      title: "操作",
-      key: "action",
-      width: 80,
-      render: (_, record) => (
-        <TableActions
-          actions={[
-            {
-              text: "预览",
-              onClick: () => handleBasePreview(record),
-            },
-            {
-              text: "编辑",
-              onClick: () => handleEditBase(record),
-            },
-            {
-              text: "删除",
-              onClick: () => handleDeleteBase(record),
-              danger: true,
-              divider: true,
-              confirm: `确定要删除基础模板"${record.name}"吗？`,
-            },
-          ]}
-        />
-      ),
-    },
-  ];
-
-  // 自定义模板表格列配置
-  const customColumns: AntTableColumn<CustomTemplate>[] = [
-    {
-      title: "模板名称",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "基础模板",
-      dataIndex: "base_template_id",
-      key: "base_template_id",
-      width: 150,
-      render: (value) => (
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          {value || "-"}
-        </span>
-      ),
-    },
-    {
-      title: "状态",
-      dataIndex: "status",
-      key: "status",
-      width: 100,
-      render: (value) => (
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-            value === "active"
-              ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-              : value === "draft"
-              ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"
-              : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"
-          }`}
-        >
-          {dicts.map.templateStatus[value] || value}
-        </span>
-      ),
-    },
-    {
-      title: "版本",
-      dataIndex: "version",
-      key: "version",
-      width: 80,
-      render: (value) => (
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          v{value || 1}
-        </span>
-      ),
-    },
-    {
-      title: "创建时间",
-      dataIndex: "createdAt",
-      key: "createdAt",
-      width: 180,
-      render: (value) => (
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          {value || "-"}
-        </span>
-      ),
-    },
-    {
-      title: "操作",
-      key: "action",
-      width: 80,
-      render: (_, record) => (
-        <TableActions
-          actions={[
-            {
-              text: "预览",
-              onClick: () => handleCustomPreview(record),
-            },
-            {
-              text: "编辑",
-              onClick: () => handleEditCustom(record),
-            },
-            {
-              text: "删除",
-              onClick: () => handleDeleteCustom(record),
-              danger: true,
-              divider: true,
-              confirm: `确定要删除自定义模板"${record.name}"吗？`,
-            },
-          ]}
-        />
-      ),
-    },
-  ];
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-muted-foreground">加载中...</div>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-4">
-      {/* 头部标题和操作按钮 */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">模板管理</h1>
-        <AntButton
-          type="primary"
-          onClick={activeTab === "base" ? handleCreateBase : handleCreateCustom}
-        >
-          {activeTab === "base" ? "新增基础模板" : "新增自定义模板"}
-        </AntButton>
+    <div className="space-y-6">
+      {/* 统计卡片 */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* 基础模板总数 */}
+        <Card className="p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground">基础模板</p>
+              <p className="text-3xl font-bold mt-2">{stats.baseTotal}</p>
+            </div>
+            <div className="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+              <FileText className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            </div>
+          </div>
+          <div className="mt-4 flex items-center gap-2">
+            <TrendingUp className="h-4 w-4 text-green-600" />
+            <span className="text-xs text-muted-foreground">
+              {Object.keys(stats.baseByCategoryCount).length} 个分类
+            </span>
+          </div>
+        </Card>
+
+        {/* 自定义模板总数 */}
+        <Card className="p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground">自定义模板</p>
+              <p className="text-3xl font-bold mt-2">{stats.customTotal}</p>
+            </div>
+            <div className="h-12 w-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+              <Copy className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+            </div>
+          </div>
+          <div className="mt-4 flex items-center gap-2">
+            <Clock className="h-4 w-4 text-blue-600" />
+            <span className="text-xs text-muted-foreground">
+              {stats.activeCount} 个已激活
+            </span>
+          </div>
+        </Card>
+
+        {/* 草稿模板 */}
+        <Card className="p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground">草稿模板</p>
+              <p className="text-3xl font-bold mt-2">{stats.draftCount}</p>
+            </div>
+            <div className="h-12 w-12 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
+              <Edit className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
+            </div>
+          </div>
+          <div className="mt-4 flex items-center gap-2">
+            <AlertCircle className="h-4 w-4 text-yellow-600" />
+            <span className="text-xs text-muted-foreground">待完善</span>
+          </div>
+        </Card>
+
+        {/* 归档模板 */}
+        <Card className="p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground">归档模板</p>
+              <p className="text-3xl font-bold mt-2">{stats.archivedCount}</p>
+            </div>
+            <div className="h-12 w-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+              <FileText className="h-6 w-6 text-gray-600 dark:text-gray-400" />
+            </div>
+          </div>
+          <div className="mt-4 flex items-center gap-2">
+            <Clock className="h-4 w-4 text-gray-600" />
+            <span className="text-xs text-muted-foreground">已停用</span>
+          </div>
+        </Card>
       </div>
 
-      {/* Tab 切换按钮 */}
-      <div className="flex gap-2 border-b border-gray-200 dark:border-gray-700">
-        <button
-          onClick={() => setActiveTab("base")}
-          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-            activeTab === "base"
-              ? "border-blue-500 text-blue-600 dark:text-blue-400"
-              : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-          }`}
-        >
-          基础模板
-        </button>
-        <button
-          onClick={() => setActiveTab("custom")}
-          className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-            activeTab === "custom"
-              ? "border-blue-500 text-blue-600 dark:text-blue-400"
-              : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-          }`}
-        >
-          自定义模板
-        </button>
-      </div>
+      {/* 快速操作 */}
+      <Card className="p-6">
+        <h2 className="text-lg font-semibold mb-4">快速操作</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+          <AntButton
+            type="primary"
+            icon={<Plus className="h-4 w-4" />}
+            onClick={() => router.push("/templates/base")}
+            className="h-auto py-3"
+          >
+            <div className="text-left">
+              <div className="font-medium">创建基础模板</div>
+              <div className="text-xs opacity-80">新增可复用模板</div>
+            </div>
+          </AntButton>
 
-      {/* 表格内容 */}
-      {activeTab === "base" ? (
-        <AntTable
-          columns={baseColumns}
-          dataSource={baseData}
-          rowKey="_id"
-          loading={baseLoading}
-          pagination={{
-            ...basePagination,
-            onChange: (page, pageSize) => {
-              loadBaseData(page, pageSize);
-            },
-          }}
-        />
-      ) : (
-        <AntTable
-          columns={customColumns}
-          dataSource={customData}
-          rowKey="_id"
-          loading={customLoading}
-          pagination={{
-            ...customPagination,
-            onChange: (page, pageSize) => {
-              loadCustomData(page, pageSize);
-            },
-          }}
-        />
-      )}
+          <AntButton
+            type="primary"
+            icon={<Copy className="h-4 w-4" />}
+            onClick={() => router.push("/templates/custom")}
+            className="h-auto py-3"
+          >
+            <div className="text-left">
+              <div className="font-medium">创建自定义模板</div>
+              <div className="text-xs opacity-80">基于基础模板定制</div>
+            </div>
+          </AntButton>
+
+          <AntButton
+            icon={<FileText className="h-4 w-4" />}
+            onClick={() => router.push("/templates/base")}
+            className="h-auto py-3"
+          >
+            <div className="text-left">
+              <div className="font-medium">管理基础模板</div>
+              <div className="text-xs opacity-80">查看所有基础模板</div>
+            </div>
+          </AntButton>
+
+          <AntButton
+            icon={<Edit className="h-4 w-4" />}
+            onClick={() => router.push("/templates/custom")}
+            className="h-auto py-3"
+          >
+            <div className="text-left">
+              <div className="font-medium">管理自定义模板</div>
+              <div className="text-xs opacity-80">查看所有自定义模板</div>
+            </div>
+          </AntButton>
+        </div>
+      </Card>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* 最近更新 */}
+        <Card className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold">最近更新</h2>
+            <Clock className="h-5 w-5 text-muted-foreground" />
+          </div>
+          <div className="space-y-3">
+            {recentTemplates.length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                暂无模板
+              </p>
+            ) : (
+              recentTemplates.map((template) => (
+                <div
+                  key={`${template.type}-${template._id}`}
+                  className="flex items-center justify-between p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer"
+                  onClick={() =>
+                    router.push(`/templates/${template.type}`)
+                  }
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium truncate">
+                        {template.name}
+                      </span>
+                      <span
+                        className={cn(
+                          "text-xs px-2 py-0.5 rounded-full",
+                          template.type === "base"
+                            ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                            : "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
+                        )}
+                      >
+                        {template.type === "base" ? "基础" : "自定义"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {new Date(
+                        template.updatedAt || template.createdAt || ""
+                      ).toLocaleString("zh-CN")}
+                    </p>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground flex-shrink-0 ml-2" />
+                </div>
+              ))
+            )}
+          </div>
+        </Card>
+
+        {/* 基础模板分类 */}
+        <Card className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold">基础模板分类</h2>
+            <FileText className="h-5 w-5 text-muted-foreground" />
+          </div>
+          <div className="space-y-3">
+            {Object.entries(baseTemplatesByCategory).length === 0 ? (
+              <p className="text-sm text-muted-foreground text-center py-8">
+                暂无基础模板
+              </p>
+            ) : (
+              Object.entries(baseTemplatesByCategory).map(
+                ([category, templates]) => (
+                  <div
+                    key={category}
+                    className="flex items-center justify-between p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer"
+                    onClick={() => router.push("/templates/base")}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-lg bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center">
+                        <FileText className="h-5 w-5 text-brand-600 dark:text-brand-400" />
+                      </div>
+                      <div>
+                        <div className="font-medium">
+                          {dicts.map.templateCategory[category] || category}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {templates.length} 个模板
+                        </div>
+                      </div>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                )
+              )
+            )}
+          </div>
+        </Card>
+      </div>
     </div>
   );
 }

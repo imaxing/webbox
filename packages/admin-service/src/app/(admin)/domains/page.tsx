@@ -16,6 +16,7 @@ import { DomainConfig } from "@/components";
 import { useDict, useTableData } from "@/hooks";
 import api from "@/api";
 import type { Domain, DomainFormData } from "@/api/domain";
+import { RefreshCw } from "lucide-react";
 
 export default function DomainManagementPage() {
   const dicts = useDict();
@@ -221,6 +222,9 @@ export default function DomainManagementPage() {
           options={projectOptions}
           className="w-48"
         />
+        <AntButton icon={<RefreshCw className="h-4 w-4" />} onClick={refresh}>
+          刷新
+        </AntButton>
         <AntButton type="primary" onClick={handleCreate}>
           新增域名
         </AntButton>

@@ -167,15 +167,6 @@ export default function AdminLayout({
 
             {/* 右侧：功能按钮 */}
             <div className="flex items-center gap-2">
-              {/* 刷新按钮 */}
-              <button
-                onClick={() => router.refresh()}
-                className="p-2 rounded-md hover:bg-muted transition-colors"
-                title="刷新页面"
-              >
-                <LucideIcons.RefreshCw className="h-5 w-5" />
-              </button>
-
               {/* 主题切换 */}
               <ThemeToggle />
 

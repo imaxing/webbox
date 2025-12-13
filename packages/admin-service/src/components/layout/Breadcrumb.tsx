@@ -14,7 +14,10 @@ interface BreadcrumbItem {
 }
 
 // 从菜单项递归构建路由名称映射
-function buildRouteNameMap(items: MenuItem[], map: Record<string, string> = {}): Record<string, string> {
+function buildRouteNameMap(
+  items: MenuItem[],
+  map: Record<string, string> = {}
+): Record<string, string> {
   items.forEach((item) => {
     if (item.path) {
       // 提取路径的最后一段作为 key
@@ -25,8 +28,8 @@ function buildRouteNameMap(items: MenuItem[], map: Record<string, string> = {}):
       }
     }
     // 递归处理子菜单
-    if (item.subItems && item.subItems.length > 0) {
-      item.subItems.forEach((subItem) => {
+    if (item.children && item.children.length > 0) {
+      item.children.forEach((subItem) => {
         if (subItem.path) {
           const segments = subItem.path.split("/").filter(Boolean);
           // 为子路径的每一段建立映射
@@ -82,9 +85,7 @@ export function Breadcrumb() {
       .split("/")
       .filter((segment) => segment && !segment.startsWith("("));
 
-    const items: BreadcrumbItem[] = [
-      { label: "首页", href: "/" },
-    ];
+    const items: BreadcrumbItem[] = [{ label: "首页", href: "/" }];
 
     // 构建面包屑路径
     let currentPath = "";

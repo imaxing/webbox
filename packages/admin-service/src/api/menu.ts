@@ -1,29 +1,16 @@
 import { apiRequest } from "./request";
+import type { MenuPayload } from "@webbox/shared";
 
-// 菜单项类型
-export interface MenuItem {
-  name: string;
-  icon: string;
-  path?: string;
-  subItems?: SubMenuItem[];
-}
-
-// 子菜单项类型
-export interface SubMenuItem {
-  name: string;
-  path: string;
-  pro?: boolean;
-  new?: boolean;
-}
+export type { MenuItem } from "@webbox/shared";
 
 /**
  * 获取菜单配置
  */
 export const getMenus = () => {
-  return apiRequest<MenuItem[]>({
+  return apiRequest<MenuPayload>({
     method: "get",
     url: "/admin/menus",
-  });
+  }).then((payload) => payload.items);
 };
 
 // 默认导出对象形式

@@ -43,8 +43,8 @@ export function DynamicMenu({ items, sidebarOpen, title }: DynamicMenuProps) {
     if (item.path) {
       return pathname === item.path;
     }
-    if (item.subItems) {
-      return item.subItems.some((sub) => pathname === sub.path);
+    if (item.children) {
+      return item.children.some((sub) => pathname === sub.path);
     }
     return false;
   };
@@ -62,13 +62,13 @@ export function DynamicMenu({ items, sidebarOpen, title }: DynamicMenuProps) {
         </div>
       )}
       {items.map((item) => {
-        const Icon = getIcon(item.icon);
-        const hasSubItems = item.subItems && item.subItems.length > 0;
+        const Icon = getIcon(item.icon || "Circle");
+        const hasChildren = item.children && item.children.length > 0;
         const isOpen = openMenus.includes(item.name);
         const isActive = isMenuActive(item);
 
         // 如果有路径且没有子菜单，直接渲染链接
-        if (item.path && !hasSubItems) {
+        if (item.path && !hasChildren) {
           return (
             <Link key={item.name} href={item.path}>
               <div
@@ -94,7 +94,7 @@ export function DynamicMenu({ items, sidebarOpen, title }: DynamicMenuProps) {
         }
 
         // 有子菜单的情况
-        if (hasSubItems) {
+        if (hasChildren) {
           return (
             <Collapsible
               key={item.name}
@@ -131,13 +131,13 @@ export function DynamicMenu({ items, sidebarOpen, title }: DynamicMenuProps) {
               </CollapsibleTrigger>
               {sidebarOpen && (
                 <CollapsibleContent className="space-y-1 pl-9 pt-1">
-                  {item.subItems?.map((subItem) => (
-                    <Link key={subItem.path} href={subItem.path}>
+                  {item.children?.map((subItem) => (
+                    <Link key={subItem.path} href={subItem.path!}>
                       <div
                         className={cn(
                           "flex items-center gap-2 rounded-lg px-3 py-1.5 mb-1 text-sm transition-colors",
                           "hover:bg-muted hover:text-foreground",
-                          isSubMenuActive(subItem.path) &&
+                          isSubMenuActive(subItem.path || "") &&
                             "bg-muted text-foreground font-medium"
                         )}
                       >
